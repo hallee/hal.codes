@@ -7,7 +7,7 @@ public func routes(_ router: Router) throws {
     }
 
     /// Redirect all unknown paths to TLD
-    router.get(PathComponent.anything) { req in
+    router.get(PathComponent.catchall) { req in
         return req.redirect(to: "/", type: .normal)
     }
     

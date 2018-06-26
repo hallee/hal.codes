@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>#(title)</title>
+        <link rel="stylesheet" href="/styles/normalize.css">
+        <link rel="stylesheet" href="/styles/style.css">
+    </head>
+    <body>
