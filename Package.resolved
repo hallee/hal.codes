@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/vapor/core.git",
         "state": {
           "branch": null,
-          "revision": "e5582911ed940289212a36321e15ec561d947dbe",
-          "version": "3.3.0"
+          "revision": "7f56a09995bf3c8df562be456bdcda405d9d0678",
+          "version": "3.4.1"
         }
       },
       {
@@ -83,6 +83,15 @@
         }
       },
       {
+        "package": "libsass",
+        "repositoryURL": "https://github.com/robinwalterfit/Swift-libsass.git",
+        "state": {
+          "branch": null,
+          "revision": "9d48a04eda5a98d7a934ce40249a7275d11f3236",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
@@ -116,6 +125,15 @@
           "branch": null,
           "revision": "37760e9a52030bb9011972c5213c3350fa9d41fd",
           "version": "1.0.0"
+        }
+      },
+      {
+        "package": "Sass",
+        "repositoryURL": "https://github.com/robinwalterfit/Swift-Sass.git",
+        "state": {
+          "branch": null,
+          "revision": "6a2ba673e1f0bdbdbf3e2eb871229bc0e7354fbe",
+          "version": "1.0.1"
         }
       },
       {
