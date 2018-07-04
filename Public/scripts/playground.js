@@ -18,6 +18,6 @@ func generateSiteLogo() -> SiteLogo {\n\
 }",
     mode: 'swift',
     indentUnit: 4,
-    viewportMargin: Infinity,
+    lineNumbers: true,
     theme: "one-dark"
 });
