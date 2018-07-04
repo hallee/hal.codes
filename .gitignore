@@ -1,7 +1,10 @@
 Packages
+Toolchains
 .build
 xcuserdata
 *.xcodeproj
 DerivedData/
 .DS_Store
 *.sketch
+node_modules/
+Public/codemirror/*
