@@ -14,7 +14,7 @@ public func app(_ env: Environment) throws -> Application {
 }
 
 fileprivate func compileStatic() {
-    let sassFolder = DirectoryConfig.detect().workDir + "Resources/Sass/"
+    let sassFolder = DirectoryConfig.detect().workDir + "Frontend/Sass/"
     let outputFolder = DirectoryConfig.detect().workDir + "Public/styles/"
     guard let sassFiles = FileManager.default.enumerator(atPath: sassFolder) else { fatalError() }
     while let file = sassFiles.nextObject() as? String {
