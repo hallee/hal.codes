@@ -1,13 +1,6 @@
 <div id="playground"></div>
-<script src="/codemirror/lib/codemirror.js"></script>
 <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
 <link rel="stylesheet" href="/codemirror/theme/one-dark.css">
-<script src="/codemirror/mode/swift/swift.js"></script>
-<script>
-    var playground = CodeMirror(document.getElementById('playground'), {
-        mode: 'swift',
-        indentUnit: 4,
-        viewportMargin: Infinity,
-        theme: "one-dark"
-    });
-</script>
+<script src="/codemirror/lib/codemirror.js" defer></script>
+<script src="/codemirror/mode/swift/swift.js" defer></script>
+<script src="/scripts/playground.js" defer></script>

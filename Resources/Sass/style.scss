@@ -8,7 +8,9 @@
 
 @font-face {
     font-family: 'Iosevka';
-    src: url('/fonts/iosevka-brew-regular.ttf');
+    font-weight: 400;
+    src: url('/fonts/iosevka-brew-regular.woff2') format('woff2'),
+         url('/fonts/iosevka-brew-regular.ttf') format('truetype');
 }
 
 body {
