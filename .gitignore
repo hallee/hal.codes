@@ -6,3 +6,4 @@ xcuserdata
 DerivedData/
 .DS_Store
 *.sketch
+node_modules/
