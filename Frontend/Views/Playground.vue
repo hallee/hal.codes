@@ -1,100 +1,68 @@
 <template>
-    <div id="playground"></div>
+<div id="playground">
+    <codemirror
+        :code="code"
+        :options="{
+           tabSize: 2,
+           lineNumbers: true,
+           lineWrapping: true,
+           line: true,
+           gutters: ['CodeMirror-linenumbers'],
+        }">
+    </codemirror>
+</div>
+<!--    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="/codemirror/theme/one-dark.css">
+    <script src="/codemirror/lib/codemirror.js" defer></script>
+    <script src="/codemirror/mode/swift/swift.js" defer></script>
+    <script src="/scripts/playground.js" defer></script> -->
 </template>
 
 <script>
-import Codemirror from "codemirror"
-import 'codemirror/mode/swift/swift'
-import "codemirror-one-dark-theme"
+import { codemirror } from 'vue2-codemirror-lite-js'
+// import codemirror from './CodeMirror.vue'
 
-export default { 
+
+export default {
+    components: {
+        codemirror
+    },
+    data () {
+        return {
+          code: 'var a = 10',
+          cmOptions: {
+              tabSize: 4,
+              styleActiveLine: true,
+              lineNumbers: true,
+              line: true,
+              mode: 'text/x-swift',
+              lineWrapping: true,
+              theme: 'rubyblue'
+          }
+        }
+    }
+}
+</script>
+<!--  
+<script>
+import hljs from 'highlight.js/lib/highlight';
+import Behave from 'behave-js';
+export default {
     mounted: function () {
         this.$nextTick(function () {
-            console.log(document.getElementById('playground'))
-            var playground = Codemirror(document.getElementById('playground'), {
-                value: "enum LogoColor {\n\
-                case red, orange, yellow, green, blue, indigo, violet\n\
-            }\n\
-            \n\
-            class SiteLogo {\n\
-                var color: LogoColor\n\
-            \n\
-                init(_ color: LogoColor) {\n\
-                    self.color = color\n\
-                }\n\
-            }\n\
-            \n\
-            /// Called by the app to fetch this site's logo ✨\n\
-            func generateSiteLogo() -> SiteLogo {\n\
-                let logo = SiteLogo(.indigo)\n\
-                return logo\n\
-            }",
-                mode: 'swift',
-                indentUnit: 4,
-                lineNumbers: true,
-                theme: "one-dark"
+            hljs.initHighlightingOnLoad();
+            var editor = new Behave({
+                textarea: document.getElementById('test'),
+                replaceTab: true,
+                softTabs: true,
+                tabSize: 4,
+                autoOpen: true,
+                overwrite: true,
+                autoStrip: true,
+                autoIndent: true,
+                fence: false
             })
         })
     }
 }
-
-</script>
-
-<!-- <template>
-    <div id="playground">
-        <codemirror v-model="code" :options="options"></codemirror>
-    </div>
-</template>
-
-<script>
-import { codemirror } from 'vue-codemirror'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/mode/swift/swift'
-import 'codemirror-one-dark-theme'
-
-export default { 
-    components: {
-      codemirror
-    },
-    data () {
-      return {
-        code: 'class CodeMirror',
-        options: {
-          mode: 'text/x-swift',
-          indentUnit: 4,
-          lineNumbers: true,
-          theme: 'one-dark'
-        },
-      }
-    }
-
-    // created: function() {
-    //     // import('codemirror').then(Codemirror => {
-    //         console.log(document.getElementById('playground'))
-    //         var playground = Codemirror(document.getElementById('playground'), {
-    //             value: "enum LogoColor {\n\
-    //             case red, orange, yellow, green, blue, indigo, violet\n\
-    //         }\n\
-    //         \n\
-    //         class SiteLogo {\n\
-    //             var color: LogoColor\n\
-    //         \n\
-    //             init(_ color: LogoColor) {\n\
-    //                 self.color = color\n\
-    //             }\n\
-    //         }\n\
-    //         \n\
-    //         /// Called by the app to fetch this site's logo ✨\n\
-    //         func generateSiteLogo() -> SiteLogo {\n\
-    //             let logo = SiteLogo(.indigo)\n\
-    //             return logo\n\
-    //         }",
-    //             mode: 'swift',
-    //             indentUnit: 4,
-    //             lineNumbers: true,
-    //             theme: "one-dark"
-    //         });
-    //     // })
-    // }
-}
-</script> -->
+</script>  -->

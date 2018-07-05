@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hallee/hal.codes.git"
@@ -27,6 +26,7 @@
     "codemirror": "^5.39.0",
     "codemirror-one-dark-theme": "^1.1.1",
     "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue2-codemirror-lite-js": "^3.5.10"
   }
 }
