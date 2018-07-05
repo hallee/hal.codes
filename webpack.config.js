@@ -1,8 +1,9 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: './Frontend/index.js',
+  entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss', './Frontend/Sass/style.scss'], // TODO: move styles to .vue
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
     filename: 'bundle.js'
@@ -15,8 +16,29 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [ 'css-loader' ]
+        test: /\.(scss|css)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: './Public/styles/'
+              }
+          },
+          {
+            loader: "css-loader",
+            options: {
+              minimize: {
+                  safe: true
+              }
+            }
+          },
+          { 
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.resolve(__dirname, 'Frontend/Sass'),]
+            } 
+          }
+        ]
       },
       {
         test: /\.vue$/,
@@ -25,6 +47,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '../styles/style.css'
+    })
   ]
 }

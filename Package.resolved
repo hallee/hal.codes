@@ -83,15 +83,6 @@
         }
       },
       {
-        "package": "libsass",
-        "repositoryURL": "https://github.com/robinwalterfit/Swift-libsass.git",
-        "state": {
-          "branch": null,
-          "revision": "9d48a04eda5a98d7a934ce40249a7275d11f3236",
-          "version": "1.0.0"
-        }
-      },
-      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
@@ -137,15 +128,6 @@
         }
       },
       {
-        "package": "Sass",
-        "repositoryURL": "https://github.com/robinwalterfit/Swift-Sass.git",
-        "state": {
-          "branch": null,
-          "revision": "6a2ba673e1f0bdbdbf3e2eb871229bc0e7354fbe",
-          "version": "1.0.1"
-        }
-      },
-      {
         "package": "TemplateKit",
         "repositoryURL": "https://github.com/vapor/template-kit.git",
         "state": {
@@ -177,8 +159,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "74a46ecacca51d326a1e8cf4b7967827765f05bf",
-          "version": "3.0.5"
+          "revision": "6b07105a3899fbbae194ee3eb82f54debe502221",
+          "version": "3.0.6"
         }
       },
       {

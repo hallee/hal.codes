@@ -25,4 +25,4 @@ ubuntu*)
     # cleanup
     rm -rf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
     ;;
-esac n 
+esac
