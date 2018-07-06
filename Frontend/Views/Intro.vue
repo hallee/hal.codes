@@ -21,8 +21,9 @@
 </template>
 
 <script>
-import Playground from './Playground.vue'
-
+const Playground = () => ({
+  component: import('./Playground.vue')
+})
 export default {
     components: {
         Playground

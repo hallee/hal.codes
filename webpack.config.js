@@ -8,6 +8,7 @@ module.exports = {
   entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss', './Frontend/Sass/style.scss'], // TODO: move styles to .vue
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
+    publicPath: '/scripts/',
     filename: 'bundle.js'
   },
   resolve: {

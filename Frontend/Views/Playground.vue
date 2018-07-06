@@ -1,10 +1,12 @@
 <template>
+<transition name="fade">
 <div id="playground">
     <codemirror
         :code="code"
         :options="options">
     </codemirror>
 </div>
+</transition>
 </template>
 
 <script>
@@ -33,41 +35,27 @@ func generateSiteLogo() -> SiteLogo {
     let logo = SiteLogo(.indigo)
     return logo
 }`,
-          options: {
-              tabSize: 4,
-              styleActiveLine: true,
-              lineNumbers: true,
-              line: true,
-              mode: 'text/x-swift',
-              lineWrapping: true,
-              undoDepth: 100,
-              historyEventDelay: 500,
-              gutters: ['CodeMirror-linenumbers'],
-          }
+            options: {
+                tabSize: 4,
+                styleActiveLine: true,
+                lineNumbers: true,
+                line: true,
+                mode: 'text/x-swift',
+                lineWrapping: true,
+                undoDepth: 100,
+                historyEventDelay: 500,
+                gutters: ['CodeMirror-linenumbers'],
+            }
         }
     }
 }
 </script>
-<!--  
-<script>
-import hljs from 'highlight.js/lib/highlight';
-import Behave from 'behave-js';
-export default {
-    mounted: function () {
-        this.$nextTick(function () {
-            hljs.initHighlightingOnLoad();
-            var editor = new Behave({
-                textarea: document.getElementById('test'),
-                replaceTab: true,
-                softTabs: true,
-                tabSize: 4,
-                autoOpen: true,
-                overwrite: true,
-                autoStrip: true,
-                autoIndent: true,
-                fence: false
-            })
-        })
-    }
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .4s;
 }
-</script>  -->
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+</style>
