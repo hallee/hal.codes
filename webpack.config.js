@@ -1,6 +1,8 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const CompressionPlugin = require("compression-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 
 module.exports = {
   entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss', './Frontend/Sass/style.scss'], // TODO: move styles to .vue
@@ -46,8 +48,14 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    minimize: true
+  },
   plugins: [
     new VueLoaderPlugin(),
+    new CompressionPlugin({
+      algorithm: 'gzip'
+    }),
     new MiniCssExtractPlugin({
       filename: '../styles/style.css'
     })
