@@ -2,26 +2,13 @@
 <div id="playground">
     <codemirror
         :code="code"
-        :options="{
-           tabSize: 2,
-           lineNumbers: true,
-           lineWrapping: true,
-           line: true,
-           gutters: ['CodeMirror-linenumbers'],
-        }">
+        :options="options">
     </codemirror>
 </div>
-<!--    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="/codemirror/theme/one-dark.css">
-    <script src="/codemirror/lib/codemirror.js" defer></script>
-    <script src="/codemirror/mode/swift/swift.js" defer></script>
-    <script src="/scripts/playground.js" defer></script> -->
 </template>
 
 <script>
-import { codemirror } from 'vue2-codemirror-lite-js'
-// import codemirror from './CodeMirror.vue'
-
+import { codemirror } from 'vue2-codemirror-lite-swift'
 
 export default {
     components: {
@@ -29,15 +16,33 @@ export default {
     },
     data () {
         return {
-          code: 'var a = 10',
-          cmOptions: {
+          code: `enum LogoColor {
+    case red, orange, yellow, green, blue, indigo, violet
+}
+
+class SiteLogo {
+    var color: LogoColor
+
+    init(_ color: LogoColor) {
+        self.color = color
+    }
+}
+
+/// Called by the app to fetch this site's logo ✨
+func generateSiteLogo() -> SiteLogo {
+    let logo = SiteLogo(.indigo)
+    return logo
+}`,
+          options: {
               tabSize: 4,
               styleActiveLine: true,
               lineNumbers: true,
               line: true,
               mode: 'text/x-swift',
               lineWrapping: true,
-              theme: 'rubyblue'
+              undoDepth: 100,
+              historyEventDelay: 500,
+              gutters: ['CodeMirror-linenumbers'],
           }
         }
     }
