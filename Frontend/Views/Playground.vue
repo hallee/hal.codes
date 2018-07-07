@@ -13,10 +13,12 @@
 import { codemirror } from 'vue2-codemirror-lite-swift'
 
 var exampleSocket = new WebSocket("ws://" + location.host + "/playground")
+// TODO: loading view
 exampleSocket.onopen = function (event) {
-  exampleSocket.send("Here's some text that the server is urgently awaiting!")
+  // TODO: hide loading view
 }
 exampleSocket.onmessage = function (event) {
+  // TODO: show error
   console.log(event.data);
 }
 
