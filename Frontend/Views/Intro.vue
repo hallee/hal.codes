@@ -60,6 +60,7 @@ section.intro {
     
     article {
         max-width: 480px;
+        margin-bottom: 2em;
     }
 }
 </style>

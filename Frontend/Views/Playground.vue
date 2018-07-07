@@ -11,6 +11,18 @@
 
 <script>
 import { codemirror } from 'vue2-codemirror-lite-swift'
+import io from 'socket.io-client';
+
+// const socket = io('http://localhost:3000');
+
+// console.log('init');
+
+// socket.on('connect', onConnect);
+
+// function onConnect(){
+//   console.log('connect ' + socket.id);
+// }
+
 
 export default {
     components: {
@@ -76,6 +88,11 @@ func generateSiteLogo() -> SiteLogo {
         line-height: 1.4em;
         padding: 1em;
         height: auto;
+
+        pre {
+            -webkit-font-variant-ligatures: normal !important;
+            font-variant-ligatures: normal !important;
+        }
     }
     .CodeMirror-scroll {
         max-height: 600px;

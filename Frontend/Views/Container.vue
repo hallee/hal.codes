@@ -32,6 +32,8 @@ export default {
          url('/fonts/iosevka-brew-regular.ttf') format('truetype');
 }
 
+$break-mobile: 768px;
+
 body {
     background: #efefef;
     text-rendering: optimizeSpeed;
@@ -57,12 +59,20 @@ a {
 p {
     font-size: 1em;
     line-height: 1.5em;
+
+    @media screen and (max-width: $break-mobile) { 
+        font-size: 0.8em;
+    }
 }
 
 section.main {
     padding: 3em;
     margin: 0 auto;
     max-width: 1400px;
+
+    @media screen and (max-width: $break-mobile) { 
+        padding: 1em;
+    }
 }
 
 .footer {
