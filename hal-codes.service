@@ -1,9 +1,10 @@
 [Unit]
 Description=hal.codes
+After=syslog.target
 
 [Service]
-Type=simple
-Restart=always
+User=hal
+WorkingDirectory=/home/hal/hal.codes/
 RestartSec=2s
 ExecStart=/home/hal/hal.codes/.build/release/Run
 
