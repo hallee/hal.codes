@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
-  entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss', './Frontend/Sass/style.scss'], // TODO: move styles to .vue
+  entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss'],
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
     publicPath: '/scripts/',

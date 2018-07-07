@@ -1,1 +1,1 @@
-.fade-enter-active[data-v-30e3c74a],.fade-leave-active[data-v-30e3c74a]{transition:opacity .4s}.fade-enter[data-v-30e3c74a],.fade-leave-to[data-v-30e3c74a]{opacity:0}
+.fade-enter-active,.fade-leave-active{transition:opacity .4s}.fade-enter,.fade-leave-to{opacity:0}#playground{flex-grow:1;max-width:740px;width:auto;border-radius:8px;-webkit-user-select:none}#playground .cm-s-one-dark{font-family:Iosevka;font-weight:400;font-size:16px}#playground .CodeMirror{border-radius:7px;line-height:1.4em;padding:1em;height:auto}#playground .CodeMirror-scroll{max-height:600px}
