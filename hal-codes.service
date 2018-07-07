@@ -1,0 +1,11 @@
+[Unit]
+Description=hal.codes
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2s
+ExecStart=/home/hal/hal.codes/.build/release/Run
+
+[Install]
+WantedBy=multi-user.target
