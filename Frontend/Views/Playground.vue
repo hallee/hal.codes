@@ -13,15 +13,15 @@
 import { codemirror } from 'vue2-codemirror-lite-swift'
 import io from 'socket.io-client';
 
-// const socket = io('http://localhost:3000');
+const socket = io('http://159.65.225.86/plaground:3000');
 
-// console.log('init');
+console.log('init');
 
-// socket.on('connect', onConnect);
+socket.on('connect', onConnect);
 
-// function onConnect(){
-//   console.log('connect ' + socket.id);
-// }
+function onConnect(){
+  console.log('connect ' + socket.id);
+}
 
 
 export default {
