@@ -13,13 +13,12 @@
 import { codemirror } from 'vue2-codemirror-lite-swift'
 import io from 'socket.io-client';
 
-const socket = io('http://159.65.225.86/plaground:3000');
+const socket = io('/', { path: '/playground'});
 
 console.log('init');
 
 socket.on('connect', onConnect);
-
-function onConnect(){
+function onConnect() {
   console.log('connect ' + socket.id);
 }
 
