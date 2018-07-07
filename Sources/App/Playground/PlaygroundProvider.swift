@@ -20,6 +20,7 @@ public final class PlaygroundProvider: Provider {
         /// Register websocket server
         let wss = NIOWebSocketServer.default()
         wss.get(socketPath) { ws, req in
+            // TODO: security / limiting to host
             let playground = MicroPlayground(DirectoryConfig.detect().workDir)
             ws.onText { ws, text in
                 print("Running command -> \n\(text)")

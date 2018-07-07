@@ -11,17 +11,14 @@
 
 <script>
 import { codemirror } from 'vue2-codemirror-lite-swift'
-import io from 'socket.io-client';
 
-const socket = io('/', { path: '/playground'});
-
-console.log('init');
-
-socket.on('connect', onConnect);
-function onConnect() {
-  console.log('connect ' + socket.id);
+var exampleSocket = new WebSocket("ws://" + location.host + "/playground")
+exampleSocket.onopen = function (event) {
+  exampleSocket.send("Here's some text that the server is urgently awaiting!")
 }
-
+exampleSocket.onmessage = function (event) {
+  console.log(event.data);
+}
 
 export default {
     components: {
