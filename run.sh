@@ -1,7 +1,7 @@
 SWIFT_VERSION=4.1.2
 BRANCH=release
 RELEASE=RELEASE
-SWIFT_TARGET=osx
+SWIFT_TARGET=ubuntu16.04
 
 case "$SWIFT_TARGET" in
 *osx)
@@ -19,7 +19,7 @@ case "$SWIFT_TARGET" in
 ubuntu*)
     mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
     # download
-    curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1404/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
+    curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1604/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
     # extract
     tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
     # cleanup
