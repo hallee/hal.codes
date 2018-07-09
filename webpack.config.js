@@ -1,6 +1,6 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const CompressionPlugin = require("compression-webpack-plugin")
+const CompressionPlugin = require('compression-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
