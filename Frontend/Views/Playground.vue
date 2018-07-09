@@ -18,15 +18,26 @@
 <script>
 import { codemirror } from 'vue2-codemirror-lite-swift'
 
-var exampleSocket = new WebSocket("ws://" + location.host + "/playground")
-// TODO: loading view
-exampleSocket.onopen = function (event) {
-  // TODO: hide loading view
+var exampleSocket
+
+function constructSocket() {
+    exampleSocket = new WebSocket("ws://" + location.host + "/playground")
+    // TODO: loading view
+    exampleSocket.onopen = function (event) {
+      // TODO: hide loading view
+      console.log("OPENED")
+    }
+    exampleSocket.onmessage = function (event) {
+      // TODO: show error
+      console.log(event.data);
+    }
+    exampleSocket.onclose = function (event) {
+        console.log("CLOSED")
+        constructSocket()
+    }
 }
-exampleSocket.onmessage = function (event) {
-  // TODO: show error
-  console.log(event.data);
-}
+constructSocket()
+
 
 export default {
     methods: {
