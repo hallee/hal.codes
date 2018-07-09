@@ -1,10 +1,16 @@
 <template>
 <transition name="fade">
 <div id="playground">
+    <div class="run-bar">
+        <button v-on:click="run">Run</button>
+    </div>
     <codemirror
-        :code="code"
+        v-model="code"
         :options="options">
     </codemirror>
+    <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
+    <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
+    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p>
 </div>
 </transition>
 </template>
@@ -23,6 +29,11 @@ exampleSocket.onmessage = function (event) {
 }
 
 export default {
+    methods: {
+        run: function (event) {
+            exampleSocket.send(this.$data.code)
+        }
+    },
     components: {
         codemirror
     },
@@ -74,7 +85,10 @@ func generateSiteLogo() -> SiteLogo {
     max-width: 740px;
     width: auto;
     border-radius: 8px;
-    -webkit-user-select: none;
+
+    p {
+        font-size: 0.8em;
+    }
     
     .cm-s-one-dark {
         font-family: 'Iosevka';
@@ -86,6 +100,7 @@ func generateSiteLogo() -> SiteLogo {
         line-height: 1.4em;
         padding: 1em;
         height: auto;
+        -webkit-user-select: none;
 
         pre {
             -webkit-font-variant-ligatures: normal !important;
