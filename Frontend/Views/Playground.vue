@@ -29,34 +29,37 @@ import { codemirror } from 'vue2-codemirror-lite-swift'
 
 var exampleSocket
 
-function constructSocket() {
-    exampleSocket = new WebSocket("ws://" + location.host + "/playground")
-    // TODO: loading view
-    exampleSocket.onopen = function (event) {
-      // TODO: hide loading view
-        console.log("OPENED")
-    }
-    exampleSocket.onmessage = function (event) {
-      // TODO: show error
-      console.log(event.data);
-      this.playgroundOutput = event.data;
-    }
-    exampleSocket.onclose = function (event) {
-        console.log("CLOSED")
-        constructSocket()
-    }
-}
-constructSocket()
-
-
 export default {
     methods: {
         run: function (event) {
             exampleSocket.send(this.$data.code)
-        }
+        },
+        print: function() {
+            this.playgroundOutput = 'hello!'
+        },
+        constructSocket: function () {
+            exampleSocket = new WebSocket("ws://" + location.host + "/playground")
+            // TODO: loading view
+            exampleSocket.onopen = function (event) {
+              // TODO: hide loading view
+                console.log("OPENED")
+            }
+            exampleSocket.onmessage = function (event) {
+              // TODO: show error
+              console.log(event.data)
+              this.playgroundOutput = event.data
+            }
+            exampleSocket.onclose = function (event) {
+                console.log("CLOSED")
+                this.constructSocket()
+            }
+        },
     },
     components: {
         codemirror
+    },
+    mounted: function () {
+        this.constructSocket()
     },
     data () {
         return {
