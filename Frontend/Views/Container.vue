@@ -47,12 +47,12 @@ body {
 
 a {
     color: #000;
+    cursor: pointer;
     background: none;
     transition: color 0.2s, background 0.2s;
     
     &:hover {
         color: #999;
-        cursor: pointer;
     }
 }
 

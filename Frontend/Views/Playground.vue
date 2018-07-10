@@ -2,12 +2,21 @@
 <transition name="fade">
 <div id="playground">
     <div class="run-bar">
-        <button v-on:click="run">Run</button>
+        <button class="roundrect-button run-button" v-on:click="run">
+            <img src="/images/run.svg" height="32px" width="32px" />
+        </button>
+
+        <button class="reset-button" v-on:click="reset">
+            <img src="/images/reset.svg" height="32px" width="32px" />
+        </button>
     </div>
     <codemirror
         v-model="code"
         :options="options">
     </codemirror>
+    <div class="console">
+        <p><span>></span>{{ playgroundOutput }}</p>
+    </div>
     <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
     <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
     <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p>
@@ -25,11 +34,12 @@ function constructSocket() {
     // TODO: loading view
     exampleSocket.onopen = function (event) {
       // TODO: hide loading view
-      console.log("OPENED")
+        console.log("OPENED")
     }
     exampleSocket.onmessage = function (event) {
       // TODO: show error
       console.log(event.data);
+      this.playgroundOutput = event.data;
     }
     exampleSocket.onclose = function (event) {
         console.log("CLOSED")
@@ -50,7 +60,8 @@ export default {
     },
     data () {
         return {
-          code: `enum LogoColor {
+            playgroundOutput: 'playgroundOutput',
+            code: `enum LogoColor {
     case red, orange, yellow, green, blue, indigo, violet
 }
 
@@ -91,11 +102,57 @@ func generateSiteLogo() -> SiteLogo {
     opacity: 0;
 }
 
+.run-bar {
+    margin: 12px 0;
+    display: flex;
+}
+
+.roundrect-button {
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
+    filter: drop-shadow( 0 4px 16px rgba(40, 0, 80, 0.25) );
+    
+    &:hover {
+        transform: scale(1.08);
+    }
+    &:active {
+        transform: none;
+    }
+}
+
+.run-button {
+    background: #5664EC;
+    padding: 6px 32px;
+}
+
+.reset-button {
+    align-self: flex-end;
+    margin-left: auto;
+    height: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    img {
+        vertical-align: bottom;
+    }
+}
+
+.console {
+    font-family: 'Iosevka';
+    font-weight: 400;
+    font-size: 16px;
+}
+
 #playground {
     flex-grow: 1;
     max-width: 740px;
     width: auto;
-    border-radius: 8px;
 
     p {
         font-size: 0.8em;
@@ -107,7 +164,8 @@ func generateSiteLogo() -> SiteLogo {
         font-size: 16px;
     }
     .CodeMirror {
-        border-radius: 7px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
         line-height: 1.4em;
         padding: 1em;
         height: auto;
