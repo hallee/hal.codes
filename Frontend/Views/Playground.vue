@@ -2,7 +2,7 @@
 <transition name="fade">
 <div id="playground">
     <div class="run-bar">
-        <button class="roundrect-button run-button" v-on:click="execute">
+        <button class="roundrect-button run-button" :disabled="status != 'ready'" v-on:click="execute">
             <img src="/images/run.svg" height="24px" width="24px" />
         </button>
 
@@ -17,9 +17,9 @@
     <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
     </div>
-<!--     <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
+    <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
     <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
-    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p> -->
+    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p>
 </div>
 </transition>
 </template>
@@ -49,27 +49,25 @@ var socket
 export default {
     methods: {
         execute: function (event) {
+            this.status = 'running'
             socket.send(this.code)
         },
         printConsole: function (text) {
+            this.status = 'ready'
             // TODO: sanitize, limit output
             this.playgroundOutput = text
         },
         constructSocket: function () {
             const vm = this
-            socket = new WebSocket("ws://" + location.host + "/playground")
-            // TODO: loading view
+            socket = new WebSocket('ws://' + location.host + '/playground')
             socket.onopen = function (event) {
-              // TODO: hide loading view
-                console.log("OPENED")
+                vm.status = 'ready'
             }
             socket.onmessage = function (event) {
-              // TODO: show error
-              console.log(event.data)
-              vm.printConsole(event.data)
+                vm.printConsole(event.data)
             }
             socket.onclose = function (event) {
-                console.log("CLOSED")
+                vm.status = 'disconnected'
                 vm.constructSocket()
             }
         },
@@ -87,6 +85,16 @@ export default {
         return {
             playgroundOutput: '',
             code: codeString,
+            status: {
+                type: String,
+                validator: function (value) {
+                  return [
+                    'ready',
+                    'running',
+                    'disconnected'
+                  ].indexOf(value) !== -1
+                }
+            },
             options: {
                 tabSize: 4,
                 styleActiveLine: true,
@@ -139,6 +147,10 @@ export default {
 
     img {
         vertical-align: middle;
+    }
+
+    &:disabled {
+        opacity: 0.5;
     }
 }
 
