@@ -3,11 +3,11 @@
 <div id="playground">
     <div class="run-bar">
         <button class="roundrect-button run-button" v-on:click="execute">
-            <img src="/images/run.svg" height="32px" width="32px" />
+            <img src="/images/run.svg" height="24px" width="24px" />
         </button>
 
         <button class="reset-button" v-on:click="resetPlayground">
-            <img src="/images/reset.svg" height="32px" width="32px" />
+            <img src="/images/reset.svg" height="24px" width="24px" />
         </button>
     </div>
     <codemirror
@@ -119,7 +119,7 @@ export default {
 .roundrect-button {
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 0.8em;
     cursor: pointer;
@@ -135,7 +135,11 @@ export default {
 
 .run-button {
     background: #5D6169;
-    padding: 6px 32px;
+    padding: 6px 18px;
+
+    img {
+        vertical-align: middle;
+    }
 }
 
 .reset-button {
@@ -167,8 +171,8 @@ export default {
         font-size: 16px;
     }
     .CodeMirror {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
         line-height: 1.4em;
         padding: 1em;
         height: auto;
@@ -189,15 +193,21 @@ export default {
     .console {
         color: #CDD5E4;
         background-color: #444A55;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
         line-height: 1.4em;
-        padding: 0.2em 1.6em;
+        padding: 0.2em 2.4em;
         margin: 0;
+        min-height: 2.8em;
+        max-height: 400px;
+        overflow-y: scroll;
 
         pre {
             white-space: pre-wrap;
             &:before {
+                display: block;
+                position: absolute;
+                margin-left: -0.8em;
                 opacity: 0.5;
                 content: "> ";
                 display: inline;

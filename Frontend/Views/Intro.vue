@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .hal-codes-logo {
     cursor: pointer;
     -webkit-user-select: none;

@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @font-face {
     font-family: 'IBM Plex Sans';
     font-style: normal;
@@ -63,6 +63,10 @@ p {
     @media screen and (max-width: $break-mobile) { 
         font-size: 0.8em;
     }
+}
+
+button {
+    outline: none;
 }
 
 section.main {
