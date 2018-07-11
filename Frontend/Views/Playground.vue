@@ -2,11 +2,11 @@
 <transition name="fade">
 <div id="playground">
     <div class="run-bar">
-        <button class="roundrect-button run-button" v-on:click="run">
+        <button class="roundrect-button run-button" v-on:click="execute">
             <img src="/images/run.svg" height="32px" width="32px" />
         </button>
 
-        <button class="reset-button" v-on:click="reset">
+        <button class="reset-button" v-on:click="resetPlayground">
             <img src="/images/reset.svg" height="32px" width="32px" />
         </button>
     </div>
@@ -15,11 +15,11 @@
         :options="options">
     </codemirror>
     <div class="console">
-        <p><span>></span>{{ playgroundOutput }}</p>
+        <p><pre>{{ playgroundOutput }}</pre></p>
     </div>
-    <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
+<!--     <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
     <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
-    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p>
+    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p> -->
 </div>
 </transition>
 </template>
@@ -27,44 +27,7 @@
 <script>
 import { codemirror } from 'vue2-codemirror-lite-swift'
 
-var exampleSocket
-
-export default {
-    methods: {
-        run: function (event) {
-            exampleSocket.send(this.$data.code)
-        },
-        print: function() {
-            this.playgroundOutput = 'hello!'
-        },
-        constructSocket: function () {
-            exampleSocket = new WebSocket("ws://" + location.host + "/playground")
-            // TODO: loading view
-            exampleSocket.onopen = function (event) {
-              // TODO: hide loading view
-                console.log("OPENED")
-            }
-            exampleSocket.onmessage = function (event) {
-              // TODO: show error
-              console.log(event.data)
-              this.playgroundOutput = event.data
-            }
-            exampleSocket.onclose = function (event) {
-                console.log("CLOSED")
-                this.constructSocket()
-            }
-        },
-    },
-    components: {
-        codemirror
-    },
-    mounted: function () {
-        this.constructSocket()
-    },
-    data () {
-        return {
-            playgroundOutput: 'playgroundOutput',
-            code: `enum LogoColor {
+const codeString = `enum LogoColor {
     case red, orange, yellow, green, blue, indigo, violet
 }
 
@@ -80,7 +43,49 @@ class SiteLogo {
 func generateSiteLogo() -> SiteLogo {
     let logo = SiteLogo(.indigo)
     return logo
-}`,
+}`
+var socket
+
+export default {
+    methods: {
+        execute: function (event) {
+            socket.send(this.code)
+        },
+        printConsole: function (text) {
+            this.playgroundOutput = text
+        },
+        constructSocket: function () {
+            const vm = this
+            socket = new WebSocket("ws://" + location.host + "/playground")
+            // TODO: loading view
+            socket.onopen = function (event) {
+              // TODO: hide loading view
+                console.log("OPENED")
+            }
+            socket.onmessage = function (event) {
+              // TODO: show error
+              console.log(event.data)
+              vm.printConsole(event.data)
+            }
+            socket.onclose = function (event) {
+                console.log("CLOSED")
+                vm.constructSocket()
+            }
+        },
+        resetPlayground: function () {
+            this.code = codeString
+        }
+    },
+    components: {
+        codemirror
+    },
+    mounted: function () {
+        this.constructSocket()
+    },
+    data () {
+        return {
+            playgroundOutput: 'playgroundOutput',
+            code: codeString,
             options: {
                 tabSize: 4,
                 styleActiveLine: true,
