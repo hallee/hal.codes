@@ -52,6 +52,7 @@ export default {
             socket.send(this.code)
         },
         printConsole: function (text) {
+            // TODO: sanitize, limit output
             this.playgroundOutput = text
         },
         constructSocket: function () {
@@ -84,7 +85,7 @@ export default {
     },
     data () {
         return {
-            playgroundOutput: 'playgroundOutput',
+            playgroundOutput: '',
             code: codeString,
             options: {
                 tabSize: 4,
@@ -102,7 +103,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .fade-enter-active, .fade-leave-active {
     transition: opacity .4s;
 }
@@ -123,18 +124,17 @@ export default {
     font-size: 0.8em;
     cursor: pointer;
     transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
-    filter: drop-shadow( 0 4px 16px rgba(40, 0, 80, 0.25) );
     
     &:hover {
-        transform: scale(1.08);
+        transform: scale(0.98);
     }
     &:active {
-        transform: none;
+        transform: scale(0.92);
     }
 }
 
 .run-button {
-    background: #5664EC;
+    background: #5D6169;
     padding: 6px 32px;
 }
 
@@ -145,16 +145,11 @@ export default {
     background: none;
     border: none;
     cursor: pointer;
+    opacity: 0.5;
 
     img {
         vertical-align: bottom;
     }
-}
-
-.console {
-    font-family: 'Iosevka';
-    font-weight: 400;
-    font-size: 16px;
 }
 
 #playground {
@@ -166,7 +161,7 @@ export default {
         font-size: 0.8em;
     }
     
-    .cm-s-one-dark {
+    .cm-s-one-dark, .console pre {
         font-family: 'Iosevka';
         font-weight: 400;
         font-size: 16px;
@@ -179,6 +174,9 @@ export default {
         height: auto;
         -webkit-user-select: none;
 
+        .CodeMirror-linenumbers {
+            margin-right: 0.2em;
+        }
         pre {
             -webkit-font-variant-ligatures: normal !important;
             font-variant-ligatures: normal !important;
@@ -186,6 +184,25 @@ export default {
     }
     .CodeMirror-scroll {
         max-height: 600px;
+    }
+
+    .console {
+        color: #CDD5E4;
+        background-color: #444A55;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        line-height: 1.4em;
+        padding: 0.2em 1.6em;
+        margin: 0;
+
+        pre {
+            white-space: pre-wrap;
+            &:before {
+                opacity: 0.5;
+                content: "> ";
+                display: inline;
+            }
+        }
     }
 }
 
