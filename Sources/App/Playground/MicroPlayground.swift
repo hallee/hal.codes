@@ -33,17 +33,18 @@ class MicroPlayground {
         projectPath = projectDirectoryPath
     }
     
-    func run(code: String) -> String {
+    func run(code: String) -> PlaygroundResult {
         let result = buildAndRun(code: code)
         var outputString = ""
         if let errors = result.errors {
             for error in errors {
                 outputString += error.description + "\n"
             }
+            return PlaygroundResult(text: "", error: outputString)
         } else {
             outputString += result.text + "\n"
+            return PlaygroundResult(text: outputString, error: "")
         }
-        return outputString
     }
     
     private func buildAndRun(code: String) -> RunResult {
@@ -146,7 +147,7 @@ class MicroPlayground {
         
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
-            return Result.success(try result.utf8Output().chuzzle() ?? "Done.")
+            return Result.success(try result.utf8Output().chuzzle() ?? "")
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
@@ -194,6 +195,11 @@ class MicroPlayground {
     private struct RunResult {
         let text: String
         let errors: [PlaygroundError]?
+    }
+    
+    struct PlaygroundResult: Codable {
+        let text: String
+        let error: String
     }
 
 }

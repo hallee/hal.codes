@@ -64,7 +64,11 @@ export default {
                 vm.status = 'ready'
             }
             socket.onmessage = function (event) {
-                vm.printConsole(event.data)
+                var response = JSON.parse(event.data)
+                vm.printConsole(response.text + response.error)
+                if (response.error != '') {
+                    console.log("ERROR")
+                }
             }
             socket.onclose = function (event) {
                 vm.status = 'disconnected'

@@ -23,8 +23,14 @@ public final class PlaygroundProvider: Provider {
             // TODO: security / limiting to host
             let playground = MicroPlayground(DirectoryConfig.detect().workDir)
             ws.onText { ws, text in
-                print("Running command -> \n\(text)")
-                ws.send(playground.run(code: text))
+                do {
+                    let result = playground.run(code: text)
+                    let encoded = try JSONEncoder().encode(result)
+                    guard let jsonString = String(data: encoded, encoding: .utf8) else { fatalError() }
+                    ws.send(jsonString)
+                } catch {
+                    fatalError("Error parsing JSON")
+                }
             }
         }
         services.register(wss, as: WebSocketServer.self)
