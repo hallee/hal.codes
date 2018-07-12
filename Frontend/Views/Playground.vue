@@ -217,9 +217,7 @@ export default {
         pre {
             white-space: pre-wrap;
             &:before {
-                display: block;
-                position: absolute;
-                margin-left: -0.8em;
+                margin-left: -1em;
                 opacity: 0.5;
                 content: "> ";
                 display: inline;
