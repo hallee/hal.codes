@@ -6,6 +6,13 @@
             <img src="/images/run.svg" height="24px" width="24px" />
         </button>
 
+        <div class="run-result">
+            <transition name="slide-right">
+                <img v-if="result == 'success'" key="success-icon" src="/images/success.svg" height="32px" width="32px" />
+                <img v-if="result == 'error'" key="error-icon" src="/images/fail.svg" height="32px" width="32px" />
+            </transition>
+        </div>
+
         <button class="reset-button" v-on:click="resetPlayground">
             <img src="/images/reset.svg" height="24px" width="24px" />
         </button>
@@ -50,6 +57,7 @@ export default {
     methods: {
         execute: function (event) {
             this.status = 'running'
+            this.result = 'unknown'
             socket.send(this.code)
         },
         printConsole: function (text) {
@@ -67,7 +75,9 @@ export default {
                 var response = JSON.parse(event.data)
                 vm.printConsole(response.text + response.error)
                 if (response.error != '') {
-                    console.log("ERROR")
+                    vm.result = 'error'
+                } else {
+                    vm.result = 'success'
                 }
             }
             socket.onclose = function (event) {
@@ -99,6 +109,16 @@ export default {
                   ].indexOf(value) !== -1
                 }
             },
+            result: {
+                type: String,
+                validator: function (value) {
+                  return [
+                    'success',
+                    'error',
+                    'unknown'
+                  ].indexOf(value) !== -1
+                }
+            },
             options: {
                 tabSize: 4,
                 styleActiveLine: true,
@@ -122,6 +142,15 @@ export default {
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
+
+.slide-right-enter-active, .slide-right-leave-active {
+    transition: opacity .2s, transform .2s cubic-bezier(0.175, 0.9, 0.32, 1.6);
+}
+.slide-right-enter, .slide-right-leave-to {
+    opacity: 0;
+    transform: translateX(-0.4em);
+}
+
 
 .run-bar {
     margin: 12px 0;
@@ -148,7 +177,7 @@ export default {
 .run-button {
     background: #5D6169;
     padding: 6px 18px;
-
+    z-index: 10;
     img {
         vertical-align: middle;
     }
@@ -226,6 +255,15 @@ export default {
                 content: "> ";
                 display: inline;
             }
+        }
+    }
+
+    .run-result {
+        display: flex;
+        margin-left: 0.4em;
+
+        img {
+            margin: auto 0;
         }
     }
 }
