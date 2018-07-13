@@ -10,8 +10,7 @@
                 </svg>
             </div>
             <article>
-                <p>👋 I’m Hal, a software developer living in Brooklyn.</p>
-                <p>I mostly make apps for iPhones.</p>
+                <p>👋 I’m Hal, an iOS developer living in Brooklyn.</p>
                 <p>Currently I work at Quartz
                 helping to build a <a href="https://qz.com/app/">conversational news app</a>. It's a fun reprieve from traditional news apps, and it's sort of like texting with an entire newsroom.</p>
             </article>

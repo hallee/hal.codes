@@ -24,9 +24,10 @@
     <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
     </div>
-    <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
+    <p>What's this? A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser.</p>
+<!--     <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
     <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
-    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p>
+    <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p> -->
 </div>
 </transition>
 </template>
@@ -38,18 +39,13 @@ const codeString = `enum LogoColor {
     case red, orange, yellow, green, blue, indigo, violet
 }
 
-class SiteLogo {
+struct SiteLogo {
     var color: LogoColor
-
-    init(_ color: LogoColor) {
-        self.color = color
-    }
 }
 
 /// Called by the app to fetch this site's logo ✨
 func generateSiteLogo() -> SiteLogo {
-    let logo = SiteLogo(.indigo)
-    return logo
+    return SiteLogo(color: .indigo)
 }`
 var socket
 
@@ -205,10 +201,6 @@ export default {
     flex-grow: 1;
     max-width: 740px;
     width: auto;
-
-    p {
-        font-size: 0.8em;
-    }
     
     .cm-s-one-dark, .console pre {
         font-family: 'Iosevka';
@@ -241,13 +233,15 @@ export default {
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         line-height: 1.4em;
-        padding: 0.2em 2.4em;
+        padding: 0em 2.4em;
         margin: 0;
-        min-height: 2.8em;
         max-height: 400px;
         overflow-y: scroll;
-
+        p {
+            margin: 0.4em 0;
+        }
         pre {
+            margin: 0;
             white-space: pre-wrap;
             &:before {
                 margin-left: -1em;
