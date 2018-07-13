@@ -263,6 +263,7 @@ export default {
         margin-left: 0.4em;
 
         img {
+            position: absolute;
             margin: auto 0;
         }
     }
