@@ -156,6 +156,8 @@ export default {
     transform: translateX(-0.4em);
 }
 
+$break-mobile: 768px;
+$break-mobile-small: 320px;
 
 .run-bar {
     margin: 12px 0;
@@ -220,14 +222,25 @@ export default {
 }
 
 #playground {
-    flex-grow: 1;
+    flex: 1 0 520px;
     max-width: 740px;
     width: auto;
+
+    @media screen and (max-width: $break-mobile) { 
+        flex: 1 0 240px;
+    }
     
     .cm-s-one-dark, .console pre {
         font-family: 'Iosevka';
         font-weight: 400;
         font-size: 16px;
+
+        @media screen and (max-width: $break-mobile) { 
+            font-size: 0.8em;
+        }
+        @media screen and (max-width: $break-mobile-small) { 
+            font-size: 0.5em;
+        }
     }
     .CodeMirror {
         border-top-left-radius: 8px;
