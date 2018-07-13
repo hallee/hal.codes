@@ -12,6 +12,8 @@
                 <img v-if="result == 'error'" key="error-icon" src="/images/fail.svg" height="32px" width="32px" />
             </transition>
         </div>
+        <div class="spacer"></div>
+        <p class="version"><a href="https://swift.org/blog/swift-4-1-released/">{{ swiftVersion }}</a></p>
 
         <button class="reset-button" v-on:click="resetPlayground">
             <img src="/images/reset.svg" height="24px" width="24px" />
@@ -24,7 +26,7 @@
     <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
     </div>
-    <p>What's this? A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser.</p>
+    <p><i>What's this?</i> A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser.</p>
 <!--     <p><a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> is my language of choice — it's easy to learn, open source, and has great low-level performance. But its usage is mostly limited to iOS developers, and I'd like to see that change.</p>
     <p>In that spirit, I've made this little Swift environment so that you can try it right here in your browser. It's a real Swift environment with all the type checking and error handling you'd expect.</p>
     <p>You can use it to change this site's logo color — not just for you, but for everyone who visits this page!</p> -->
@@ -83,6 +85,11 @@ export default {
         },
         resetPlayground: function () {
             this.code = codeString
+        },
+        checkSwiftVersion: function () {
+            this.$http.get('/playground/version').then(response => {
+                this.swiftVersion = 'Swift ' + response.body;
+            }, response => { });
         }
     },
     components: {
@@ -90,11 +97,13 @@ export default {
     },
     mounted: function () {
         this.constructSocket()
+        this.checkSwiftVersion()
     },
     data () {
         return {
             playgroundOutput: '',
             code: codeString,
+            swiftVersion: '',
             status: {
                 type: String,
                 validator: function (value) {
@@ -151,6 +160,18 @@ export default {
 .run-bar {
     margin: 12px 0;
     display: flex;
+    .spacer {
+        flex-grow: 1;
+    }
+    .version {
+        margin: auto 2em;
+        font-size: 0.6em;
+
+        a {
+            color: #B7B7B7;
+            text-decoration: none;
+        }
+    }
 }
 
 .roundrect-button {
@@ -185,7 +206,8 @@ export default {
 
 .reset-button {
     align-self: flex-end;
-    margin-left: auto;
+    margin: auto 0;
+    padding: 0;
     height: 100%;
     background: none;
     border: none;
@@ -193,7 +215,7 @@ export default {
     opacity: 0.5;
 
     img {
-        vertical-align: bottom;
+        vertical-align: top;
     }
 }
 

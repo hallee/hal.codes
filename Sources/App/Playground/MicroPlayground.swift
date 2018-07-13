@@ -16,7 +16,8 @@ import Foundation
 
 class MicroPlayground {
     
-    static let swiftVersion = "4.1.2-RELEASE"
+    static let swiftVersionNumber = "4.1.2"
+    static let swiftVersion = swiftVersionNumber + "-RELEASE"
     private let processSet = ProcessSet()
     private let projectPath: String
     lazy var toolchainPath: String = {
