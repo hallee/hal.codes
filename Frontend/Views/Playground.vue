@@ -214,7 +214,6 @@ $break-mobile-small: 320px;
     flex: 1 0 520px;
     max-width: 740px;
     width: auto;
-    -webkit-user-select: none;
 
     @media screen and (max-width: $break-mobile) { 
         flex: 1 0 240px;
@@ -238,6 +237,7 @@ $break-mobile-small: 320px;
         line-height: 1.4em;
         padding: 1em;
         height: auto;
+        -webkit-user-select: none;
         pointer-events: none;
 
         .CodeMirror-code {
@@ -273,7 +273,6 @@ $break-mobile-small: 320px;
             margin: 0;
             line-height: 1.6em;
             white-space: pre-wrap;
-            -webkit-user-select: text;
             &:before {
                 margin-left: -1em;
                 opacity: 0.5;
