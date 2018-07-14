@@ -49,7 +49,6 @@ body {
     font-weight: 400;
     color: #000;
     -webkit-font-smoothing: antialiased;
-    text-decoration-skip: ink;
 }
 
 a {

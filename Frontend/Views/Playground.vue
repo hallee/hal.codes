@@ -2,7 +2,7 @@
 <transition name="fade">
 <div id="playground">
     <div class="run-bar">
-        <button class="roundrect-button run-button" :disabled="status != 'ready'" v-on:click="execute">
+        <button class="roundrect-button run-button" :disabled="status != 'ready'" v-on:click.passive="execute">
             <img src="/images/run.svg" height="24px" width="24px" />
         </button>
 
@@ -15,7 +15,7 @@
         <div class="spacer"></div>
         <p class="version"><a href="https://swift.org/blog/swift-4-1-released/">{{ swiftVersion }}</a></p>
 
-        <button class="reset-button" v-on:click="resetPlayground">
+        <button class="reset-button" v-on:click.passive="resetPlayground">
             <img src="/images/reset.svg" height="24px" width="24px" />
         </button>
     </div>
@@ -253,10 +253,6 @@ $break-mobile-small: 320px;
         .CodeMirror-linenumbers {
             margin-right: 0.2em;
         }
-        pre {
-            -webkit-font-variant-ligatures: normal !important;
-            font-variant-ligatures: normal !important;
-        }
     }
     .CodeMirror-scroll {
         max-height: 600px;
@@ -270,7 +266,7 @@ $break-mobile-small: 320px;
         line-height: 1.4em;
         padding: 0em 2.4em;
         margin: 0;
-        max-height: 400px;
+        max-height: 240px;
         overflow-y: scroll;
         p {
             margin: 0.4em 0;

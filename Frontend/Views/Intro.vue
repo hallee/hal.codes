@@ -58,7 +58,6 @@ section.intro {
     flex-wrap: wrap;
     
     article {
-        flex: 1 0 300px;
         max-width: 480px;
         margin-bottom: 2em;
         margin-right: 0.6em;
