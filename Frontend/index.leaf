@@ -3,6 +3,8 @@
     <head>
         <title>hal.codes</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="Hal Lee is a software developer" property="og:title">
+        <meta content="Hal Lee is an iOS developer based in Brooklyn, currently at Quartz." name="description">
         <link rel="stylesheet" href="/styles/style.css">
     </head>
     <body>
