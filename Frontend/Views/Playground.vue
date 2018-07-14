@@ -133,7 +133,6 @@ export default {
                 lineWrapping: true,
                 undoDepth: 100,
                 historyEventDelay: 500,
-                gutters: ['CodeMirror-linenumbers'],
             }
         }
     }
@@ -256,6 +255,10 @@ $break-mobile-small: 320px;
     }
     .CodeMirror-scroll {
         max-height: 600px;
+    }
+
+    div.CodeMirror-cursors {
+        visibility: visible;
     }
 
     .console {
