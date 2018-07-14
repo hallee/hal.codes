@@ -20,8 +20,7 @@
         </button>
     </div>
     <codemirror
-        v-model="code"
-        :options="options">
+        v-model="code">
     </codemirror>
     <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
@@ -123,16 +122,6 @@ export default {
                     'unknown'
                   ].indexOf(value) !== -1
                 }
-            },
-            options: {
-                tabSize: 4,
-                styleActiveLine: true,
-                lineNumbers: true,
-                line: true,
-                mode: 'text/x-swift',
-                lineWrapping: true,
-                undoDepth: 100,
-                historyEventDelay: 500,
             }
         }
     }
@@ -224,6 +213,7 @@ $break-mobile-small: 320px;
     flex: 1 0 520px;
     max-width: 740px;
     width: auto;
+    -webkit-user-select: none;
 
     @media screen and (max-width: $break-mobile) { 
         flex: 1 0 240px;
@@ -247,18 +237,23 @@ $break-mobile-small: 320px;
         line-height: 1.4em;
         padding: 1em;
         height: auto;
-        -webkit-user-select: none;
+        pointer-events: none;
 
-        .CodeMirror-linenumbers {
-            margin-right: 0.2em;
+        .CodeMirror-code {
+            -webkit-user-select: text;
+            pointer-events: auto;
+            ::selection {
+                background-color: rgba(200, 220, 240, 0.2);
+            }
+        }
+
+        .CodeMirror-linenumber {
+            pointer-events: none;
+            -webkit-user-select: none;
         }
     }
     .CodeMirror-scroll {
         max-height: 600px;
-    }
-
-    div.CodeMirror-cursors {
-        visibility: visible;
     }
 
     .console {
@@ -269,7 +264,7 @@ $break-mobile-small: 320px;
         line-height: 1.4em;
         padding: 0em 2.4em;
         margin: 0;
-        max-height: 240px;
+        max-height: 220px;
         overflow-y: scroll;
         p {
             margin: 0.4em 0;
