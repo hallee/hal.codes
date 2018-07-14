@@ -34,9 +34,9 @@ class PlaygroundErrorParser {
             guard let row = Int(result[1]), let column = Int(result[2]) else { continue }
             let description: String
             if result.count > 6 {
-                description = "hal.codes:\(row):\(column) error: \(result[4])\n\(result[5])\n\(result[6])"
+                description = "hal.codes:\(row):\(column) error: \(result[4])\n\(result[5])\n\(result[6])\n"
             } else {
-                description = "hal.codes:\(row):\(column) error: \(result[4])"
+                description = "hal.codes:\(row):\(column) error: \(result[4])\n"
             }
             items += [PlaygroundError(location: CodeLocation(row: row + offset, column: column),
                                       description: description)]

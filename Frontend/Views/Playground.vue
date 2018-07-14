@@ -148,8 +148,9 @@ $break-mobile: 768px;
 $break-mobile-small: 320px;
 
 .run-bar {
-    margin: 12px 0;
+    margin: 0 0 12px 0;
     display: flex;
+
     .spacer {
         flex-grow: 1;
     }
@@ -225,7 +226,7 @@ $break-mobile-small: 320px;
         font-size: 16px;
 
         @media screen and (max-width: $break-mobile) { 
-            font-size: 0.8em;
+            font-size: 0.7em;
         }
         @media screen and (max-width: $break-mobile-small) { 
             font-size: 0.5em;
@@ -261,17 +262,18 @@ $break-mobile-small: 320px;
         background-color: #444A55;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
-        line-height: 1.4em;
         padding: 0em 2.4em;
         margin: 0;
         max-height: 220px;
         overflow-y: scroll;
         p {
-            margin: 0.4em 0;
+            margin: 0.8em 0;
         }
         pre {
             margin: 0;
+            line-height: 1.6em;
             white-space: pre-wrap;
+            -webkit-user-select: text;
             &:before {
                 margin-left: -1em;
                 opacity: 0.5;
