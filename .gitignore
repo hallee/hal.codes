@@ -8,3 +8,4 @@ DerivedData/
 *.sketch
 node_modules/
 Public/codemirror/*
+Designs/

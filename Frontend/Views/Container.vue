@@ -3,15 +3,20 @@
     <section class="main">
         <Intro/>
         <!-- TODO: Projects, footer -->
+        <Projects/>
     </section>
 </template>
 
 <script>
 import Intro from './Intro.vue'
+const Projects = () => ({
+  component: import('./Projects.vue')
+})
 
 export default {
     components: {
-        Intro
+        Intro,
+        Projects
     }
 }
 </script>

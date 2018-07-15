@@ -42,10 +42,10 @@ export default {
     filter: drop-shadow( 0 2px 10px rgba(40, 0, 80, 0.25) );
     
     &:hover {
-        transform: scale(0.96);
+        transform: scale(1.04);
     }
     &:active {
-        transform: scale(0.94);
+        transform: none;
     }
 }
 #squircle {
