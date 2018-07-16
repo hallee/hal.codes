@@ -31,8 +31,12 @@ $break-mobile: 768px;
 
 section.projects {
     margin-top: 4em;
-    overflow: hidden;
     width: 100%;
+
+    // fix for horizontal scroll on mobile; revisit later
+    @media screen and (max-width: $break-mobile) { 
+        overflow: hidden;
+    }
 
     h1, h2, h3 {
         margin: 0 0 2em 0;
