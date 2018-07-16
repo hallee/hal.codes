@@ -33,11 +33,6 @@ section.projects {
     margin-top: 4em;
     width: 100%;
 
-    // fix for horizontal scroll on mobile; revisit later
-    @media screen and (max-width: $break-mobile) { 
-        overflow: hidden;
-    }
-
     h1, h2, h3 {
         margin: 0 0 2em 0;
     }
@@ -46,7 +41,7 @@ section.projects {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-right: -4em;
+        margin-right: -3em;
     }
     
     article {
@@ -55,7 +50,7 @@ section.projects {
         background: #A8CDE1; 
         cursor: pointer;
         margin-bottom: 8em;
-        margin-right: 4em;
+        margin-right: 3em;
         overflow: hidden;
         height: 680px;
         min-width: 200px;

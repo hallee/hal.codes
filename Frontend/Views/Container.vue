@@ -87,6 +87,7 @@ section.main {
     padding: 3em;
     margin: 0 auto;
     max-width: 1400px;
+    overflow-x: hidden;
 
     @media screen and (max-width: $break-mobile) { 
         padding: 1em;
