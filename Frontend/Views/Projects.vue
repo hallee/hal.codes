@@ -86,7 +86,8 @@ section.projects {
         flex: 1 0 380px;
         max-width: 560px;
         img {
-            margin-top: -100px;
+            margin-top: -104px;
+            margin-left: -40px;
         }
     }
     article.fore {
