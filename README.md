@@ -38,6 +38,7 @@ hal.codes is hosted on the [smallest DigialOcean droplet](https://www.digitaloce
 ```bash
 eval "$(curl -sL https://apt.vapor.sh)"
 sudo apt-get install swift vapor
+cd ~
 git clone git@github.com:hallee/hal.codes.git
 cd hal.codes/
 ./run.sh
@@ -60,5 +61,12 @@ apt-get source nginx
 cd nginx-1.10.3/ # version number may differ
 nano auto/options # change HTTP_GZIP_STATIC=NO to YES
 dpkg-buildpackage -uc -b
-sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.deb # package name may differ
+sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.04.2_all.deb # package name may differ
+```
+
+Now that Nginx is built with proper gzip support, we can set it up:
+
+```bash
+cd ~/hal.codes/
+sudo cp nginx.conf /etc/nginx/sites-available/hal.codes
 ```
