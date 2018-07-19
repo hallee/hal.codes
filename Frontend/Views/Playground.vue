@@ -246,6 +246,7 @@ $break-mobile-small: 320px;
         height: auto;
         -webkit-user-select: none;
         pointer-events: none;
+        ::-webkit-scrollbar-corner, ::-webkit-scrollbar { background-color: rgba(0,0,0,0); }
 
         .CodeMirror-code {
             -webkit-user-select: text;
