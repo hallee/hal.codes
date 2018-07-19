@@ -43,7 +43,6 @@ git clone git@github.com:hallee/hal.codes.git
 cd hal.codes/
 ./run.sh
 vapor build --release
-yarn --prod
 nano hal-codes.service # change the working directory to match your system
 sudo cp hal-codes.service /lib/systemd/system/
 sudo systemctl enable hal-codes.service
