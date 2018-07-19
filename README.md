@@ -69,4 +69,6 @@ Now that Nginx is built with proper gzip support, we can set it up:
 ```bash
 cd ~/hal.codes/
 sudo cp nginx.conf /etc/nginx/sites-available/hal.codes
+sudo ln -s /etc/nginx/sites-available/hal.codes /etc/nginx/sites-enabled/
+sudo systemctl enable nginx
 ```
