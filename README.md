@@ -4,21 +4,21 @@
 	</a>
     <br>
     <br>
-    <a href="LICENSE">
-        <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
-    </a>
     <a href="https://swift.org">
         <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4.1">
+    </a>
+    <a href="LICENSE">
+        <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
     </a>
 </p>
 
 ## Overview
 
-I set out to build my [personal website](https://hal.codes) using [Swift](https://swift.org/about/) because I'd like to see more people using Swift outside of the iOS community. Swift is fast, easy to learn, and I think it has huge potential on the web. 
+I set out to build my [personal website](https://hal.codes) using [Swift](https://swift.org/about/). I use Swift every day for iOS development and I'd like to see Swift usage expand outside of the iOS community. Swift is fast, easy to learn, and I think it has huge potential on the web.
 
-This site's backend is built on [Vapor](https://vapor.codes), a server-side Swift web framework. Vapor serves the root document, creates a websocket server (for the [Swift Playground]() environment at the top of my site), and evaluates commands sent to that websocket server using a Swift REPL ??.
+This site's backend is built on [Vapor](https://vapor.codes), a server-side Swift web framework. Vapor serves the root document and creates a websocket server for the [Swift Playground]() environment at the top of my site.
 
-Sadly, the whole site couldn't be written in Swift. The frontend is built on [Vue.js](https://vuejs.org/v2/guide/). Vue handles client-side routing and allows for lazy loading heavy components, like the Swift Playground.
+Sadly, the whole site couldn't be written in Swift. [Vue.js](https://vuejs.org/v2/guide/) powers the frontend. It handles client-side routing and allows for lazy loading heavy components, like the Swift Playground.
 
 ## Development Installation
 
@@ -33,7 +33,7 @@ webpack -d --watch
 
 ## Deployment
 
-I host the site on the smallest DigialOcean droplet ($5/mo).
+hal.codes is hosted on the [smallest DigialOcean droplet](https://www.digitalocean.com/pricing/) ($5/mo) on Ubuntu 16.04. Any VPS that can run a [Swift-supported Linux](https://swift.org/download/#releases) version should work fine.
 
 ```bash
 eval "$(curl -sL https://apt.vapor.sh)"
@@ -42,6 +42,7 @@ git clone git@github.com:hallee/hal.codes.git
 cd hal.codes/
 ./run.sh
 vapor build --release
+yarn --prod
 nano hal-codes.service # change the working directory to match your system
 sudo cp hal-codes.service /lib/systemd/system/
 sudo systemctl enable hal-codes.service
@@ -49,19 +50,15 @@ sudo systemctl enable hal-codes.service
 
 At this point the Vapor server will be running on port `8080`. The systemd service ensures that the server stays up continuously, even after reboots.
 
-To serve the site publicly, I use Nginx with a proxy configuration.
-Since css and js files are already gzipped, we want to use the `gzip_static` module of Nginx, which unforutnately requires [building it from source](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html).
+To route public traffic on port `80` to the Vapor server, I use Nginx with a proxy configuration.
+Since css and js files are already gzipped by webpack, Nginx's `gzip_static` module is required to serve them without the server recompresisng them, which unforutnately requires [building Nginx from source](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html). 
 
 ```bash
 apt-get build-dep nginx
 cd /tmp/
 apt-get source nginx
-cd nginx-1.10.3/
+cd nginx-1.10.3/ # version number may differ
 nano auto/options # change HTTP_GZIP_STATIC=NO to YES
 dpkg-buildpackage -uc -b
-sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.deb
+sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.deb # package name may differ
 ```
-
-### Build Log
-
-* [Build nginx with `ngx_http_gzip_static_module`](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html)
