@@ -25,7 +25,13 @@
     <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
     </div>
-    <p><i>What's this?</i> A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser.</p>
+    <div class="explanation">
+    <p><a v-on:click.passive="toggleExplanation"><i>What's this?</i></a>
+        <transition name="fade">
+            <span v-if="showExplanation == true"> A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser. <br />Changes made to the site's logo will be visible to everyone!</span>
+        </transition>
+    </p>
+    </div>
 </div>
 </transition>
 </template>
@@ -86,7 +92,10 @@ export default {
             this.$http.get('/playground/version').then(response => {
                 this.swiftVersion = 'Swift ' + response.body;
             }, response => { });
-        }
+        },
+        toggleExplanation: function (event) {
+            this.showExplanation = !this.showExplanation
+        },
     },
     components: {
         codemirror
@@ -119,7 +128,8 @@ export default {
                     'unknown'
                   ].indexOf(value) !== -1
                 }
-            }
+            },
+            showExplanation: false
         }
     }
 }
@@ -277,6 +287,11 @@ $break-mobile-small: 320px;
                 display: inline;
             }
         }
+    }
+
+    .explanation {
+        font-size: 0.9em;
+        height: 3.6em;
     }
 
     .run-result {

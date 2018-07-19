@@ -39,7 +39,7 @@ export default {
     max-width: 232px;
     margin-bottom: 2em;
     transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
-    filter: drop-shadow( 0 2px 10px rgba(40, 0, 80, 0.25) );
+    // filter: drop-shadow( 0 2px 10px rgba(40, 0, 80, 0.25) );
     
     &:hover {
         transform: scale(1.04);

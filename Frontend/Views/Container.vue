@@ -48,18 +48,17 @@ $break-mobile-small: 320px;
 
 body {
     background: #efefef;
-    text-rendering: optimizeSpeed;
     font-family: 'PlexSans', serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
-    color: #000;
-    -webkit-font-smoothing: antialiased;
+    color: #232323;
 }
 
 a {
-    color: #000;
+    color: #232323;
     cursor: pointer;
     background: none;
+    text-decoration: underline;
     transition: color 0.2s, background 0.2s;
     
     &:hover {
@@ -68,7 +67,7 @@ a {
 }
 
 p {
-    font-size: 1em;
+    font-size: 1.1em;
     line-height: 1.5em;
 
     @media screen and (max-width: $break-mobile) { 

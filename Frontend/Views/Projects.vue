@@ -2,11 +2,11 @@
 <transition name="fade">
     <section class="projects"> 
         <section>
-            <article class="objects">
-                <img src="/images/objectsPhone.png" alt="Quartz Objects" srcset="/images/objectsPhone.png 1x, /images/objectsPhone@2x.png 2x">
-            </article>
             <article class="fore">
                 <img src="/images/objectsPhone.png" alt="Quartz Objects" srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x">
+            </article>
+            <article class="objects">
+                <img src="/images/objectsPhone.png" alt="Quartz Objects" srcset="/images/objectsPhone.png 1x, /images/objectsPhone@2x.png 2x">
             </article>
         </section>
     </section>
@@ -27,6 +27,7 @@ export default {
     opacity: 0;
 }
 
+$break-small: 900px;
 $break-mobile: 768px;
 
 section.projects {
@@ -42,6 +43,9 @@ section.projects {
         flex-wrap: wrap;
         justify-content: space-between;
         margin-right: -3em;
+        @media screen and (max-width: $break-small) {
+            margin-right: -1em;
+        } 
     }
     
     article {
@@ -75,15 +79,19 @@ section.projects {
             }
         }
 
+        @media screen and (max-width: $break-small) {
+            margin-right: 1em;
+            flex: 1 0 240px !important;
+        } 
+
         @media screen and (max-width: $break-mobile) { 
-            flex: 1 0 200px !important;
             margin-bottom: 3em;
             height: 500px;
         }
     }
 
     article.objects {
-        flex: 1 0 380px;
+        flex: 1 0 260px;
         max-width: 560px;
         img {
             margin-top: -104px;
@@ -92,7 +100,7 @@ section.projects {
     }
     article.fore {
         background: #E1D4E1;
-        flex: 2 0 500px;
+        flex: 1.6 0 280px;
         img {
             margin-top: -60px;
         }
