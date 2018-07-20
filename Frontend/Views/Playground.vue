@@ -270,17 +270,14 @@ $break-mobile-small: 320px;
         background-color: #444A55;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
-        padding: 0em 2.4em;
-        margin: 0;
         max-height: 220px;
         overflow-y: scroll;
         p {
             margin: 0.8em 0;
         }
         pre {
-            margin: 0;
+            margin: 0em 3.2em;
             line-height: 1.6em;
-            white-space: pre-wrap;
             &:before {
                 margin-left: -1em;
                 opacity: 0.5;
