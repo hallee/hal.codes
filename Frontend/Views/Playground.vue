@@ -271,12 +271,14 @@ $break-mobile-small: 320px;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         max-height: 220px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
         p {
             margin: 0.8em 0;
         }
         pre {
             margin: 0em 3.2em;
+            white-space: pre-wrap;
             line-height: 1.6em;
             &:before {
                 margin-left: -1em;
