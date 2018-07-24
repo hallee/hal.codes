@@ -26,9 +26,9 @@ Sadly, the whole site couldn't be written in Swift. [Vue.js](https://vuejs.org/v
 git clone git@github.com:hallee/hal.codes.git
 cd hal.codes/
 ./run.sh
-vapor build
+vapor xcode
 yarn
-webpack -d --watch
+npx webpack -d --watch
 ```
 
 ## Deployment
