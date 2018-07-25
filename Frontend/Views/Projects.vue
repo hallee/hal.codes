@@ -3,7 +3,7 @@
     <section class="projects"> 
         <section>
             <article class="fore">
-                <img src="/images/objectsPhone.png" alt="Quartz Objects" srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x">
+                <img src="/images/forePhone.png" alt="Fore - A smart portrait editing app" srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x">
             </article>
             <article class="objects">
                 <img src="/images/objectsPhone.png" alt="Quartz Objects" srcset="/images/objectsPhone.png 1x, /images/objectsPhone@2x.png 2x">

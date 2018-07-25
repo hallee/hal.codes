@@ -2,7 +2,7 @@
 <transition name="fade">
 <div id="playground">
     <div class="run-bar">
-        <button class="roundrect-button run-button" :disabled="status != 'ready'" v-on:click.passive="execute">
+        <button title="Run Playground" class="roundrect-button run-button" :disabled="status != 'ready'" v-on:click.passive="execute">
             <img src="/images/run.svg" height="24px" width="24px" />
         </button>
 
@@ -15,7 +15,7 @@
         <div class="spacer"></div>
         <p class="version"><a href="https://swift.org/blog/swift-4-1-released/">{{ swiftVersion }}</a></p>
 
-        <button class="reset-button" v-on:click.passive="resetPlayground">
+        <button title="Reset to original code" class="reset-button" v-on:click.passive="resetPlayground">
             <img src="/images/reset.svg" height="24px" width="24px" />
         </button>
     </div>
@@ -211,10 +211,20 @@ $break-mobile-small: 320px;
     border: none;
     cursor: pointer;
     opacity: 0.5;
+    transition: all .4s;
 
     img {
         vertical-align: top;
     }
+
+    &:hover {
+        transform: rotate(360deg);
+    }
+    &:active {
+        opacity: 0.1;
+    }
+
+
 }
 
 #playground {
