@@ -34,33 +34,37 @@ class MicroPlayground {
         projectPath = projectDirectoryPath
     }
     
-    func run(code: String) -> PlaygroundResult {
-        let result = buildAndRun(code: code)
-        var outputString = ""
-        if let errors = result.errors {
-            for error in errors {
-                outputString += error.description + "\n"
+    func run(code: String, completion: @escaping (PlaygroundResult) -> Void) {
+        buildAndRun(code: code) { result in
+            var outputString = ""
+            if let errors = result.errors {
+                for error in errors {
+                    outputString += error.description + "\n"
+                }
+                completion(PlaygroundResult(text: "", error: outputString))
+            } else {
+                outputString += result.text + "\n"
+                completion(PlaygroundResult(text: outputString, error: ""))
             }
-            return PlaygroundResult(text: "", error: outputString)
-        } else {
-            outputString += result.text + "\n"
-            return PlaygroundResult(text: outputString, error: "")
         }
     }
     
-    private func buildAndRun(code: String) -> RunResult {
-        do {
-            let buildResult = try build(code: code)
-            let runResult = try run(binaryPath: buildResult.dematerialize())
-            return RunResult(text: try runResult.dematerialize(), errors: nil)
-        } catch MicroPlayground.Error.failed(let output) {
-            if let items = try? errorParser.parse(input: output), items.count > 0 {
-                return RunResult(text: output, errors: items)
-            } else {
-                return RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)])
+    private func buildAndRun(code: String, completion: @escaping (RunResult) -> Void) {
+        let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString)
+        queue.async {
+            do {
+                let buildResult = try self.build(code: code)
+                let runResult = try self.run(binaryPath: buildResult.dematerialize())
+                completion(RunResult(text: try runResult.dematerialize(), errors: nil))
+            } catch MicroPlayground.Error.failed(let output) {
+                if let items = try? self.errorParser.parse(input: output), items.count > 0 {
+                    completion(RunResult(text: output, errors: items))
+                } else {
+                    completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)]))
+                }
+            } catch {
+                completion(RunResult(text: error.localizedDescription, errors: nil))
             }
-        } catch {
-            return RunResult(text: error.localizedDescription, errors: nil)
         }
     }
     
