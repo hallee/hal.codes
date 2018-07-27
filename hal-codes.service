@@ -7,10 +7,11 @@ WorkingDirectory=/hal.codes/
 RestartSec=2s
 ExecStart=/home/hal/hal.codes/.build/release/Run
 
-DynamicUser=yes
-ProtectSystem=strict
+ProtectSystem=yes
 ProtectHome=yes
-PrivateUsers=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
 
 [Install]
 WantedBy=multi-user.target
