@@ -3,13 +3,14 @@ Description=hal.codes
 After=syslog.target
 
 [Service]
-User=hal
-WorkingDirectory=/home/hal/hal.codes/
+WorkingDirectory=/hal.codes/
 RestartSec=2s
 ExecStart=/home/hal/hal.codes/.build/release/Run
 
-ProtectSystem=strict
 DynamicUser=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateUsers=yes
 
 [Install]
 WantedBy=multi-user.target
