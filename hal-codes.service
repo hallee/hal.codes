@@ -8,5 +8,8 @@ WorkingDirectory=/home/hal/hal.codes/
 RestartSec=2s
 ExecStart=/home/hal/hal.codes/.build/release/Run
 
+ProtectSystem=strict
+DynamicUser=yes
+
 [Install]
 WantedBy=multi-user.target
