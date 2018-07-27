@@ -54,8 +54,11 @@ class MicroPlayground {
             let runResult = try run(binaryPath: buildResult.dematerialize())
             return RunResult(text: try runResult.dematerialize(), errors: nil)
         } catch MicroPlayground.Error.failed(let output) {
-            let items = try? errorParser.parse(input: output)
-            return RunResult(text: output, errors: items)
+            if let items = try? errorParser.parse(input: output), items.count > 0 {
+                return RunResult(text: output, errors: items)
+            } else {
+                return RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)])
+            }
         } catch {
             return RunResult(text: error.localizedDescription, errors: nil)
         }
