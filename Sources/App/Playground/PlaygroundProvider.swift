@@ -21,24 +21,32 @@ public final class PlaygroundProvider: Provider {
         let wss = NIOWebSocketServer.default()
         wss.get(socketPath) { ws, req in
             // TODO: security / limiting to host
-            let playground = MicroPlayground(DirectoryConfig.detect().workDir)
-            ws.onText { ws, text in
-                playground.run(code: text) { result in
-                    do {
-                        let encoded = try JSONEncoder().encode(result)
-                        guard let jsonString = String(data: encoded, encoding: .utf8) else { fatalError() }
-                        ws.send(jsonString)
-                    } catch {
-                        fatalError("Error parsing JSON")
-                    }
-                }
-            }
+            self.createPlayground(for: ws)
         }
         services.register(wss, as: WebSocketServer.self)
     }
     
     public func didBoot(_ container: Container) throws -> EventLoopFuture<Void> {
         return .done(on: container)
+    }
+    
+    private func createPlayground(for socket: WebSocket) {
+        let playground = MicroPlayground(DirectoryConfig.detect().workDir)
+        socket.onText { ws, text in
+            self.runCode(text, playground, on: ws)
+        }
+    }
+    
+    private func runCode(_ code: String, _ playground: MicroPlayground, on socket: WebSocket) {
+        playground.run(code: code) { result in
+            do {
+                let encoded = try JSONEncoder().encode(result)
+                guard let jsonString = String(data: encoded, encoding: .utf8) else { return }
+                socket.send(jsonString)
+            } catch {
+                fatalError("Error parsing JSON")
+            }
+        }
     }
 
 }
