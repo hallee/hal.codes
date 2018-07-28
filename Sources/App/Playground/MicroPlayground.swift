@@ -24,8 +24,9 @@ class MicroPlayground {
         return projectPath + "/Toolchains/swift-\(MicroPlayground.swiftVersion).xctoolchain/usr/bin"
     }()
     
-    private var errorParser = PlaygroundErrorParser()
+    private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog")
     
+    private var errorParser = PlaygroundErrorParser()
     enum Error: Swift.Error {
         case failed(String)
     }
@@ -49,22 +50,40 @@ class MicroPlayground {
         }
     }
     
-    private func buildAndRun(code: String, completion: @escaping (RunResult) -> Void) {
+    private func buildAndRun(code: String, timeLimit: Double = 5.0,
+                             completion: @escaping (RunResult) -> Void) {
         let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString)
+        var returned = false
+        
         queue.async {
+            defer {
+                returned = true
+            }
+            
             do {
                 let buildResult = try self.build(code: code)
                 let runResult = try self.run(binaryPath: buildResult.dematerialize())
+                guard !returned else { return }
                 completion(RunResult(text: try runResult.dematerialize(), errors: nil))
             } catch MicroPlayground.Error.failed(let output) {
                 if let items = try? self.errorParser.parse(input: output), items.count > 0 {
+                    guard !returned else { return }
                     completion(RunResult(text: output, errors: items))
                 } else {
+                    guard !returned else { return }
                     completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)]))
                 }
             } catch {
-                completion(RunResult(text: error.localizedDescription, errors: nil))
+                guard !returned else { return }
+                completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: error.localizedDescription)]))
             }
+        }
+        
+        watchdogQueue.asyncAfter(deadline: .now() + timeLimit) {
+            guard !returned else { return }
+            self.processSet.terminate()
+            completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: "Exceeded time limit.")]))
+            returned = true
         }
     }
     
