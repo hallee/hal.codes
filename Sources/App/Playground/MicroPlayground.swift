@@ -18,12 +18,12 @@ class MicroPlayground {
     
     static let swiftVersionNumber = "4.1.2"
     static let swiftVersion = swiftVersionNumber + "-RELEASE"
-    private let processSet = ProcessSet()
     private let projectPath: String
     lazy var toolchainPath: String = {
         return projectPath + "/Toolchains/swift-\(MicroPlayground.swiftVersion).xctoolchain/usr/bin"
     }()
     
+    private let processSet = ProcessSet()
     private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog")
     
     private var errorParser = PlaygroundErrorParser()
@@ -53,6 +53,7 @@ class MicroPlayground {
     private func buildAndRun(code: String, timeLimit: Double = 5.0,
                              completion: @escaping (RunResult) -> Void) {
         let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString)
+        var process: Basic.Process?
         var returned = false
         
         queue.async {
@@ -60,28 +61,30 @@ class MicroPlayground {
                 returned = true
             }
             
+            var playgroundOutput: RunResult
             do {
                 let buildResult = try self.build(code: code)
-                let runResult = try self.run(binaryPath: buildResult.dematerialize())
-                guard !returned else { return }
-                completion(RunResult(text: try runResult.dematerialize(), errors: nil))
+                let runResult = try self.run(binaryPath: buildResult.dematerialize()) { processCreated in
+                    process = processCreated
+                }
+                playgroundOutput = RunResult(text: try runResult.dematerialize(), errors: nil)
             } catch MicroPlayground.Error.failed(let output) {
                 if let items = try? self.errorParser.parse(input: output), items.count > 0 {
-                    guard !returned else { return }
-                    completion(RunResult(text: output, errors: items))
+                    playgroundOutput = RunResult(text: output, errors: items)
                 } else {
-                    guard !returned else { return }
-                    completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)]))
+                    playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)])
                 }
             } catch {
-                guard !returned else { return }
-                completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: error.localizedDescription)]))
+                playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: error.localizedDescription)])
             }
+            
+            guard !returned else { return }
+            completion(playgroundOutput)
         }
         
         watchdogQueue.asyncAfter(deadline: .now() + timeLimit) {
             guard !returned else { return }
-            self.processSet.terminate()
+            process?.signal(15)
             completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: "Exceeded time limit.")]))
             returned = true
         }
@@ -156,7 +159,7 @@ class MicroPlayground {
         }
     }
     
-    private func run(binaryPath: AbsolutePath) throws -> Result<String, Error> {
+    private func run(binaryPath: AbsolutePath, processCreated: (Basic.Process) -> Void) throws -> Result<String, Error> {
         var cmd = [String]()
         #if os(macOS)
             // Use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
@@ -165,6 +168,7 @@ class MicroPlayground {
         cmd += [binaryPath.asString]
         
         let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
+        processCreated(process)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
