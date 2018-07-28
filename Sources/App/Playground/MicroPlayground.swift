@@ -24,7 +24,8 @@ class MicroPlayground {
     }()
     
     private let processSet = ProcessSet()
-    private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog")
+    private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog",
+                                              qos: .userInitiated)
     
     private var errorParser = PlaygroundErrorParser()
     enum Error: Swift.Error {
@@ -52,7 +53,7 @@ class MicroPlayground {
     
     private func buildAndRun(code: String, timeLimit: Double = 5.0,
                              completion: @escaping (RunResult) -> Void) {
-        let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString)
+        let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString, qos: .background)
         var process: Basic.Process?
         var returned = false
         
