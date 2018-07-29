@@ -5,13 +5,15 @@
 //  Created by Hal Lee on 7/28/18.
 //
 
+import Vapor
+
 extension MicroPlayground {
     
-    func runLogoColorAttempt(code: String, completion: @escaping (LogoColor) -> Void) {
+    func runLogoColorAttempt(code: String, _ request: Request) {
         let logoCode = code + "\nprint(generateSiteLogo().color)"
         run(code: logoCode) { result in
             if let color = self.parseLogoColor(result.text) {
-                completion(color)
+                Logo.shared.setColor(color)
             }
         }
     }

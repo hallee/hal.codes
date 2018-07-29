@@ -21,7 +21,7 @@ public final class PlaygroundProvider: Provider {
         let wss = NIOWebSocketServer.default()
         wss.get(socketPath) { ws, req in
             // TODO: security / limiting to host
-            self.createPlayground(for: ws)
+            self.createPlayground(for: ws, req)
         }
         services.register(wss, as: WebSocketServer.self)
     }
@@ -30,14 +30,15 @@ public final class PlaygroundProvider: Provider {
         return .done(on: container)
     }
     
-    private func createPlayground(for socket: WebSocket) {
+    private func createPlayground(for socket: WebSocket, _ request: Request) {
         let playground = MicroPlayground(DirectoryConfig.detect().workDir)
         socket.onText { ws, text in
-            self.runCode(text, playground, on: ws)
+            self.runCode(text, playground, on: ws, request)
         }
     }
     
-    private func runCode(_ code: String, _ playground: MicroPlayground, on socket: WebSocket) {
+    private func runCode(_ code: String, _ playground: MicroPlayground,
+                         on socket: WebSocket, _ request: Request) {
         playground.run(code: code) { result in
             do {
                 let encoded = try JSONEncoder().encode(result)
@@ -48,9 +49,7 @@ public final class PlaygroundProvider: Provider {
             }
         }
         
-        playground.runLogoColorAttempt(code: code) { color in
-            
-        }
+        playground.runLogoColorAttempt(code: code, request)
     }
 
 }

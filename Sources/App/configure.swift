@@ -1,15 +1,8 @@
-import FluentPostgreSQL
 import Vapor
 import Leaf
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
-    /// Register database
-    try services.register(FluentPostgreSQLProvider())
-    var migrations = MigrationConfig()
-    migrations.add(model: Logo.self, database: .psql)
-    services.register(migrations)
-    
     /// Register providers first
     services.register([TemplateRenderer.self, ViewRenderer.self]) { container -> LeafRenderer in
         let leafConfig = LeafConfig(tags: LeafTagConfig.default(),
