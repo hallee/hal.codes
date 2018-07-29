@@ -47,6 +47,10 @@ public final class PlaygroundProvider: Provider {
                 fatalError("Error parsing JSON")
             }
         }
+        
+        playground.runLogoColorAttempt(code: code) { color in
+            
+        }
     }
 
 }
