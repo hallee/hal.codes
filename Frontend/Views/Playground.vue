@@ -95,7 +95,9 @@ export default {
         },
         checkSwiftVersion: function () {
             this.$http.get('/playground/version').then(response => {
-                this.swiftVersion = 'Swift ' + response.body;
+                if (response.body.length < 6) {
+                    this.swiftVersion = 'Swift ' + response.body;
+                }
             }, response => { });
         },
         toggleExplanation: function (event) {
