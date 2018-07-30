@@ -65,6 +65,7 @@ export default {
             // TODO: sanitize, limit output
             this.playgroundOutput = text
         },
+        // TODO: Move socket shit up a level or two
         constructSocket: function () {
             const vm = this
             socket = new WebSocket('ws://' + location.host + '/playground')
@@ -73,11 +74,15 @@ export default {
             }
             socket.onmessage = function (event) {
                 var response = JSON.parse(event.data)
-                vm.printConsole(response.text + response.error)
-                if (response.error != '') {
-                    vm.result = 'error'
-                } else {
-                    vm.result = 'success'
+                if (response.hasOwnProperty('error') && response.hasOwnProperty('text')) {
+                    vm.printConsole(response.text + response.error)
+                    if (response.error != '') {
+                        vm.result = 'error'
+                    } else {
+                        vm.result = 'success'
+                    }
+                } else if (response.hasOwnProperty('logoColor')) {
+                    vm.printConsole(response.logoColor)
                 }
             }
             socket.onclose = function (event) {
