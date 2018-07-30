@@ -10,5 +10,6 @@
     <body>
         <div id="app"></div>
         <script src="/scripts/bundle.js"></script>
+        <div ref="logoColor" style="display:none">#(logoColor)</div>
     </body>
 </html>
