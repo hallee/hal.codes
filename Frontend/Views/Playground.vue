@@ -65,7 +65,6 @@ export default {
             // TODO: sanitize, limit output
             this.playgroundOutput = text
         },
-        // TODO: Move socket shit up a level or two
         constructSocket: function () {
             const vm = this
             socket = new WebSocket('ws://' + location.host + '/playground')
@@ -82,7 +81,9 @@ export default {
                         vm.result = 'success'
                     }
                 } else if (response.hasOwnProperty('logoColor')) {
-                    vm.printConsole(response.logoColor)
+                    if (response.logoColor.length == 6) {
+                        vm.$emit('logo-color', response.logoColor)
+                    }
                 }
             }
             socket.onclose = function (event) {
