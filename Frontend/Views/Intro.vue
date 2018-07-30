@@ -15,7 +15,7 @@
                 helping to build a <a href="https://qz.com/app/">conversational news app</a>. It's a fun reprieve from traditional news apps, and it's sort of like texting with an entire newsroom.</p>
             </article>
         </div>
-        <Playground v-on:logo-color="logoColor = $event" />
+        <Playground v-on:logo-color="setLogoColor = $event" />
     </section>
 </template>
 
@@ -27,9 +27,17 @@ export default {
     components: {
         Playground
     },
+    computed: {
+        initialLogoColor: function () {
+            return window.initialLogoColor
+        },
+        logoColor: function () {
+            return this.setLogoColor || initialLogoColor
+        }
+    },
     data () {
         return {
-            logoColor: '5664EC',
+            setLogoColor: null
         }
     }
 }
