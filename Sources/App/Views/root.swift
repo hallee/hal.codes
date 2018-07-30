@@ -1,8 +1,12 @@
 import Vapor
 import Leaf
 
+struct RootPage: Codable {
+    var logoColor: String
+}
+
 func generateVueRoot(for req: Request) throws -> Future<View> {
     let leaf = try req.make(LeafRenderer.self)
-
-    return leaf.render("index", TemplateData.null)
+    let page = RootPage(logoColor: Logo.shared.hexValue())
+    return leaf.render("index", page)
 }

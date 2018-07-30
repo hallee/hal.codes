@@ -17,13 +17,16 @@ class Logo {
     
     private var color: LogoColor {
         didSet {
-            for action in colorChangeActions {
-                action?(LogoObject(logoColor: hexValue()))
+            for action in self.colorChangeActions {
+                actionQueue.async {
+                    action?(LogoObject(logoColor: self.hexValue()))
+                }
             }
             print(colorChangeActions.count) // TODO: weak references? dictionary?
         }
     }
-    private let colorQueue = DispatchQueue(label: "logoColorQueue", qos: .userInitiated)
+    private let actionQueue = DispatchQueue(label: "logoColorActionQueue")
+    private let colorQueue = DispatchQueue(label: "logoColorQueue", qos: .userInitiated, attributes: .concurrent)
     private var colorChangeActions = [((LogoObject) -> Void)?]()
     
     private init(color: LogoColor = .indigo) {
@@ -35,28 +38,32 @@ class Logo {
     }
     
     func setColor(_ color: LogoColor) {
-        colorQueue.async {
+        colorQueue.async(flags: .barrier) {
             self.color = color
         }
     }
     
     func hexValue() -> String {
-        switch color {
-        case .red:
-            return "C63333"
-        case .orange:
-            return "E26723"
-        case .yellow:
-            return "F2DB66"
-        case .green:
-            return "4F9261"
-        case .blue:
-            return "2466D4"
-        case .indigo:
-            return "5664EC"
-        case .violet:
-            return "874CC7"
+        var hexString = ""
+        colorQueue.sync {
+            switch self.color {
+            case .red:
+                hexString = "C63333"
+            case .orange:
+                hexString = "E26723"
+            case .yellow:
+                hexString = "F2DB66"
+            case .green:
+                hexString = "4F9261"
+            case .blue:
+                hexString = "2466D4"
+            case .indigo:
+                hexString = "5664EC"
+            case .violet:
+                hexString = "874CC7"
+            }
         }
+        return hexString
     }
     
 }
