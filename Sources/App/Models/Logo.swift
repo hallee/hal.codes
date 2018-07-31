@@ -17,24 +17,24 @@ class Logo {
     
     private var color: LogoColor {
         didSet {
-            for action in self.colorChangeActions {
-                actionQueue.async {
-                    action?(LogoObject(logoColor: self.hexValue()))
-                }
+            notificationQueue.async {
+                NotificationCenter.default.post(self.colorChangeNotification)
             }
-            print(colorChangeActions.count) // TODO: weak references? dictionary?
         }
     }
-    private let actionQueue = DispatchQueue(label: "logoColorActionQueue")
+    
+    private let notificationQueue = DispatchQueue(label: "logoNotificationQueue")
     private let colorQueue = DispatchQueue(label: "logoColorQueue", qos: .userInitiated, attributes: .concurrent)
-    private var colorChangeActions = [((LogoObject) -> Void)?]()
+    
+    static let notificationName = Notification.Name(rawValue: "LogoColorChanged")
+    private var colorChangeNotification: Notification {
+        return Notification(name: Logo.notificationName,
+                            object: self,
+                            userInfo: ["logoColor": hexValue()])
+    }
     
     private init(color: LogoColor = .indigo) {
         self.color = color
-    }
-    
-    func onColorChange(_ closure: ((LogoObject) -> Void)?) {
-        colorChangeActions.append(closure)
     }
     
     func setColor(_ color: LogoColor) {
@@ -52,22 +52,28 @@ class Logo {
             case .orange:
                 hexString = "E26723"
             case .yellow:
-                hexString = "F2DB66"
+                hexString = "FFD14F"
             case .green:
-                hexString = "4F9261"
+                hexString = "0D9C59"
             case .blue:
-                hexString = "2466D4"
+                hexString = "0779B9"
             case .indigo:
                 hexString = "5664EC"
             case .violet:
-                hexString = "874CC7"
+                hexString = "AC79C6"
             }
         }
         return hexString
     }
     
-}
-
-struct LogoObject: Codable {
-    var logoColor: String
+    func addColorChangeObserver(_ observer: WebSocket) {
+        NotificationCenter.default.addObserver(forName: Logo.notificationName,
+                                               object: nil,
+                                               queue: nil) { [weak observer] notification in
+            if let newLogoColor = notification.userInfo as? [String: String] {
+                try? observer?.sendJSONFormatted(newLogoColor)
+            }
+        }
+    }
+    
 }

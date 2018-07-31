@@ -21,7 +21,7 @@ public final class PlaygroundProvider: Provider {
         let wss = NIOWebSocketServer.default()
         wss.get(socketPath) { socket, request in
             // TODO: security / limiting to host
-            self.createPlayground(for: socket, request)
+            self.createPlayground(for: socket)
         }
         services.register(wss, as: WebSocketServer.self)
     }
@@ -30,36 +30,22 @@ public final class PlaygroundProvider: Provider {
         return .done(on: container)
     }
     
-    private func createPlayground(for socket: WebSocket, _ request: Request) {
+    private func createPlayground(for socket: WebSocket) {
         let playground = MicroPlayground(DirectoryConfig.detect().workDir)
         socket.onText { socket, text in
-            self.runCode(text, playground, on: socket, request)
+            self.runCode(text, playground, on: socket)
         }
         
-        Logo.shared.onColorChange { [weak self] color in
-            self?.sendJSONString(color, to: socket)
-        }
-        
+        Logo.shared.addColorChangeObserver(socket)
     }
     
     private func runCode(_ code: String, _ playground: MicroPlayground,
-                         on socket: WebSocket, _ request: Request) {
-        playground.run(code: code) { result in
-            self.sendJSONString(result, to: socket)
+                         on socket: WebSocket) {
+        playground.run(code: code) { [weak socket] result in
+            try? socket?.sendJSONFormatted(result)
         }
         
-        playground.runLogoColorAttempt(code: code, request)
-    }
-    
-    private func sendJSONString<T: Encodable>(_ output: T, to socket: WebSocket) {
-        do {
-            let encoded = try JSONEncoder().encode(output)
-            guard let jsonString = String(data: encoded, encoding: .utf8) else { return }
-            print(jsonString)
-            socket.send(jsonString)
-        } catch {
-            print(error)
-        }
+        playground.runLogoColorAttempt(code: code)
     }
 
 }

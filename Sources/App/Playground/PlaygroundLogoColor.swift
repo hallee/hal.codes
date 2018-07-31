@@ -9,7 +9,7 @@ import Vapor
 
 extension MicroPlayground {
     
-    func runLogoColorAttempt(code: String, _ request: Request) {
+    func runLogoColorAttempt(code: String) {
         let logoCode = code + "\nprint(generateSiteLogo().color)"
         run(code: logoCode) { result in
             if let color = self.parseLogoColor(result.text) {
