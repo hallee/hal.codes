@@ -16,15 +16,18 @@ import Foundation
 
 class MicroPlayground {
     
-    static let swiftVersion = "4.1.2-RELEASE"
-    private let processSet = ProcessSet()
+    static let swiftVersionNumber = "4.1.2"
+    static let swiftVersion = swiftVersionNumber + "-RELEASE"
     private let projectPath: String
     lazy var toolchainPath: String = {
         return projectPath + "/Toolchains/swift-\(MicroPlayground.swiftVersion).xctoolchain/usr/bin"
     }()
     
-    private var errorParser = PlaygroundErrorParser()
+    private let processSet = ProcessSet()
+    private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog",
+                                              qos: .userInitiated)
     
+    private var errorParser = PlaygroundErrorParser()
     enum Error: Swift.Error {
         case failed(String)
     }
@@ -33,29 +36,58 @@ class MicroPlayground {
         projectPath = projectDirectoryPath
     }
     
-    func run(code: String) -> String {
-        let result = buildAndRun(code: code)
-        var outputString = ""
-        if let errors = result.errors {
-            for error in errors {
-                outputString += error.description + "\n"
+    func run(code: String, completion: @escaping (PlaygroundResult) -> Void) {
+        buildAndRun(code: code) { result in
+            var outputString = ""
+            if let errors = result.errors {
+                for error in errors {
+                    outputString += error.description + "\n"
+                }
+                completion(PlaygroundResult(text: "", error: outputString))
+            } else {
+                outputString += result.text + "\n"
+                completion(PlaygroundResult(text: outputString, error: ""))
             }
-        } else {
-            outputString += result.text + "\n"
         }
-        return outputString
     }
     
-    private func buildAndRun(code: String) -> RunResult {
-        do {
-            let buildResult = try build(code: code)
-            let runResult = try run(binaryPath: buildResult.dematerialize())
-            return RunResult(text: try runResult.dematerialize(), errors: nil)
-        } catch MicroPlayground.Error.failed(let output) {
-            let items = try? errorParser.parse(input: output)
-            return RunResult(text: output, errors: items)
-        } catch {
-            return RunResult(text: error.localizedDescription, errors: nil)
+    private func buildAndRun(code: String, timeLimit: Double = 5.0,
+                             completion: @escaping (RunResult) -> Void) {
+        let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString, qos: .background)
+        var process: Basic.Process?
+        var returned = false
+        
+        queue.async {
+            defer {
+                returned = true
+            }
+            
+            var playgroundOutput: RunResult
+            do {
+                let buildResult = try self.build(code: code)
+                let runResult = try self.run(binaryPath: buildResult.dematerialize()) { processCreated in
+                    process = processCreated
+                }
+                playgroundOutput = RunResult(text: try runResult.dematerialize(), errors: nil)
+            } catch MicroPlayground.Error.failed(let output) {
+                if let items = try? self.errorParser.parse(input: output), items.count > 0 {
+                    playgroundOutput = RunResult(text: output, errors: items)
+                } else {
+                    playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)])
+                }
+            } catch {
+                playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: error.localizedDescription)])
+            }
+            
+            guard !returned else { return }
+            completion(playgroundOutput)
+        }
+        
+        watchdogQueue.asyncAfter(deadline: .now() + timeLimit) {
+            guard !returned else { return }
+            process?.signal(15)
+            completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: "Exceeded time limit.")]))
+            returned = true
         }
     }
     
@@ -128,7 +160,7 @@ class MicroPlayground {
         }
     }
     
-    private func run(binaryPath: AbsolutePath) throws -> Result<String, Error> {
+    private func run(binaryPath: AbsolutePath, processCreated: (Basic.Process) -> Void) throws -> Result<String, Error> {
         var cmd = [String]()
         #if os(macOS)
             // Use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
@@ -137,6 +169,7 @@ class MicroPlayground {
         cmd += [binaryPath.asString]
         
         let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
+        processCreated(process)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
@@ -146,7 +179,7 @@ class MicroPlayground {
         
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
-            return Result.success(try result.utf8Output().chuzzle() ?? "Done.")
+            return Result.success(try result.utf8Output().chuzzle() ?? "")
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
@@ -194,6 +227,11 @@ class MicroPlayground {
     private struct RunResult {
         let text: String
         let errors: [PlaygroundError]?
+    }
+    
+    struct PlaygroundResult: Codable {
+        let text: String
+        let error: String
     }
 
 }

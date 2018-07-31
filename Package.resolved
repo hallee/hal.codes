@@ -33,8 +33,26 @@
         "repositoryURL": "https://github.com/vapor/database-kit.git",
         "state": {
           "branch": null,
-          "revision": "acdd4d3384ec0122dcfcca8d23d9054a2860ffba",
-          "version": "1.2.0"
+          "revision": "7a01659316b9f033fa2150d5cd5e9d3c3e46c2e3",
+          "version": "1.3.0"
+        }
+      },
+      {
+        "package": "Fluent",
+        "repositoryURL": "https://github.com/vapor/fluent.git",
+        "state": {
+          "branch": null,
+          "revision": "270b6fa372f03809b9795e8f8b9d1c31267a0ff3",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "FluentPostgreSQL",
+        "repositoryURL": "https://github.com/vapor/fluent-postgresql.git",
+        "state": {
+          "branch": null,
+          "revision": "8e3eb9d24d54ac58c8d04c194ad6b24f0b1b667e",
+          "version": "1.0.0"
         }
       },
       {
@@ -60,8 +78,17 @@
         "repositoryURL": "https://github.com/vapor/multipart.git",
         "state": {
           "branch": null,
-          "revision": "7778dcb62f3efa845e8e2808937bb347575ba7ce",
-          "version": "3.0.1"
+          "revision": "e57007c23a52b68e44ebdfc70cbe882a7c4f1ec3",
+          "version": "3.0.2"
+        }
+      },
+      {
+        "package": "PostgreSQL",
+        "repositoryURL": "https://github.com/vapor/postgresql.git",
+        "state": {
+          "branch": null,
+          "revision": "3fcc6263f94e836dd9b3722a37bfc61308c0b5f0",
+          "version": "1.0.1"
         }
       },
       {
@@ -83,12 +110,12 @@
         }
       },
       {
-        "package": "libsass",
-        "repositoryURL": "https://github.com/robinwalterfit/Swift-libsass.git",
+        "package": "SQL",
+        "repositoryURL": "https://github.com/vapor/sql.git",
         "state": {
           "branch": null,
-          "revision": "9d48a04eda5a98d7a934ce40249a7275d11f3236",
-          "version": "1.0.0"
+          "revision": "bfbaa048f9e655218611b65da470efa7deb16616",
+          "version": "2.0.2"
         }
       },
       {
@@ -105,8 +132,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio-ssl.git",
         "state": {
           "branch": null,
-          "revision": "0adc938bc8de3d3829b842f9767d81c7480b8403",
-          "version": "1.1.1"
+          "revision": "6617eb0d3afcb12170594968df01ca63afb58ac5",
+          "version": "1.2.0"
         }
       },
       {
@@ -137,15 +164,6 @@
         }
       },
       {
-        "package": "Sass",
-        "repositoryURL": "https://github.com/robinwalterfit/Swift-Sass.git",
-        "state": {
-          "branch": null,
-          "revision": "6a2ba673e1f0bdbdbf3e2eb871229bc0e7354fbe",
-          "version": "1.0.1"
-        }
-      },
-      {
         "package": "TemplateKit",
         "repositoryURL": "https://github.com/vapor/template-kit.git",
         "state": {
@@ -159,8 +177,8 @@
         "repositoryURL": "https://github.com/vapor/url-encoded-form.git",
         "state": {
           "branch": null,
-          "revision": "57cf7fb9c1a1014c50bc05123684a9139ad44127",
-          "version": "1.0.3"
+          "revision": "cbfe7ef6301557d3f2d0807a98165232ae06e1c6",
+          "version": "1.0.4"
         }
       },
       {
@@ -177,8 +195,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "74a46ecacca51d326a1e8cf4b7967827765f05bf",
-          "version": "3.0.5"
+          "revision": "54632a6c1e7ecd9923c0d00b612de936de1c4745",
+          "version": "3.0.8"
         }
       },
       {
