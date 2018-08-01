@@ -88,7 +88,7 @@ export default {
             }
             socket.onclose = function (event) {
                 vm.status = 'disconnected'
-                vm.constructSocket()
+                setTimeout(function() { vm.constructSocket() }, 1000)
             }
         },
         resetPlayground: function () {
@@ -97,7 +97,7 @@ export default {
         checkSwiftVersion: function () {
             this.$http.get('/playground/version').then(response => {
                 if (response.body.length < 6) {
-                    this.swiftVersion = 'Swift ' + response.body;
+                    this.swiftVersion = 'Swift ' + response.body
                 }
             }, response => { });
         },
