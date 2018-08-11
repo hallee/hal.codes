@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import Container from './Views/Container.vue'
+import Home from './Views/Home.vue'
 import Project from './Views/Project.vue'
 
 Vue.use(VueRouter)
@@ -12,7 +12,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: Container
+            component: Home
         },
         {
             path: '/:project',
