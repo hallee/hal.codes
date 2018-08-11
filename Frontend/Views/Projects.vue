@@ -2,20 +2,20 @@
   <transition name="fade">
     <section class="projects"> 
       <section>
-        <article class="fore">
+        <router-link to="/fore" class="fore">
           <img
             src="/images/forePhone.png"
             alt="Fore - A smart portrait editing app"
             srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x"
           >
-        </article>
-        <article class="objects">
+        </router-link>
+        <router-link to="/objects" class="objects">
           <img
             src="/images/objectsPhone.png"
             alt="Quartz Objects"
             srcset="/images/objectsPhone.png 1x, /images/objectsPhone@2x.png 2x"
           >
-        </article>
+        </router-link>
       </section>
     </section>
   </transition>
@@ -50,7 +50,7 @@ section.projects {
     } 
   }
   
-  article {
+  a {
     display: inline-block;
     border-radius: 8px;
     background: #A8CDE1; 
@@ -92,7 +92,8 @@ section.projects {
     }
   }
 
-  article.objects {
+  .objects {
+    display: block;
     flex: 1 0 260px;
     max-width: 560px;
     img {
@@ -100,7 +101,8 @@ section.projects {
       margin-left: -40px;
     }
   }
-  article.fore {
+  .fore {
+    display: block;
     background: #E1D4E1;
     flex: 1.6 0 280px;
     img {

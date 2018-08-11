@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  beforeRouteEnter (to, from, next) {
-    // Check that Markdown file exists for project, otherwise:
-    next('/')
-  }
+  // beforeRouteEnter (to, from, next) {
+  //   // Check that Markdown file exists for project, otherwise:
+  //   next('/')
+  // }
 }
 </script>
