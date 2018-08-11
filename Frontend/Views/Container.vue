@@ -1,8 +1,6 @@
 <template>
-    <!-- TODO: Routing -->
     <section class="main">
         <Intro/>
-        <!-- TODO: Projects, footer -->
         <Projects/>
     </section>
 </template>
