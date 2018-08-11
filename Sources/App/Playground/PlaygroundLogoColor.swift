@@ -10,7 +10,7 @@ import Vapor
 extension MicroPlayground {
     
     func runLogoColorAttempt(code: String) {
-        let logoCode = code + "\nprint(generateSiteLogo().color)"
+        let logoCode = code + "\nprint(siteLogoColor())"
         run(code: logoCode) { result in
             if let color = self.parseLogoColor(result.text) {
                 Logo.shared.setColor(color)

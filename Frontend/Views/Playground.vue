@@ -72,13 +72,9 @@ const codeString = `enum LogoColor {
     case red, orange, yellow, green, blue, indigo, violet
 }
 
-struct SiteLogo {
-    var color: LogoColor
-}
-
-/// Called by the app to fetch this site's logo ✨
-func generateSiteLogo() -> SiteLogo {
-    return SiteLogo(color: .indigo)
+/// Called by the app to color this site's logo ✨
+func siteLogoColor() -> LogoColor {
+    return .indigo
 }`
 var socket
 
