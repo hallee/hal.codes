@@ -8,21 +8,16 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            component: Home
-        },
-        {
-            path: '/:project',
-            component: Project
-        }
-    ]
+  mode: 'history',
+  routes: [
+    { path: '/', component: Home },
+    { path: '/:project', component: Project },
+    { path: '*', redirect: '/' }
+  ]
 })
 
-var vm = new Vue({
-    el: '#app',
-    template: '<router-view></router-view>',
-    router
+new Vue({
+  el: '#app',
+  template: '<router-view></router-view>',
+  router
 })
