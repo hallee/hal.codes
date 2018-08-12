@@ -1,7 +1,7 @@
 <template>   
   <section class="intro">
     <div>
-      <Logo :logoColor="logoColor" />
+      <Logo :logo-color="logoColor" />
       <article>
         <p>👋 I’m Hal, an iOS developer living in Brooklyn.</p>
         <p>Currently I work at Quartz

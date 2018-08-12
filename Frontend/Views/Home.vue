@@ -44,6 +44,10 @@ export default {
 $break-mobile: 768px;
 $break-mobile-small: 320px;
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background: #efefef;
   font-family: 'PlexSans', serif;

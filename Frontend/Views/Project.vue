@@ -1,19 +1,21 @@
 <template>
   <section class="main">
     <Logo />
-    <h2>Project '{{ $route.params.project }}'</h2>
+    <component :is="currentPost" />
   </section>
 </template>
 
 <script>
 import Logo from './Logo.vue'
+
 export default {
   components: {
     Logo
   },
-  // beforeRouteEnter (to, from, next) {
-  //   // Check that Markdown file exists for project, otherwise:
-  //   next('/')
-  // }
+  data () {
+    return {
+      currentPost: () => import('../../Content/Projects/' + this.$route.params.project + '.md')
+    }
+  }
 }
 </script>

@@ -2,14 +2,20 @@
   <transition name="fade">
     <section class="projects"> 
       <section>
-        <router-link to="/fore" class="fore">
+        <router-link 
+          to="/fore" 
+          class="fore"
+        >
           <img
             src="/images/forePhone.png"
             alt="Fore - A smart portrait editing app"
             srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x"
           >
         </router-link>
-        <router-link to="/objects" class="objects">
+        <router-link 
+          to="/objects" 
+          class="objects"
+        >
           <img
             src="/images/objectsPhone.png"
             alt="Quartz Objects"
