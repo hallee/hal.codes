@@ -11,10 +11,9 @@ export default {
   components: {
     Logo
   },
-  beforeRouteEnter (to, from, next) {
-    // Check that Markdown file exists for project, otherwise:
-    Logo.logoColor = window.initialLogoColor 
-    next(true)
-  }
+  // beforeRouteEnter (to, from, next) {
+  //   // Check that Markdown file exists for project, otherwise:
+  //   next('/')
+  // }
 }
 </script>

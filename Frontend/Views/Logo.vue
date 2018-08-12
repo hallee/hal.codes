@@ -26,10 +26,8 @@ export default {
       window.initialLogoColor = newVal
     }
   },
-  methods: {
-    reload: function () {
-      this.logoColor = window.initialLogoColor
-    }
+  mounted: function () {
+    this.logoColor = window.initialLogoColor
   }
 }
 </script>
