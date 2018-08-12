@@ -97,7 +97,7 @@ section.projects {
     flex: 1 0 260px;
     max-width: 560px;
     img {
-      margin-top: -104px;
+      margin-top: -50px;
       margin-left: -40px;
     }
   }
