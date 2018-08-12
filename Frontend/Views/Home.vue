@@ -38,7 +38,15 @@ export default {
   font-family: 'Iosevka';
   font-weight: 400;
   src: url('/fonts/iosevka-brew-regular.woff2') format('woff2'),
-     url('/fonts/iosevka-brew-regular.ttf') format('truetype');
+       url('/fonts/iosevka-brew-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Cerebri';
+  src: url('/fonts/cerebrisans-semibold.eot');
+  src: url('/fonts/cerebrisans-semibold.woff2') format('woff2'),
+       url('/fonts/cerebrisans-semibold.woff') format('woff'),
+       url('/fonts/cerebrisans-semibold.ttf')  format('truetype'),
+       url('/fonts/cerebrisans-semibold.svg#CerebriSans-SemiBold') format('svg');
 }
 
 $break-mobile: 768px;
