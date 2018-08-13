@@ -169,6 +169,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../Sass/mixins.scss";
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .4s;
 }
@@ -183,9 +185,6 @@ export default {
   opacity: 0;
   transform: translateX(-0.4em);
 }
-
-$break-mobile: 768px;
-$break-mobile-small: 320px;
 
 .run-bar {
   margin: 0 0 12px 0;
@@ -265,7 +264,7 @@ $break-mobile-small: 320px;
   max-width: 740px;
   width: auto;
 
-  @media screen and (max-width: $break-mobile) { 
+  @include mobile {
     flex: 1 0 240px;
   }
   
@@ -274,10 +273,10 @@ $break-mobile-small: 320px;
     font-weight: 400;
     font-size: 16px;
 
-    @media screen and (max-width: $break-mobile) { 
+    @include mobile {
       font-size: 0.7em;
     }
-    @media screen and (max-width: $break-mobile-small) { 
+    @include mobile-small {
       font-size: 0.5em;
     }
   }

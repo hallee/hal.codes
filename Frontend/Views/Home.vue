@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../Sass/mixins.scss";
+
 @font-face {
   font-family: 'PlexSans';
   font-style: italic;
@@ -49,9 +51,6 @@ export default {
        url('/fonts/cerebrisans-semibold.svg#CerebriSans-SemiBold') format('svg');
 }
 
-$break-mobile: 768px;
-$break-mobile-small: 320px;
-
 html {
   overflow-y: scroll;
 }
@@ -80,10 +79,10 @@ p {
   font-size: 1.1em;
   line-height: 1.5em;
 
-  @media screen and (max-width: $break-mobile) { 
+  @include mobile {
     font-size: 0.8em;
   }
-  @media screen and (max-width: $break-mobile-small) {
+  @include mobile-small {
     font-size: 0.6em;
   }
 }
@@ -98,7 +97,7 @@ section.main {
   max-width: 1400px;
   overflow-x: hidden;
 
-  @media screen and (max-width: $break-mobile) { 
+  @include mobile {
     padding: 1em;
   }
 }

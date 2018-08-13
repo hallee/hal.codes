@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$break-mobile: 768px;
+@import "../Sass/mixins.scss";
 
 .hal-codes-logo {
   cursor: pointer;
@@ -52,7 +52,7 @@ $break-mobile: 768px;
     transform: none;
   }
 
-  @media screen and (max-width: $break-mobile) {
+  @include mobile {
     max-width: 174px;
     margin-bottom: 1em;
   }

@@ -1,0 +1,14 @@
+$break-mobile: 768px;
+$break-mobile-small: 320px;
+
+@mixin mobile {
+  @media screen and (max-width: $break-mobile) {
+    @content;
+  }
+}
+
+@mixin mobile-small {
+  @media screen and (max-width: $break-mobile-small) {
+    @content;
+  }
+}

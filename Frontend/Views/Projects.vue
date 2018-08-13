@@ -28,6 +28,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import "../Sass/mixins.scss";
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .4s;
 }
@@ -36,7 +38,6 @@
 }
 
 $break-small: 900px;
-$break-mobile: 768px;
 
 section.projects {
   margin-top: 4em;
@@ -67,7 +68,7 @@ section.projects {
     height: 680px;
     min-width: 200px;
 
-    @media screen and (min-width: $break-mobile) { 
+    @include mobile { 
       img {
         transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
         pointer-events: none;
@@ -92,7 +93,7 @@ section.projects {
       flex: 1 0 240px !important;
     } 
 
-    @media screen and (max-width: $break-mobile) { 
+    @include mobile {
       margin-bottom: 3em;
       height: 500px;
     }
