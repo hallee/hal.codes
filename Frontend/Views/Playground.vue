@@ -55,7 +55,7 @@
         <p><pre>{{ playgroundOutput }}</pre></p>
       </div>
       <div class="explanation">
-        <p><a @click.passive="toggleExplanation"><i>What's this?</i></a>
+        <p><a @click.passive="toggleExplanation"><i>What’s this?</i></a>
           <transition name="fade">
             <span v-if="showExplanation == true"> A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser. <br>Changes made to the site's logo will be visible to everyone!</span>
           </transition>
