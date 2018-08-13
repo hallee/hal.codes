@@ -266,12 +266,7 @@ export default {
   width: auto;
 
   @include mobile {
-    flex: 1 0 320px;
-  }
-
-  @include mobile-small {
-    flex: 1 0 260px;
-    min-width: 240px;
+    flex-basis: 80%;
   }
   
   .cm-s-one-dark, .console pre {
@@ -279,9 +274,6 @@ export default {
     font-weight: 400;
     font-size: 16px;
 
-    @include mobile {
-      font-size: 0.7em;
-    }
     @include mobile-small {
       font-size: 0.5em;
     }

@@ -55,11 +55,12 @@ section.intro {
 
   div {
     flex: 1 0 320px;
-    min-width: 380px;
+    min-width: 320px;
     margin-right: 1em;
 
     @include mobile {
       margin-right: 0;
+      flex: 1 0 300px;
       min-width: 300px;
     }
 

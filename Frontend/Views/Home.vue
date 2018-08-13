@@ -82,12 +82,11 @@ p {
   @include tablet {
     font-size: 0.9em;
   }
-
   @include mobile {
     font-size: 0.8em;
   }
   @include mobile-small {
-    font-size: 0.6em;
+    font-size: 0.7em;
   }
 }
 
