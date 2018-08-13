@@ -44,12 +44,23 @@ $post-width: 500px;
     max-width: $post-width;
   }
 
+  .post-text {
+    flex: 1 0 40%;
+  }
+
+  .image-fit {
+    flex: 1 0 50%;
+    max-width: 554px;
+    min-width: 380px;
+    margin: 0 auto;
+  }
+
   img {
+    width: auto;
+    max-width: 100%;
     object-fit: contain;
   }
 
-  .post-text {
-    flex-grow: 1;
-  }
+
 }
 </style>
