@@ -265,6 +265,10 @@ export default {
   min-width: 320px;
   width: auto;
 
+  @include mobile {
+    flex: 1 0 320px;
+  }
+
   @include mobile-small {
     flex: 1 0 260px;
     min-width: 240px;
