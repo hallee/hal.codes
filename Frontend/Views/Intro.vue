@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../Sass/mixins.scss";
+
 section.intro {
   display: flex;
   justify-content: space-between;
@@ -45,6 +47,26 @@ section.intro {
     max-width: 480px;
     margin-bottom: 2em;
     margin-right: 0.6em;
+
+    @include mobile-small {
+      margin-right: 0;
+    }
+  }
+
+  div {
+    flex: 1 0 320px;
+    min-width: 380px;
+    margin-right: 1em;
+
+    @include mobile {
+      margin-right: 0;
+      min-width: 300px;
+    }
+
+    @include mobile-small {
+      min-width: 200px;
+      flex: 1 0 200px;
+    }
   }
 }
 </style>

@@ -260,12 +260,14 @@ export default {
 }
 
 #playground {
-  flex: 1 0 520px;
+  flex: 1 0 420px;
   max-width: 740px;
+  min-width: 320px;
   width: auto;
 
-  @include mobile {
-    flex: 1 0 240px;
+  @include mobile-small {
+    flex: 1 0 260px;
+    min-width: 240px;
   }
   
   .cm-s-one-dark, .console pre {

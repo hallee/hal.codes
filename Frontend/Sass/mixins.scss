@@ -1,5 +1,12 @@
+$break-tablet: 1200px;
 $break-mobile: 768px;
 $break-mobile-small: 320px;
+
+@mixin tablet {
+  @media screen and (max-width: $break-tablet) {
+    @content;
+  }
+}
 
 @mixin mobile {
   @media screen and (max-width: $break-mobile) {

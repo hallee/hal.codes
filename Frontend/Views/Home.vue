@@ -79,6 +79,10 @@ p {
   font-size: 1.1em;
   line-height: 1.5em;
 
+  @include tablet {
+    font-size: 0.9em;
+  }
+
   @include mobile {
     font-size: 0.8em;
   }
