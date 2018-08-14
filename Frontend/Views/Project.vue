@@ -12,6 +12,17 @@
 import Logo from './Logo.vue'
 
 export default {
+  beforeRouteEnter (to, from, next) {
+    import('../../Content/Projects/' + to.params.project + '.md').then(function(post) {
+      if (post) {
+        next(true)
+      } else {
+        next('/')
+      }
+    }).catch(() => {
+      next('/')
+    })
+  },
   components: {
     Logo
   },
