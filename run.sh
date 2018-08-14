@@ -1,7 +1,11 @@
 SWIFT_VERSION=4.1.2
 BRANCH=release
 RELEASE=RELEASE
-SWIFT_TARGET=ubuntu16.04
+if [[ `uname` == 'Darwin' ]]; then
+   SWIFT_TARGET=osx
+else
+   SWIFT_TARGET=ubuntu16.04
+fi
 
 case "$SWIFT_TARGET" in
 *osx)
