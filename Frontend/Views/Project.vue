@@ -28,7 +28,7 @@ $post-width: 500px;
 
 .post {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   
   h1, h2, h3, h4, h5 {
     font-family: Cerebri, serif;
