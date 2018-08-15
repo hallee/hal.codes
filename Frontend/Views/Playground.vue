@@ -12,6 +12,7 @@
             src="/images/run.svg" 
             height="24px" 
             width="24px"
+            alt=""
           >
         </button>
 
@@ -23,6 +24,7 @@
               src="/images/success.svg"
               height="32px"
               width="32px"
+              alt="Run succeeded"
             >
             <img 
               v-if="result == 'error'"
@@ -30,6 +32,7 @@
               src="/images/fail.svg"
               height="32px"
               width="32px"
+              alt="Run failed"
             >
           </transition>
         </div>
@@ -47,6 +50,7 @@
             src="/images/reset.svg" 
             height="24px"
             width="24px"
+            alt=""
           >
         </button>
       </div>
