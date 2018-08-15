@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta content="Hal Lee is a software developer" property="og:title">
         <meta content="Hal Lee is an iOS developer based in Brooklyn, currently at Quartz." name="description">
+        <meta name="theme-color" content="\##(logoColor)">
         <link rel="stylesheet" href="/styles/style.css">
         <script>window.initialLogoColor = '#(logoColor)'</script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108345243-2"></script>
