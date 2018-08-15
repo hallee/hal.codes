@@ -21,3 +21,9 @@ new Vue({
   template: '<router-view></router-view>',
   router
 })
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
