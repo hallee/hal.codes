@@ -13,7 +13,10 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/:project', component: Project },
     { path: '*', redirect: '/' }
-  ]
+  ],
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
 
 new Vue({
