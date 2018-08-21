@@ -35,11 +35,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../Sass/mixins.scss";
 $post-width: 500px;
 
 .post {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
+
+  div:first-child {
+    @include mobile {
+      order: 1;
+    }
+  }
   
   h1, h2, h3, h4, h5 {
     font-family: Cerebri, serif;
@@ -49,6 +56,10 @@ $post-width: 500px;
   h2 {
     font-size: 2.2em;
     max-width: $post-width;
+
+    @include tablet {
+      font-size: 1.8em;
+    }
   }
 
   p {
@@ -57,12 +68,16 @@ $post-width: 500px;
 
   .post-text {
     flex: 1 0 40%;
+
+    @include mobile {
+      flex: 1 0 100%;
+    }
   }
 
   .image-fit {
     flex: 1 0 50%;
-    max-width: 554px;
-    min-width: 380px;
+    max-width: 526px;
+    min-width: 360px;
     margin: 0 auto;
   }
 
@@ -70,6 +85,10 @@ $post-width: 500px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
+
+    @include mobile {
+      margin-top: 1em;
+    }
   }
 
 
