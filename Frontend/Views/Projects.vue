@@ -1,10 +1,11 @@
 <template>
   <transition name="fade">
     <section class="projects"> 
-      <section ontouchstart>
+      <section>
         <router-link 
           to="/fore" 
           class="fore"
+          ontouchstart
         >
           <img
             src="/images/forePhone.png"
@@ -15,6 +16,7 @@
         <router-link 
           to="/objects" 
           class="objects"
+          ontouchstart
         >
           <img
             src="/images/objectsPhone.png"
