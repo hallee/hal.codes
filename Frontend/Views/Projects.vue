@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <section class="projects"> 
-      <section>
+      <section ontouchstart>
         <router-link 
           to="/fore" 
           class="fore"

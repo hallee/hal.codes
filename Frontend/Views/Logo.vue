@@ -1,6 +1,9 @@
 <template>
   <router-link to="/">
-    <div class="hal-codes-logo">
+    <div 
+      class="hal-codes-logo" 
+      ontouchstart
+    >
       <!-- eslint-disable -->
       <svg viewBox="0 0 232 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>hal-codes-logo</title>

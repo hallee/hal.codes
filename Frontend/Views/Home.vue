@@ -69,6 +69,7 @@ a {
   background: none;
   text-decoration: underline;
   transition: color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   
   &:hover {
     color: #999;
