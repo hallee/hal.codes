@@ -5,7 +5,6 @@
         <router-link 
           to="/fore" 
           class="fore"
-          ontouchstart
         >
           <img
             src="/images/forePhone.png"
@@ -16,7 +15,6 @@
         <router-link 
           to="/objects" 
           class="objects"
-          ontouchstart
         >
           <img
             src="/images/objectsPhone.png"
@@ -70,13 +68,13 @@ section.projects {
     height: 680px;
     min-width: 200px;
 
-    @media screen and (min-width: $break-mobile) {
-      img {
-        transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
-        pointer-events: none;
-        -webkit-user-select: none;
-      }
+    img {
+      transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
+      pointer-events: none;
+      -webkit-user-select: none;
+    }
 
+    @media screen and (min-width: $break-mobile) {
       &:hover {
         overflow: visible;
         img {
@@ -98,6 +96,11 @@ section.projects {
     @include mobile {
       margin-bottom: 3em;
       height: 500px;
+      &:active {
+        img {
+          transform: scale(0.96);
+        }
+      }
     }
   }
 
