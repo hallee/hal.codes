@@ -46,9 +46,9 @@ section.intro {
   article {
     max-width: 480px;
     margin-bottom: 2em;
-    margin-right: 0.6em;
+    margin-right: 2em;
 
-    @include mobile-small {
+    @include mobile {
       margin-right: 0;
     }
   }
@@ -56,17 +56,15 @@ section.intro {
   div {
     flex: 1 0 320px;
     min-width: 320px;
-    margin-right: 1em;
 
-    @include mobile {
-      margin-right: 0;
+    @include tablet {
       flex: 1 0 300px;
       min-width: 300px;
     }
 
     @include mobile-small {
-      min-width: 200px;
-      flex: 1 0 200px;
+      min-width: 100px;
+      flex: 1 0 100px;
     }
   }
 }

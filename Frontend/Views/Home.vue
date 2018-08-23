@@ -63,6 +63,19 @@ body {
   color: #232323;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: Cerebri, serif;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2.2em;
+
+  @include tablet {
+    font-size: 1.8em;
+  }
+}
+
 a {
   color: #232323;
   cursor: pointer;
@@ -101,6 +114,10 @@ section.main {
   max-width: 1400px;
   overflow-x: hidden;
 
+  @include tablet {
+    padding: 2em;
+  }
+  
   @include mobile {
     padding: 1em;
   }

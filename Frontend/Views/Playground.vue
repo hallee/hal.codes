@@ -264,10 +264,11 @@ export default {
 }
 
 #playground {
-  flex: 1 0 420px;
-  max-width: 740px;
-  min-width: 320px;
   width: auto;
+
+  @include tablet {
+    flex-basis: 55%;
+  }
 
   @include mobile {
     flex-basis: 80%;
@@ -292,6 +293,10 @@ export default {
     -webkit-user-select: none;
     pointer-events: none;
     ::-webkit-scrollbar-corner, ::-webkit-scrollbar { background-color: rgba(0,0,0,0); }
+
+    @include tablet {
+      padding: 0.4em;
+    }
 
     .CodeMirror-code {
       -webkit-user-select: text;
@@ -320,9 +325,13 @@ export default {
     overflow-x: hidden;
     p {
       margin: 0.8em 0;
+
+      @include tablet {
+        margin: 0.6em 0;
+      }
     }
     pre {
-      margin: 0em 3.2em;
+      margin: 0 3.2em;
       white-space: pre-wrap;
       line-height: 1.6em;
       &:before {
@@ -330,6 +339,10 @@ export default {
         opacity: 0.5;
         content: "> ";
         display: inline;
+      }
+
+      @include tablet {
+        margin: 0 2.6em;
       }
     }
   }

@@ -1,6 +1,14 @@
 <template>
   <transition name="fade">
-    <section class="projects"> 
+    <section class="projects">
+      <h2>
+        <img
+          src="/images/arrowdown.svg"
+          alt="Projects"
+          height="64"
+          width="64"
+        >
+      </h2>
       <section>
         <router-link 
           to="/fore" 
@@ -45,8 +53,8 @@ section.projects {
   margin-top: 4em;
   width: 100%;
 
-  h1, h2, h3 {
-    margin: 0 0 2em 0;
+  @include mobile {
+    margin-top: 1em;
   }
 
   section {
@@ -57,6 +65,14 @@ section.projects {
     @media screen and (max-width: $break-small) {
       margin-right: -1em;
     } 
+  }
+
+  h2 {
+    margin-top: -2em;
+
+    @include tablet {
+      display: none;
+    }
   }
   
   a {
@@ -76,7 +92,12 @@ section.projects {
       -webkit-user-select: none;
     }
 
-    @media screen and (min-width: $break-mobile) {
+    @media screen and (max-width: $break-small) {
+      margin-right: 1em;
+      flex: 1 0 240px !important;
+    }
+
+    @include desktop {
       &:hover {
         overflow: visible;
         img {
@@ -84,25 +105,31 @@ section.projects {
         }
       }
       &:active {
+        overflow: visible;
         img {
           transform: none;
         }
       }
     }
 
-    @media screen and (max-width: $break-small) {
-      margin-right: 1em;
-      flex: 1 0 240px !important;
-    } 
+    @include tablet {
+      height: 440px;
 
-    @include mobile {
-      margin-bottom: 3em;
-      height: 500px;
+      img {
+        transform: scale(0.85) translateX(-100px) translateY(-30px);
+      }
+
       &:active {
         img {
-          transform: scale(0.96);
+          transform: scale(0.84) translateX(-100px) translateY(-30px);
         }
       }
+
+    }
+
+    @include mobile {
+      margin-bottom: 1em;
+      height: 400px;
     }
   }
 
@@ -110,6 +137,7 @@ section.projects {
     display: block;
     flex: 1 0 260px;
     max-width: 560px;
+
     img {
       margin-top: -50px;
       margin-left: -40px;
@@ -119,6 +147,7 @@ section.projects {
     display: block;
     background: #E1D4E1;
     flex: 1.6 0 280px;
+
     img {
       margin-top: -60px;
     }
