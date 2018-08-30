@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss">
 @import "../Sass/mixins.scss";
-$post-width: 500px;
+$post-width: 640px;
 
 .post {
   display: flex;

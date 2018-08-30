@@ -61,7 +61,7 @@
       <div class="explanation">
         <p><a @click.passive="toggleExplanation"><i>What’s this?</i></a>
           <transition name="fade">
-            <span v-if="showExplanation == true"> A community <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment. Poke around and get a taste of my favorite programming language right here in your browser. <br>Changes made to the site's logo will be visible to everyone!</span>
+            <span v-if="showExplanation == true"> A fully-featured <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment in your browser. Hit the play button and the code will be compiled & run, and output will appear below. You can even make changes to this site's logo, visible to everyone!</span>
           </transition>
         </p>
       </div>
@@ -348,8 +348,8 @@ export default {
   }
 
   .explanation {
-    font-size: 0.9em;
-    height: 3.6em;
+    font-size: 0.8em;
+    height: 4.4em;
   }
 
   .run-result {

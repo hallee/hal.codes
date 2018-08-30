@@ -50,9 +50,9 @@ class Logo {
             case .red:
                 hexString = "C63333"
             case .orange:
-                hexString = "E26723"
+                hexString = "FF6913"
             case .yellow:
-                hexString = "FFD14F"
+                hexString = "EBBF2A"
             case .green:
                 hexString = "288F72"
             case .blue:

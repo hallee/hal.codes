@@ -43,12 +43,14 @@ export default {
        url('/fonts/iosevka-brew-regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Cerebri';
-  src: url('/fonts/cerebrisans-semibold.eot');
-  src: url('/fonts/cerebrisans-semibold.woff2') format('woff2'),
-       url('/fonts/cerebrisans-semibold.woff') format('woff'),
-       url('/fonts/cerebrisans-semibold.ttf')  format('truetype'),
-       url('/fonts/cerebrisans-semibold.svg#CerebriSans-SemiBold') format('svg');
+  font-family: 'BasierSquare';
+  src: url('/fonts/basiersquare-bold-webfont.eot');
+  src: url('/fonts/basiersquare-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/basiersquare-bold-webfont.woff2') format('woff2'),
+       url('/fonts/basiersquare-bold-webfont.woff') format('woff'),
+       url('/fonts/basiersquare-bold-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
 html {
@@ -64,12 +66,12 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: Cerebri, serif;
-  font-weight: 600;
+  font-family: 'BasierSquare', serif;
+  font-weight: 700;
 }
 
 h2 {
-  font-size: 2.2em;
+  font-size: 2.8em;
 
   @include tablet {
     font-size: 1.8em;
