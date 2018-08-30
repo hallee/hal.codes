@@ -1,0 +1,86 @@
+<template>
+  <section class="main">
+    <Logo />
+    <component 
+      :is="currentPost" 
+      class="post"
+    />
+  </section>
+</template>
+
+<script>
+import Logo from './Logo.vue'
+
+export default {
+  beforeRouteEnter (to, from, next) {
+    import('../../Content/Projects/' + to.params.project + '.md').then(function(post) {
+      if (post) {
+        next(true)
+      } else {
+        next('/')
+      }
+    }).catch(() => {
+      next('/')
+    })
+  },
+  components: {
+    Logo
+  },
+  data () {
+    return {
+      currentPost: () => import('../../Content/Projects/' + this.$route.params.project + '.md')
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import "../Sass/mixins.scss";
+$post-width: 500px;
+
+.post {
+  display: flex;
+  flex-wrap: wrap;
+
+  div:first-child {
+    @include mobile {
+      order: 1;
+    }
+  }
+
+  h2 {
+    max-width: $post-width;
+  }
+
+  p {
+    max-width: $post-width;
+  }
+
+  .post-text {
+    flex: 1 0 40%;
+
+    @include mobile {
+      flex: 1 0 100%;
+    }
+  }
+
+  .image-fit {
+    flex: 1 0 50%;
+    max-width: 526px;
+    min-width: 360px;
+    margin: 0 auto;
+  }
+
+  img {
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+
+    @include mobile {
+      margin-top: 1em;
+    }
+  }
+
+
+}
+</style>

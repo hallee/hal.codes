@@ -1,11 +1,32 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import Container from './Views/Container.vue'
+import Home from './Views/Home.vue'
+import Project from './Views/Project.vue'
 
+Vue.use(VueRouter)
 Vue.use(VueResource)
 
-var vm = new Vue({
-    el: '#app',
-    template: '<Container/>',
-	components: { Container }
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+    { path: '/', component: Home },
+    { path: '/:project', component: Project },
+    { path: '*', redirect: '/' }
+  ],
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
+
+new Vue({
+  el: '#app',
+  template: '<router-view></router-view>',
+  router
+})
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').catch({ });
+  });
+}

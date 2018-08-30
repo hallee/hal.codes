@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["last 2 versions", "safari >= 7"]
+        "browsers": [">0.2%", "safari >= 8", "ios_saf >= 6"]
       }
     }]
   ],
