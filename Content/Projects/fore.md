@@ -3,7 +3,7 @@
 </div>
 <div class="post-text">
 
-## Fore: Version 2.0
+## Fore Rewrite
 
 Fore 2 is a ground-up rewrite of one of my personally published apps.
 
