@@ -41,43 +41,33 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // service workers are broken on ranged headers (mp4 video for example)
-  // https://samdutton.github.io/samples/service-worker/prefetch-video/
-  const range = event.request.headers.get('range');
-  if (range) {
-    const pos = Number(/^bytes=(\d+)-$/g.exec(range)[1]);
-    event.respondWith(
-      caches.open(cacheName)
+  event.respondWith(
+    caches.open(cacheName)
       .then(cache => cache.match(event.request, {ignoreSearch: true}))
       .then(response => {
-        if (!response) {
-          return fetch(event.request)
-          .then(res => {
-            return res.arrayBuffer();
-          });
-        }
-        return response.arrayBuffer();
-      }).then(ab => {
+      // service workers are broken on range headers (mp4 video for example), manual fix below
+      // https://samdutton.github.io/samples/service-worker/prefetch-video/
+      const range = event.request.headers.get('range');
+      if (!range) {
+        return fetch(event.request).catch(function() {
+          return response
+        });
+      }
+    }).then(ab => {
+      const range = event.request.headers.get('range');
+      if (range) {
+        const pos = Number(/^bytes=(\d+)-$/g.exec(range)[1]);
         return new Response(
           ab.slice(pos),
           {
             status: 206,
             statusText: 'Partial Content',
             headers: [
-              // ['Content-Type', 'video/webm'],
               ['Content-Range', 'bytes ' + pos + '-' +
                 (ab.byteLength - 1) + '/' + ab.byteLength]]
-          });
-      }));
-  } else {
-    event.respondWith(
-      caches.open(cacheName)
-        .then(cache => cache.match(event.request, {ignoreSearch: true}))
-        .then(response => {
-        return fetch(event.request).catch(function() {
-          return response
-        });
-      })
-    );
-  }
+          }
+        );
+      }
+    })
+  );
 });
