@@ -47,33 +47,24 @@ self.addEventListener('fetch', event => {
   if (range) {
     const pos = Number(/^bytes=(\d+)-$/g.exec(range)[1]);
     event.respondWith(
-      caches.open(cacheName)
-      .then(cache => cache.match(event.request, {ignoreSearch: true}))
-      .then(response => {
-          return fetch(event.request)
+        fetch(event.request)
           .then(response => {
             if (response) {
-              return response.arrayBuffer();
+              response.arrayBuffer().then(ab => {
+                return new Response(
+                ab.slice(pos),
+                {
+                  status: 206,
+                  statusText: 'Partial Content',
+                  headers: [
+                    ['Content-Range', 'bytes ' + pos + '-' +
+                      (ab.byteLength - 1) + '/' + ab.byteLength]]
+                });
+              });
             }
             return response;
           })
-          .catch(function() {
-            if (response) {
-              return response.arrayBuffer();
-            }
-            return response;
-          });
-      }).then(ab => {
-        return new Response(
-          ab.slice(pos),
-          {
-            status: 206,
-            statusText: 'Partial Content',
-            headers: [
-              ['Content-Range', 'bytes ' + pos + '-' +
-                (ab.byteLength - 1) + '/' + ab.byteLength]]
-          });
-      }));
+        )
   } else {
     event.respondWith(
       caches.open(cacheName)
