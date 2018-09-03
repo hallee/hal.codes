@@ -50,7 +50,7 @@ self.addEventListener('fetch', event => {
         fetch(event.request)
           .then(response => {
             if (response) {
-              response.arrayBuffer().then(ab => {
+              response.clone().arrayBuffer().then(ab => {
                 return new Response(
                 ab.slice(pos),
                 {
@@ -71,7 +71,7 @@ self.addEventListener('fetch', event => {
         .then(cache => cache.match(event.request, {ignoreSearch: true}))
         .then(response => {
         return fetch(event.request).catch(function() {
-          return response
+          return response;
         });
       })
     );
