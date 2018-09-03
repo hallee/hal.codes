@@ -5,7 +5,7 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
-        `/index.html`,
+        `/`,
         `/styles/style.css`,
         `/styles/0.style.css`,
         `/styles/1.style.css`,
@@ -42,8 +42,12 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
+    caches.open(cacheName)
+      .then(cache => cache.match(event.request, {ignoreSearch: true}))
+      .then(response => {
+      return fetch(event.request).catch(function() {
+        return response
+      });
     })
   );
 });
