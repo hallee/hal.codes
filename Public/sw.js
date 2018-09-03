@@ -29,7 +29,7 @@ self.addEventListener('install', e => {
         `/images/success.svg`,
         `/images/forePhone.png`, `/images/forePhone@2x.png`,
         `/images/objectsPhone.png`, `/images/objectsPhone@2x.png`,
-        `/images/objectsPhoneStraight.png`, `/images/objectsPhoneStraight@2x.png`,
+        `/images/objectsPhoneStraight.jpg`, `/images/objectsPhoneStraight@2x.jpg`,
       ])
       .then(() => self.skipWaiting());
     })
