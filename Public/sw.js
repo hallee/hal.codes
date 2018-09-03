@@ -63,7 +63,7 @@ self.addEventListener('fetch', event => {
               });
             }
             return response;
-          })
+          }).catch(function() { })
         )
   } else {
     event.respondWith(
