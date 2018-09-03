@@ -58,7 +58,10 @@ self.addEventListener('fetch', event => {
             return response;
           })
           .catch(function() {
-            return response.arrayBuffer();
+            if (response) {
+              return response.arrayBuffer();
+            }
+            return response;
           });
       }).then(ab => {
         return new Response(
