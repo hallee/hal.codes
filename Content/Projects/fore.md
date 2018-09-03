@@ -1,5 +1,5 @@
 <div class="iphone-x" >
-  <video ref="autoplayVideo" width="370" height="806" onclick="this.play()" loop muted>
+  <video ref="autoplayVideo" width="370" height="806" onclick="this.play()" loop muted playsinline>
     <source src="https://s3.amazonaws.com/hal.codes/fore.mp4" type="video/mp4" />
   </video>
 </div>
