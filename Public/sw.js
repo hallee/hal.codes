@@ -5,7 +5,6 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
-        `/`,
         `/index.html`,
         `/styles/style.css`,
         `/styles/0.style.css`,
