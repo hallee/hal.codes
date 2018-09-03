@@ -1,4 +1,4 @@
-const version = "1.1";
+const version = "1.0";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
