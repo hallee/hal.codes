@@ -56,12 +56,13 @@ To route public traffic on port `80` to the Vapor server, I use Nginx with a pro
 Since css and js files are already gzipped by webpack, Nginx's `gzip_static` module is required to serve them without the server recompresisng them, which unforutnately requires [building Nginx from source](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html). 
 
 ```bash
-apt-get build-dep nginx
+sudo apt-get install nginx-common nginx-core
+sudo apt-get build-dep nginx
 cd /tmp/
-apt-get source nginx
+sudo apt-get source nginx
 cd nginx-1.10.3/ # version number may differ
-nano auto/options # change HTTP_GZIP_STATIC=NO to YES
-dpkg-buildpackage -uc -b
+sudo nano auto/options # change HTTP_GZIP_STATIC=NO to YES
+sudo dpkg-buildpackage -uc -b
 sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.04.2_all.deb # package name may differ
 ```
 
@@ -71,5 +72,6 @@ Now that Nginx is built with proper gzip support, we can set it up:
 cd ~/hal.codes/
 sudo cp nginx.conf /etc/nginx/sites-available/hal.codes
 sudo ln -s /etc/nginx/sites-available/hal.codes /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl enable nginx
 ```

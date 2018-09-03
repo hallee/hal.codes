@@ -131,7 +131,7 @@ export default {
     },
     constructSocket: function () {
       const vm = this
-      socket = new WebSocket('ws://' + location.host + '/playground')
+      socket = new WebSocket('wss://' + location.host + '/playground')
       socket.onopen = function () {
         vm.status = 'ready'
       }
