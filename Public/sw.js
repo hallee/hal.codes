@@ -1,4 +1,4 @@
-const version = "1.0";
+const version = "1.1";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
@@ -22,7 +22,7 @@ self.addEventListener('install', e => {
         `/scripts/5.bundle.js`,
         `https://fonts.gstatic.com/s/ibmplexsans/v2/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2`,
         `https://fonts.gstatic.com/s/ibmplexsans/v2/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2`,
-        `/fonts/cerebrisans-semibold.woff2`,
+        `/fonts/basiersquare-bold-webfont.woff2`,
         `/fonts/iosevka-brew-regular.woff2`,
         `/images/fail.svg`,
         `/images/reset.svg`,
@@ -43,10 +43,8 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.open(cacheName)
-      .then(cache => cache.match(event.request, {ignoreSearch: true}))
-      .then(response => {
-      return response || fetch(event.request);
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
     })
   );
 });
