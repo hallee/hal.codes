@@ -6,11 +6,13 @@
       ref="currentPost"
       class="post"
     />
+    <Footer />
   </section>
 </template>
 
 <script>
 import Logo from './Logo.vue'
+import Footer from './Footer.vue'
 
 export default {
   beforeRouteEnter (to, from, next) {
@@ -25,7 +27,8 @@ export default {
     })
   },
   components: {
-    Logo
+    Logo,
+    Footer
   },
   data () {
     return {
