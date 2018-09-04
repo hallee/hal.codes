@@ -6,7 +6,6 @@ self.addEventListener('install', e => {
     caches.open(cacheName).then(cache => {
       return cache.addAll([
         `/`,
-        `/index.html`,
         `/styles/style.css`,
         `/styles/0.style.css`,
         `/styles/1.style.css`,
@@ -22,7 +21,7 @@ self.addEventListener('install', e => {
         `/scripts/5.bundle.js`,
         `https://fonts.gstatic.com/s/ibmplexsans/v2/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2`,
         `https://fonts.gstatic.com/s/ibmplexsans/v2/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2`,
-        `/fonts/cerebrisans-semibold.woff2`,
+        `/fonts/basiersquare-bold-webfont.woff2`,
         `/fonts/iosevka-brew-regular.woff2`,
         `/images/fail.svg`,
         `/images/reset.svg`,
@@ -30,7 +29,7 @@ self.addEventListener('install', e => {
         `/images/success.svg`,
         `/images/forePhone.png`, `/images/forePhone@2x.png`,
         `/images/objectsPhone.png`, `/images/objectsPhone@2x.png`,
-        `/images/objectsPhoneStraight.png`, `/images/objectsPhoneStraight@2x.png`,
+        `/images/objectsPhoneStraight.jpg`, `/images/objectsPhoneStraight@2x.jpg`,
       ])
       .then(() => self.skipWaiting());
     })
@@ -42,11 +41,39 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.open(cacheName)
-      .then(cache => cache.match(event.request, {ignoreSearch: true}))
-      .then(response => {
-      return response || fetch(event.request);
-    })
-  );
+  // service workers are broken on ranged headers (mp4 video for example)
+  // https://samdutton.github.io/samples/service-worker/prefetch-video/
+  const range = event.request.headers.get('range');
+  if (range) {
+    const pos = Number(/^bytes=(\d+)-$/g.exec(range)[1]);
+    event.respondWith(
+        fetch(event.request)
+          .then(response => {
+            if (response) {
+              response.clone().arrayBuffer().then(ab => {
+                return new Response(
+                ab.slice(pos),
+                {
+                  status: 206,
+                  statusText: 'Partial Content',
+                  headers: [
+                    ['Content-Range', 'bytes ' + pos + '-' +
+                      (ab.byteLength - 1) + '/' + ab.byteLength]]
+                });
+              });
+            }
+            return response;
+          }).catch(function() { })
+        )
+  } else {
+    event.respondWith(
+      caches.open(cacheName)
+        .then(cache => cache.match(event.request, {ignoreSearch: true}))
+        .then(response => {
+        return fetch(event.request).catch(function() {
+          return response;
+        });
+      })
+    );
+  }
 });

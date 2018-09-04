@@ -14,13 +14,15 @@
 
 ## Overview
 
-I set out to build my [personal website](https://hal.codes) using [Swift](https://swift.org/about/). I use Swift every day for iOS development and I'd like to see Swift usage expand outside of the iOS community. Swift is fast, easy to learn, and I think it has huge potential on the web.
+In maybe an ill-advised attempt to boost usage of [Swift](https://swift.org/about/) on the web, I set out to build my personal website using Swift.
 
-This site's backend is built on [Vapor](https://vapor.codes), a server-side Swift web framework. Vapor serves the root document and creates a websocket server for the [Swift Playground]() environment at the top of my site.
+This site is a [Vue.js](https://vuejs.org) frontend built on a [Vapor](https://vapor.codes) server. I use [Vue Router](https://router.vuejs.org) for client-side routing (this makes links to projects load almost instantly) and [Webpack](https://webpack.js.org) for bundling and code splitting.
 
-Sadly, the whole site couldn't be written in Swift. [Vue.js](https://vuejs.org/v2/guide/) powers the frontend. It handles client-side routing and allows for lazy loading heavy components, like the Swift Playground.
+The Vapor server hosts the root document, along with a WebSocket server for a web Swift Playground environment.
 
-## Development Installation
+Why not just use a Node.js server? Swift ostensibly can be faster and use less memory than a JavaScript (V8) based server. Swift also aims to be “safe by design” with its static type system and variable guarantees. Other languages have these features, but I'm most familiar with Swift. A big community of iOS and Mac developers makes me think the Swift project will be well maintained into the future.
+
+## Development
 
 ```bash
 git clone git@github.com:hallee/hal.codes.git
@@ -54,12 +56,13 @@ To route public traffic on port `80` to the Vapor server, I use Nginx with a pro
 Since css and js files are already gzipped by webpack, Nginx's `gzip_static` module is required to serve them without the server recompresisng them, which unforutnately requires [building Nginx from source](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html). 
 
 ```bash
-apt-get build-dep nginx
+sudo apt-get install nginx-common nginx-core
+sudo apt-get build-dep nginx
 cd /tmp/
-apt-get source nginx
+sudo apt-get source nginx
 cd nginx-1.10.3/ # version number may differ
-nano auto/options # change HTTP_GZIP_STATIC=NO to YES
-dpkg-buildpackage -uc -b
+sudo nano auto/options # change HTTP_GZIP_STATIC=NO to YES
+sudo dpkg-buildpackage -uc -b
 sudo dpkg -i ../nginx_1.10.3-0ubuntu0.16.04.2_all.deb # package name may differ
 ```
 
@@ -69,5 +72,6 @@ Now that Nginx is built with proper gzip support, we can set it up:
 cd ~/hal.codes/
 sudo cp nginx.conf /etc/nginx/sites-available/hal.codes
 sudo ln -s /etc/nginx/sites-available/hal.codes /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl enable nginx
 ```

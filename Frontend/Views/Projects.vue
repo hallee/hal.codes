@@ -5,8 +5,8 @@
         <img
           src="/images/arrowdown.svg"
           alt="Projects"
-          height="64"
-          width="64"
+          height="48"
+          width="48"
         >
       </h2>
       <section>
