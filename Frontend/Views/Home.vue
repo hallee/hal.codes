@@ -2,11 +2,13 @@
   <section class="main">
     <Intro />
     <Projects />
+    <Footer />
   </section>
 </template>
 
 <script>
 import Intro from './Intro.vue'
+import Footer from './Footer.vue'
 const Projects = () => ({
   component: import('./Projects.vue')
 })
@@ -14,7 +16,8 @@ const Projects = () => ({
 export default {
   components: {
     Intro,
-    Projects
+    Projects,
+    Footer
   }
 }
 </script>
@@ -111,7 +114,7 @@ button {
 }
 
 section.main {
-  padding: 3em;
+  padding: 3em 3em 1em 3em;
   margin: 0 auto;
   max-width: 1400px;
   overflow-x: hidden;
@@ -122,16 +125,6 @@ section.main {
   
   @include mobile {
     padding: 1em;
-  }
-}
-
-.footer {
-  margin-top: 8em;
-  
-  p {
-    color: #bcbcbc;
-    font-size: 0.7em;
-    text-align: center;
   }
 }
 </style>

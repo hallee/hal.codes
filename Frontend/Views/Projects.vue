@@ -50,7 +50,7 @@
 $break-small: 900px;
 
 section.projects {
-  margin-top: 4em;
+  margin-top: 2em;
   width: 100%;
 
   @include mobile {
@@ -80,7 +80,7 @@ section.projects {
     border-radius: 8px;
     background: #A8CDE1; 
     cursor: pointer;
-    margin-bottom: 8em;
+    margin-bottom: 3em;
     margin-right: 3em;
     overflow: hidden;
     height: 680px;
