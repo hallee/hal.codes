@@ -4989,8 +4989,9 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-"vue2-codemirror-lite-swift@file:../vue2-codemirror-lite-swift":
+vue2-codemirror-lite-swift@^1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue2-codemirror-lite-swift/-/vue2-codemirror-lite-swift-1.0.0.tgz#4f0ad655277e1c8a6827a54ffe61e4d5510ff443"
   dependencies:
     codemirror "^5.34.0"
 
