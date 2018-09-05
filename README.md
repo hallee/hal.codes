@@ -52,7 +52,7 @@ sudo systemctl enable hal-codes.service
 
 At this point the Vapor server will be running on port `8080`. The systemd service ensures that the server stays up continuously, even after reboots.
 
-To route public traffic on port `80` to the Vapor server, I use Nginx with a proxy configuration.
+To route public traffic on port `80`/`443` to the Vapor server, I use Nginx with a proxy configuration.
 Since css and js files are already gzipped by webpack, Nginx's `gzip_static` module is required to serve them without the server recompresisng them, which unforutnately requires [building Nginx from source](https://www.garron.me/en/go2linux/nginx-gzip_static-ubuntu.html). 
 
 ```bash
@@ -75,3 +75,5 @@ sudo ln -s /etc/nginx/sites-available/hal.codes /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl enable nginx
 ```
+
+To setup HTTPS, I used Let's Encrypt's [Certbot](https://certbot.eff.org).

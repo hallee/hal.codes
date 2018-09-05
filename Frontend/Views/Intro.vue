@@ -5,7 +5,7 @@
       <article>
         <p>👋 I’m Hal, an iOS developer living in Brooklyn.</p>
         <p>Currently I work at Quartz
-        helping to build a <a href="https://qz.com/app/">conversational news app</a>. It's a fun reprieve from traditional news apps, and it's sort of like texting with an entire newsroom.</p>
+        helping to build a <a href="https://qz.com/app/">conversational news app</a>. It’s a fun reprieve from traditional news apps, and it’s sort of like texting with an entire newsroom.</p>
       </article>
     </div>
     <Playground @logo-color="setLogoColor = $event" />

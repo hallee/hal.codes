@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
-  entry: ['./Frontend/index.js', './Frontend/Sass/normalize.scss'],
+  entry: ['./Frontend/Sass/normalize.scss', './Frontend/index.js'],
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
     publicPath: '/scripts/',
