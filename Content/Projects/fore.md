@@ -8,9 +8,9 @@
 
 ## Fore Rewrite
 
-I'm currently rewriting [Fore](http://fore.photos) from scratch.
+I’m currently rewriting [Fore](http://fore.photos) from scratch.
 
-Fore is a smart portait editor that uses algorithms to blur the background of portrait photos. I've always loved photos with [shallow depth of field](https://en.wikipedia.org/wiki/Bokeh), and Fore was an attempt to bring this effect to iPhone photos. I started work on it before Apple announced Portrait Mode, so it didn't take advantage of depth data from dual camera phones.
+Fore is a smart portait editor that uses algorithms to blur the background of portrait photos. I’ve always loved photos with [shallow depth of field](https://en.wikipedia.org/wiki/Bokeh), and Fore was an attempt to bring this effect to iPhone photos. I started work on it before Apple announced Portrait Mode, so it didn’t take advantage of depth data from dual camera phones.
 
 Version 2.0 will fully embrace depth data, and keep support for photos without it. More info to come!
 

@@ -5,10 +5,10 @@
 
 ## Quartz Objects
 
-Objects was a project to bring 3D objects to news stories in the Quartz app.
+Objects is a project to bring 3D objects to news stories in the Quartz app.
 
-The Quartz app was a bit of a playground for experimentation already — with a conversational interface and news stories accompanied by quirky animated gifs — so it was the perfect place to experiment with ARKit.
+The Quartz app was already a bit of a playground for experimentation — with a conversational interface and news stories accompanied by quirky animated gifs — so it was the perfect place to experiment with ARKit.
 
-All of the objects were rendered with physically based textures using the native SceneKit renderer.
+All of the objects are rendered with physically based textures using the native SceneKit renderer. A new screen showcases objects that have appeared in the news script with a custom `UICollectionView` layout and animated video previews.
 
 </div>
