@@ -109,6 +109,13 @@ p {
   }
 }
 
+code {
+  font-family: 'Iosevka', monospace;
+  background: #ddd;
+  border-radius: 4px;
+  padding: 0 0.2em;
+}
+
 button {
   outline: none;
 }
