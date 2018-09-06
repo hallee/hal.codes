@@ -8,6 +8,9 @@
         <meta name="theme-color" content="\##(logoColor)">
         <link rel="canonical" href="https://hal.codes">
         <link rel="stylesheet" href="/styles/style.css">
+        <link rel="icon" sizes="152x152" href="favicon#(logoColor).png">
+        <link rel="apple-touch-icon-precomposed" href="favicon.png">
+        <link rel="mask-icon" href="favicon.svg" color="\##(logoColor)">
         <script>window.initialLogoColor = '#(logoColor)'</script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108345243-2"></script>
         <script>
