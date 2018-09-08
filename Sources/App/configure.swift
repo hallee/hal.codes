@@ -11,7 +11,13 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
         return LeafRenderer(config: leafConfig,
                             using: container)
     }
-
+    
+    /// File logger
+    services.register(Logger.self) { container -> FileLogger in
+        return FileLogger(executableName: "hal.codes")
+    }
+    config.prefer(FileLogger.self, for: Logger.self)
+    
     /// Register routes to the router
     let router = EngineRouter.default()
     try routes(router)
@@ -21,7 +27,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try services.register(PlaygroundProvider())
         
     /// Register middleware
-    var middlewares = MiddlewareConfig() // Create _empty_ middleware config
+    var middlewares = MiddlewareConfig()
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)

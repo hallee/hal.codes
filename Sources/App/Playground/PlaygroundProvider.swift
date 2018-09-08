@@ -11,6 +11,7 @@ import Service
 public final class PlaygroundProvider: Provider {
     
     let socketPath: String
+    var logger: Logger?
     
     init(path: String = "playground") {
         socketPath = path
@@ -27,6 +28,7 @@ public final class PlaygroundProvider: Provider {
     }
     
     public func didBoot(_ container: Container) throws -> EventLoopFuture<Void> {
+        self.logger = try container.make(Logger.self)
         return .done(on: container)
     }
     
@@ -41,6 +43,12 @@ public final class PlaygroundProvider: Provider {
     
     private func runCode(_ code: String, _ playground: MicroPlayground,
                          on socket: WebSocket) {
+        logger?.info("""
+        ==== running code ====
+        \(code)
+        ======================
+        """)
+        
         playground.run(code: code) { [weak socket] result in
             try? socket?.sendJSONFormatted(result)
         }
