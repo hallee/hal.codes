@@ -43,7 +43,7 @@ public final class PlaygroundProvider: Provider {
     
     private func runCode(_ code: String, _ playground: MicroPlayground,
                          on socket: WebSocket) {
-        logger?.info("""
+        logger?.debug("""
         ==== running code ====
         \(code)
         ======================
@@ -53,7 +53,7 @@ public final class PlaygroundProvider: Provider {
             try? socket?.sendJSONFormatted(result)
         }
         
-        playground.runLogoColorAttempt(code: code)
+        playground.runLogoColorAttempt(code: code, logger: logger)
     }
 
 }

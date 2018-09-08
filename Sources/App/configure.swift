@@ -14,7 +14,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     
     /// File logger
     services.register(Logger.self) { container -> FileLogger in
-        return FileLogger(executableName: "hal.codes")
+        return FileLogger(executableName: "hal.codes", includeTimestamps: true)
     }
     config.prefer(FileLogger.self, for: Logger.self)
     
