@@ -12,6 +12,7 @@ final class FileLogger: Logger {
     let executableName: String
     let includeTimestamps: Bool
     let fileManager = FileManager.default
+    let fileQueue = DispatchQueue.init(label: "vaporFileLogger", qos: .utility, attributes: .concurrent)
     lazy var logDirectoryURL: URL? = {
         var baseURL: URL?
         #if os(macOS)
@@ -51,26 +52,28 @@ final class FileLogger: Logger {
         saveToFile(output, fileName: fileName)
     }
     
-    @discardableResult func saveToFile(_ string: String, fileName: String) -> Bool {
-        guard let baseURL = logDirectoryURL else { return false }
-        let url = baseURL.appendingPathComponent(fileName)
-        let output = string + "\n"
-        do {
-            if !fileManager.fileExists(atPath: url.path) {
-                try output.write(to: url, atomically: true, encoding: .utf8)
-            } else {
-                let fileHandle = try FileHandle(forWritingTo: url)
-                fileHandle.seekToEndOfFile()
-                guard let data = output.data(using: .utf8) else { return false }
-                fileHandle.write(data)
-                fileHandle.closeFile()
-            }
-        } catch {
-            print("FileLogger could not write to file \(url).")
-            return false
-        }
+    @discardableResult func saveToFile(_ string: String, fileName: String) {
+        guard let baseURL = logDirectoryURL else { return }
         
-        return true
+        fileQueue.async(flags: .barrier) {
+            let url = baseURL.appendingPathComponent(fileName)
+            let output = string + "\n"
+            do {
+                if !self.fileManager.fileExists(atPath: url.path) {
+                    try output.write(to: url, atomically: true, encoding: .utf8)
+                } else {
+                    let fileHandle = try FileHandle(forWritingTo: url)
+                    fileHandle.seekToEndOfFile()
+                    if let data = output.data(using: .utf8) {
+                        fileHandle.write(data)
+                        fileHandle.closeFile()
+                    }
+                    
+                }
+            } catch {
+                print("FileLogger could not write to file \(url).")
+            }
+        }
     }
     
 }
