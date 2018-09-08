@@ -1,5 +1,6 @@
 import Vapor
 import Leaf
+import SimpleFileLogger
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
@@ -13,10 +14,10 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     }
     
     /// File logger
-    services.register(Logger.self) { container -> FileLogger in
-        return FileLogger(executableName: "hal.codes", includeTimestamps: true)
+    services.register(Logger.self) { container -> SimpleFileLogger in
+        return SimpleFileLogger(executableName: "hal.codes", includeTimestamps: true)
     }
-    config.prefer(FileLogger.self, for: Logger.self)
+    config.prefer(SimpleFileLogger.self, for: Logger.self)
     
     /// Register routes to the router
     let router = EngineRouter.default()

@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/vapor/http.git",
         "state": {
           "branch": null,
-          "revision": "f3641659867edfa7db1a939d1e38ece7f3766e25",
-          "version": "3.1.2"
+          "revision": "818d7d48bbb03e87fd5ac682bb6fa47c04148e6c",
+          "version": "3.1.3"
         }
       },
       {
@@ -161,6 +161,15 @@
           "branch": null,
           "revision": "54632a6c1e7ecd9923c0d00b612de936de1c4745",
           "version": "3.0.8"
+        }
+      },
+      {
+        "package": "SimpleFileLogger",
+        "repositoryURL": "https://github.com/hallee/vapor-simple-file-logger.git",
+        "state": {
+          "branch": null,
+          "revision": "21ba7a8ff701a20b353b12248713a1f225fd00eb",
+          "version": "1.0.0"
         }
       },
       {
