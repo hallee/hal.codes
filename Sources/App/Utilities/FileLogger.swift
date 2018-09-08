@@ -10,8 +10,9 @@ import Vapor
 final class FileLogger: Logger {
     
     let executableName: String
+    let includeTimestamps: Bool
     let fileManager = FileManager.default
-    lazy var logFileURL: URL? = {
+    lazy var logDirectoryURL: URL? = {
         var baseURL: URL?
         #if os(macOS)
         /// ~/Library/Caches/
@@ -32,40 +33,37 @@ final class FileLogger: Logger {
             }
         } catch { print("Unable to create \(executableName) log directory.") }
         
-        /// Append file name
-        baseURL?.appendPathComponent("log.log")
-        
         return baseURL
     }()
-    lazy var fileHandle: Foundation.FileHandle? = {
-        guard let url = logFileURL else { return nil }
-        return try? FileHandle(forWritingTo: url)
-    }()
     
-    init(executableName: String = "Vapor") {
+    init(executableName: String = "Vapor", includeTimestamps: Bool = false) {
         // TODO: sanitize executableName for path use
         self.executableName = executableName
-    }
-    
-    deinit {
-        fileHandle?.closeFile()
+        self.includeTimestamps = includeTimestamps
     }
     
     func log(_ string: String, at level: LogLevel, file: String, function: String, line: UInt, column: UInt) {
-        saveToFile(string)
+        let fileName = level.description.lowercased() + ".log"
+        var output = "[ \(level.description) ] \(string) (\(file):\(line))"
+        if includeTimestamps {
+            output = "\(Date() ) " + output
+        }
+        saveToFile(output, fileName: fileName)
     }
     
-    @discardableResult func saveToFile(_ string: String) -> Bool {
-        guard let url = logFileURL else { return false }
+    @discardableResult func saveToFile(_ string: String, fileName: String) -> Bool {
+        guard let baseURL = logDirectoryURL else { return false }
+        let url = baseURL.appendingPathComponent(fileName)
         let output = string + "\n"
         do {
             if !fileManager.fileExists(atPath: url.path) {
                 try output.write(to: url, atomically: true, encoding: .utf8)
             } else {
-                guard let fileHandle = fileHandle else { return false }
+                let fileHandle = try FileHandle(forWritingTo: url)
                 fileHandle.seekToEndOfFile()
                 guard let data = output.data(using: .utf8) else { return false }
                 fileHandle.write(data)
+                fileHandle.closeFile()
             }
         } catch {
             print("FileLogger could not write to file \(url).")
