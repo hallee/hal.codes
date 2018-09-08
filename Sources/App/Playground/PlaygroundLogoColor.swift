@@ -9,11 +9,12 @@ import Vapor
 
 extension MicroPlayground {
     
-    func runLogoColorAttempt(code: String) {
+    func runLogoColorAttempt(code: String, logger: Logger? = nil) {
         let logoCode = code + "\nprint(siteLogoColor())"
         run(code: logoCode) { result in
             if let color = self.parseLogoColor(result.text) {
                 Logo.shared.setColor(color)
+                logger?.info("Changed logo color to \(color).")
             }
         }
     }
