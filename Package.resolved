@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/hallee/vapor-simple-file-logger.git",
         "state": {
           "branch": null,
-          "revision": "21ba7a8ff701a20b353b12248713a1f225fd00eb",
-          "version": "1.0.0"
+          "revision": "82459a9f22652b07311500da416d3a0ec407c0aa",
+          "version": "1.0.1"
         }
       },
       {
