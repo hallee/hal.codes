@@ -8,11 +8,6 @@
 import Basic
 import Utility
 import Foundation
-#if os(Linux)
-    import Glibc
-#else
-    import Darwin
-#endif
 
 class MicroPlayground {
     
