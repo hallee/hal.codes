@@ -61,7 +61,16 @@ class MicroPlayground {
             defer {
                 returned = true
             }
-            
+            let code = """
+            import Foundation
+            var rnofilelimit = rlimit(rlim_cur: 1, rlim_max: 1)
+            #if os(macOS)
+                setrlimit(RLIMIT_NOFILE, &rnofilelimit)
+            #else
+                setrlimit(__rlimit_resource_t(7), &rnofilelimit)
+            #endif
+
+            """ + code
             var playgroundOutput: RunResult
             do {
                 let buildResult = try self.build(code: code)
