@@ -1,14 +1,6 @@
 <template>
   <transition name="fade">
     <section class="projects">
-      <h2>
-        <img
-          src="/images/arrowdown.svg"
-          alt="Projects"
-          height="48"
-          width="48"
-        >
-      </h2>
       <section>
         <router-link 
           to="/fore" 

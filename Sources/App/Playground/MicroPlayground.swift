@@ -11,6 +11,7 @@ import Foundation
 
 class MicroPlayground {
     
+    static var moduleName = "MicroPlayground"
     static let swiftVersionNumber = "4.1.2"
     static let swiftVersion = swiftVersionNumber + "-RELEASE"
     private let projectPath: String
@@ -126,7 +127,7 @@ class MicroPlayground {
         #endif
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
-        cmd += ["-module-name", "SwiftPlayground"]
+        cmd += ["-module-name", MicroPlayground.moduleName]
         #if os(Linux)
             cmd += ["-module-link-name","Glibc"]
         #endif
