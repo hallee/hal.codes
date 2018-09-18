@@ -1,4 +1,4 @@
-SWIFT_VERSION=4.1.2
+SWIFT_VERSION=4.2
 BRANCH=release
 RELEASE=RELEASE
 if [[ `uname` == 'Darwin' ]]; then

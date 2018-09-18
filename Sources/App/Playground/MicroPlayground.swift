@@ -12,7 +12,7 @@ import Foundation
 class MicroPlayground {
     
     static var moduleName = "MicroPlayground"
-    static let swiftVersionNumber = "4.1.2"
+    static let swiftVersionNumber = "4.2"
     static let swiftVersion = swiftVersionNumber + "-RELEASE"
     private let projectPath: String
     lazy private var toolchainPath: String = {
