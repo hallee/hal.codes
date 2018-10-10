@@ -8,24 +8,34 @@
 import Basic
 import Utility
 import Foundation
-#if os(Linux)
-    import Glibc
-#else
-    import Darwin
-#endif
 
 class MicroPlayground {
     
-    static let swiftVersionNumber = "4.1.2"
+    static var moduleName = "MicroPlayground"
+    static let swiftVersionNumber = "4.2"
     static let swiftVersion = swiftVersionNumber + "-RELEASE"
     private let projectPath: String
-    lazy var toolchainPath: String = {
+    lazy private var toolchainPath: String = {
         return projectPath + "/Toolchains/swift-\(MicroPlayground.swiftVersion).xctoolchain/usr/bin"
+    }()
+    lazy private var sdkPath: AbsolutePath? = {
+        var path: AbsolutePath?
+        #if os(macOS)
+            let foundPath = try? Process.checkNonZeroExit(
+                args: "xcrun", "--sdk", "macosx", "--show-sdk-path")
+            guard let sdkRoot = foundPath?.chomp(), !sdkRoot.isEmpty else {
+                return nil
+            }
+            path = AbsolutePath(sdkRoot)
+        #endif
+        
+        return path
     }()
     
     private let processSet = ProcessSet()
     private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog",
                                               qos: .userInitiated)
+    static var processTimeLimit: Double = 5
     
     private var errorParser = PlaygroundErrorParser()
     enum Error: Swift.Error {
@@ -51,7 +61,7 @@ class MicroPlayground {
         }
     }
     
-    private func buildAndRun(code: String, timeLimit: Double = 5.0,
+    private func buildAndRun(code: String, timeLimit: Double = processTimeLimit,
                              completion: @escaping (RunResult) -> Void) {
         let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString, qos: .background)
         var process: Basic.Process?
@@ -102,54 +112,30 @@ class MicroPlayground {
     
     private func build(code: String) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
-        let projectDirectoryPath = AbsolutePath(projectPath)
         
         let temporaryBuildDirectory = try TemporaryDirectory(prefix: ProcessInfo.processInfo.globallyUniqueString)
         let mainFilePath = temporaryBuildDirectory.path.appending(RelativePath("main.swift"))
         let binaryFilePath = temporaryBuildDirectory.path.appending(component: "main")
-        let frameworksDirectory = projectDirectoryPath.appending(component: "Frameworks")
         
         try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: "" + code))
-        
-        let target: String
-        #if os(macOS)
-            target = "x86_64-apple-macosx10.11"
-        #endif
-        #if os(Linux)
-            target = "x86_64-unknown-linux-gnu"
-        #endif
         
         var cmd = [String]()
         cmd += ["\(toolchainPath)/swift"]
         cmd += ["--driver-mode=swiftc"]
-        cmd += ["-swift-version", "4"]
         #if DEBUG
             cmd += ["-v"]
         #endif
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
-        cmd += ["-module-name", "SwiftPlayground"]
+        cmd += ["-module-name", MicroPlayground.moduleName]
         #if os(Linux)
             cmd += ["-module-link-name","Glibc"]
         #endif
 
-        cmd += ["-target", target]
-        #if os(macOS)
-            cmd += ["-F", frameworksDirectory.asString]
-            cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.asString]
-        #endif
-        
-        // Optimization or not
-        #if os(macOS)
-            cmd += ["-sanitize=address"]
-        #else
-            cmd += ["-O"]
-        #endif
-        // cmd += ["-enforce-exclusivity=checked"] // needs -Onone
-        // Enable JSON-based output at some point.
-        // cmd += ["-parseable-output"]
-        if let sdkRoot = sdkRoot() {
-            cmd += ["-sdk", sdkRoot.asString]
+        cmd += ["-O"]
+
+        if let sdkPath = sdkPath {
+            cmd += ["-sdk", sdkPath.asString]
         }
         cmd += ["-o", binaryFilePath.asString]
         cmd += [mainFilePath.asString]
@@ -197,40 +183,14 @@ class MicroPlayground {
     }
     
     private func sandboxProfile() -> String {
-        var output = """
+        let output = """
         (version 1)
         (deny default)
         (import \"system.sb\")
         (allow file-read*)
         (allow process*)
-        (allow sysctl*)
-        (allow file-write*
         """
-        for directory in Platform.darwinCacheDirectories() {
-            output += "    (regex #\"^\(directory.asString)/org\\.llvm\\.clang.*\")"
-            output += "    (regex #\"^\(directory.asString)/xcrun_db.*\")"
-        }
-        output += ")\n"
         return output
-    }
-    
-    private var _sdkRoot: AbsolutePath?
-    private func sdkRoot() -> AbsolutePath? {
-        if let sdkRoot = _sdkRoot {
-            return sdkRoot
-        }
-        
-        // Find SDKROOT on macOS using xcrun.
-        #if os(macOS)
-            let foundPath = try? Process.checkNonZeroExit(
-                args: "xcrun", "--sdk", "macosx", "--show-sdk-path")
-            guard let sdkRoot = foundPath?.chomp(), !sdkRoot.isEmpty else {
-                return nil
-            }
-            _sdkRoot = AbsolutePath(sdkRoot)
-        #endif
-        
-        return _sdkRoot
     }
     
     private struct RunResult {

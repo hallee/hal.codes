@@ -38,7 +38,7 @@
         </div>
         <div class="spacer" />
         <p class="version">
-          <a href="https://swift.org/blog/swift-4-1-released/">{{ swiftVersion }}</a>
+          <a href="https://swift.org/blog/swift-4-2-released/">{{ swiftVersion }}</a>
         </p>
 
         <button 
