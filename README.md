@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="http://hal.codes">
-    <img src="http://hal.nyc/f/hal-codes-logo.svg" width="232" height="64" alt="hal.codes Logo">
+    <img src="logo.svg" width="232" height="64" alt="hal.codes Logo">
 	</a>
     <br>
     <br>
