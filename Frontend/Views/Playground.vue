@@ -38,7 +38,7 @@
         </div>
         <div class="spacer" />
         <p class="version">
-          <a href="https://swift.org/blog/swift-4-1-released/">{{ swiftVersion }}</a>
+          <a href="https://swift.org/blog/swift-4-2-released/">{{ swiftVersion }}</a>
         </p>
 
         <button 
@@ -61,7 +61,7 @@
       <div class="explanation">
         <p><a @click.passive="toggleExplanation"><i>What’s this?</i></a>
           <transition name="fade">
-            <span v-if="showExplanation == true"> A fully-featured <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment in your browser. Hit the play button to run your code. You can even make changes to this site's logo — and they’ll be visible to everyone!</span>
+            <span v-if="showExplanation == true"> A fully-featured <a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html">Swift</a> environment in your browser. Hit the play button to run your code. You can even make changes to this site’s logo — and they’ll be visible to everyone!</span>
           </transition>
         </p>
       </div>
