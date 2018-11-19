@@ -10,7 +10,7 @@ import Utility
 import Foundation
 
 class MicroPlayground {
-    
+
     static var moduleName = "MicroPlayground"
     static let swiftVersionNumber = "4.2"
     static let swiftVersion = swiftVersionNumber + "-RELEASE"
@@ -92,33 +92,39 @@ class MicroPlayground {
                 if let items = try? self.errorParser.parse(input: output), items.count > 0 {
                     playgroundOutput = RunResult(text: output, errors: items)
                 } else {
-                    playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: output)])
+                    playgroundOutput = RunResult(text: "",
+                                                 errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0),
+                                                                          description: output)])
                 }
             } catch {
-                playgroundOutput = RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: error.localizedDescription)])
+                playgroundOutput = RunResult(text: "",
+                                             errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0),
+                                                                      description: error.localizedDescription)])
             }
-            
+
             guard !returned else { return }
             completion(playgroundOutput)
         }
-        
+
         watchdogQueue.asyncAfter(deadline: .now() + timeLimit) {
             guard !returned else { return }
             process?.signal(15)
-            completion(RunResult(text: "", errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0), description: "Exceeded time limit.")]))
+            completion(RunResult(text: "",
+                                 errors: [PlaygroundError(location: CodeLocation(row: 0, column: 0),
+                                                          description: "Exceeded time limit.")]))
             returned = true
         }
     }
-    
+
     private func build(code: String) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
-        
+
         let temporaryBuildDirectory = try TemporaryDirectory(prefix: ProcessInfo.processInfo.globallyUniqueString)
         let mainFilePath = temporaryBuildDirectory.path.appending(RelativePath("main.swift"))
         let binaryFilePath = temporaryBuildDirectory.path.appending(component: "main")
-        
+
         try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: "" + code))
-        
+
         var cmd = [String]()
         cmd += ["\(toolchainPath)/swift"]
         cmd += ["--driver-mode=swiftc"]
@@ -129,7 +135,7 @@ class MicroPlayground {
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name", MicroPlayground.moduleName]
         #if os(Linux)
-            cmd += ["-module-link-name","Glibc"]
+            cmd += ["-module-link-name", "Glibc"]
         #endif
 
         cmd += ["-O"]
@@ -139,12 +145,12 @@ class MicroPlayground {
         }
         cmd += ["-o", binaryFilePath.asString]
         cmd += [mainFilePath.asString]
-        
+
         let process = Basic.Process(arguments: cmd, redirectOutput: true, verbose: false)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
-        
+
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
             return Result.success(binaryFilePath)
@@ -154,24 +160,25 @@ class MicroPlayground {
             return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
         }
     }
-    
-    private func run(binaryPath: AbsolutePath, processCreated: (Basic.Process) -> Void) throws -> Result<String, Error> {
+
+    private func run(binaryPath: AbsolutePath,
+                     processCreated: (Basic.Process) -> Void) throws -> Result<String, Error> {
         var cmd = [String]()
         #if os(macOS)
             // Use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
             cmd += ["sandbox-exec", "-p", sandboxProfile()]
         #endif
         cmd += [binaryPath.asString]
-        
+
         let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
         processCreated(process)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
-        
+
         // Remove container directory. Cleanup after run.
         try FileManager.default.removeItem(atPath: binaryPath.parentDirectory.asString)
-        
+
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
             return Result.success(try result.utf8Output().chuzzle() ?? "")
@@ -181,7 +188,7 @@ class MicroPlayground {
             return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
         }
     }
-    
+
     private func sandboxProfile() -> String {
         let output = """
         (version 1)
@@ -192,12 +199,12 @@ class MicroPlayground {
         """
         return output
     }
-    
+
     private struct RunResult {
         let text: String
         let errors: [PlaygroundError]?
     }
-    
+
     struct PlaygroundResult: Codable {
         let text: String
         let error: String
