@@ -157,7 +157,7 @@ class MicroPlayground {
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
-            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
+            return Result.failure(Error.failed(try defaultError(result)))
         }
     }
 
@@ -185,8 +185,12 @@ class MicroPlayground {
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
-            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
+            return Result.failure(Error.failed(try defaultError(result)))
         }
+    }
+
+    private func defaultError(_ result: ProcessResult) throws -> String {
+        return try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."
     }
 
     private func sandboxProfile() -> String {
