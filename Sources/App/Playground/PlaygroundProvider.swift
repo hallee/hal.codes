@@ -20,8 +20,7 @@ public final class PlaygroundProvider: Provider {
     public func register(_ services: inout Services) throws {
         /// Register websocket server
         let wss = NIOWebSocketServer.default()
-        wss.get(socketPath) { socket, req in
-            print(req.http.remotePeer.hostname)
+        wss.get(socketPath) { socket, request in
             // TODO: security / limiting to host
             self.createPlayground(for: socket)
         }
