@@ -12,9 +12,9 @@ enum LogoColor: String, Codable {
 }
 
 class Logo {
-    
+
     static let shared = Logo()
-    
+
     private var color: LogoColor {
         didSet {
             notificationQueue.async {
@@ -22,27 +22,27 @@ class Logo {
             }
         }
     }
-    
+
     private let notificationQueue = DispatchQueue(label: "logoNotificationQueue")
     private let colorQueue = DispatchQueue(label: "logoColorQueue", qos: .userInitiated, attributes: .concurrent)
-    
+
     static let notificationName = Notification.Name(rawValue: "LogoColorChanged")
     private var colorChangeNotification: Notification {
         return Notification(name: Logo.notificationName,
                             object: self,
                             userInfo: ["logoColor": hexValue()])
     }
-    
+
     private init(color: LogoColor = .indigo) {
         self.color = color
     }
-    
+
     func setColor(_ color: LogoColor) {
         colorQueue.async(flags: .barrier) {
             self.color = color
         }
     }
-    
+
     func hexValue() -> String {
         var hexString = ""
         colorQueue.sync {
@@ -65,15 +65,19 @@ class Logo {
         }
         return hexString
     }
-    
+
     func addColorChangeObserver(_ observer: WebSocket) {
-        NotificationCenter.default.addObserver(forName: Logo.notificationName,
-                                               object: nil,
-                                               queue: nil) { [weak observer] notification in
+        let notificationObserver = NotificationCenter.default.addObserver(forName: Logo.notificationName,
+                                                                          object: nil,
+                                                                          queue: nil) { [weak observer] notification in
             if let newLogoColor = notification.userInfo as? [String: String] {
                 try? observer?.sendJSONFormatted(newLogoColor)
             }
         }
+
+        observer.onClose.always {
+            NotificationCenter.default.removeObserver(notificationObserver)
+        }
     }
-    
+
 }
