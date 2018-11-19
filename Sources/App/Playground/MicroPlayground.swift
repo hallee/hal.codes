@@ -28,24 +28,24 @@ class MicroPlayground {
             }
             path = AbsolutePath(sdkRoot)
         #endif
-        
+
         return path
     }()
-    
+
     private let processSet = ProcessSet()
     private var watchdogQueue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString + "Watchdog",
                                               qos: .userInitiated)
     static var processTimeLimit: Double = 5
-    
+
     private var errorParser = PlaygroundErrorParser()
     enum Error: Swift.Error {
         case failed(String)
     }
-    
+
     init(_ projectDirectoryPath: String) {
         projectPath = projectDirectoryPath
     }
-    
+
     func run(code: String, completion: @escaping (PlaygroundResult) -> Void) {
         buildAndRun(code: code) { result in
             var outputString = ""
@@ -60,13 +60,13 @@ class MicroPlayground {
             }
         }
     }
-    
+
     private func buildAndRun(code: String, timeLimit: Double = processTimeLimit,
                              completion: @escaping (RunResult) -> Void) {
         let queue = DispatchQueue(label: ProcessInfo.processInfo.globallyUniqueString, qos: .background)
         var process: Basic.Process?
         var returned = false
-        
+
         queue.async {
             defer {
                 returned = true
