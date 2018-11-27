@@ -12,21 +12,21 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
         return LeafRenderer(config: leafConfig,
                             using: container)
     }
-    
+
     /// File logger
-    services.register(Logger.self) { container -> SimpleFileLogger in
+    services.register(Logger.self) { _ -> SimpleFileLogger in
         return SimpleFileLogger(executableName: "hal.codes", includeTimestamps: true)
     }
     config.prefer(SimpleFileLogger.self, for: Logger.self)
-    
+
     /// Register routes to the router
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-    
+
     /// Register websocket server
     try services.register(PlaygroundProvider())
-        
+
     /// Register middleware
     var middlewares = MiddlewareConfig()
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory

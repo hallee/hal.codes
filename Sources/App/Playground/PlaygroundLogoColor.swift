@@ -8,7 +8,7 @@
 import Vapor
 
 extension MicroPlayground {
-    
+
     func runLogoColorAttempt(code: String, logger: Logger? = nil) {
         let logoCode = code + "\nprint(siteLogoColor())"
         run(code: logoCode) { result in
@@ -18,7 +18,7 @@ extension MicroPlayground {
             }
         }
     }
-    
+
     func parseLogoColor(_ result: String) -> LogoColor? {
         let lines = result.split(separator: "\n")
         if let colorString = lines.last {
@@ -26,5 +26,5 @@ extension MicroPlayground {
         }
         return nil
     }
-    
+
 }

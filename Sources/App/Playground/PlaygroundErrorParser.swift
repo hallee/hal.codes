@@ -20,16 +20,17 @@ struct CodeLocation: Codable {
 }
 
 class PlaygroundErrorParser {
-    
+
     var offset: Int
-    
+
     init(rowOffset: Int = 0) {
         offset = rowOffset
     }
-    
+
     func parse(input: String) throws -> [PlaygroundError] {
         var items = [PlaygroundError]()
-        let results = try RegEx(pattern: ".*.swift:((\\d+?)\\:(\\d+?))\\: (error)\\: (.*)\\n(.*)\\n(.*)").matchGroups(in: input)
+        let swiftErrorPattern = ".*.swift:((\\d+?)\\:(\\d+?))\\: (error)\\: (.*)\\n(.*)\\n(.*)"
+        let results = try RegEx(pattern: swiftErrorPattern).matchGroups(in: input)
         for result in results {
             guard let row = Int(result[1]), let column = Int(result[2]) else { continue }
             let description: String
@@ -43,5 +44,5 @@ class PlaygroundErrorParser {
         }
         return items
     }
-    
+
 }

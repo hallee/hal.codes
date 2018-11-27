@@ -8,11 +8,11 @@
 import Vapor
 
 extension WebSocket {
-    
+
     public func sendJSONFormatted<T: Encodable>(_ object: T) throws {
         let encoded = try JSONEncoder().encode(object)
         guard let jsonString = String(data: encoded, encoding: .utf8) else { return }
         self.send(jsonString)
     }
-    
+
 }
