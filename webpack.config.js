@@ -25,6 +25,21 @@ module.exports = {
             options: {
               minimize: {
                   safe: true
+              },
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('postcss-preset-env')()
+              ],
+              config: {
+                ctx: {
+                  'postcss-preset-env': {}
+                }
               }
             }
           },
