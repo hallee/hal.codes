@@ -36,8 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../Sass/mixins.scss";
-
 .hal-codes-logo {
   cursor: pointer;
   user-select: none;

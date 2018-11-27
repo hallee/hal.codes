@@ -30,8 +30,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../Sass/mixins.scss";
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .4s;
 }

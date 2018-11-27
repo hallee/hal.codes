@@ -11,8 +11,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../Sass/mixins.scss";
-
 section.footer {
   display: flex;
   flex-wrap: wrap;

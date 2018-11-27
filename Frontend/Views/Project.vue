@@ -45,7 +45,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../Sass/mixins.scss";
 $post-width: 640px;
 
 .post {

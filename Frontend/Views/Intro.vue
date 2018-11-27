@@ -36,8 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../Sass/mixins.scss";
-
 section.intro {
   display: flex;
   justify-content: space-between;

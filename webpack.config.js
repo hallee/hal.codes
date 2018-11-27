@@ -1,6 +1,7 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const postCSSPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   entry: ['./Frontend/Sass/normalize.scss', './Frontend/index.js'],
@@ -26,27 +27,24 @@ module.exports = {
               minimize: {
                   safe: true
               },
-              importLoaders: 1
+              importLoaders: 2
             }
           },
           {
             loader: 'postcss-loader',
             options: {
-              config: {
-                ctx: {
-                  'postcss-preset-env': { stage: 0 }
-                }
-              },
               ident: 'postcss',
-              plugins: (loader) => [
-                require('postcss-preset-env')()
+              exec: true,
+              plugins: () => [
+                postCSSPresetEnv({ stage: 1 })
               ]
             }
           },
           { 
             loader: 'sass-loader',
             options: {
-              includePaths: [path.resolve(__dirname, 'Frontend/Sass'),]
+              includePaths: [path.resolve(__dirname, 'Frontend/Sass'),],
+              data: '@import "../Sass/mixins.scss";'
             } 
           }
         ]

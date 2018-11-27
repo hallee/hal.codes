@@ -173,8 +173,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../Sass/mixins.scss";
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .4s;
 }
