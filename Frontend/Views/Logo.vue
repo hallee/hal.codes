@@ -38,6 +38,8 @@ export default {
 <style lang="scss" scoped>
 .hal-codes-logo {
   cursor: pointer;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
   user-select: none;
   user-drag: none;
   max-width: 232px;

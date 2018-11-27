@@ -1,7 +1,6 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const postCSSPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   entry: ['./Frontend/Sass/normalize.scss', './Frontend/index.js'],
@@ -24,20 +23,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              minimize: {
-                  safe: true
-              },
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              exec: true,
-              plugins: () => [
-                postCSSPresetEnv({ stage: 1 })
-              ]
+              minimize: { safe: true }
             }
           },
           { 
@@ -55,7 +41,10 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: file => (
+          /node_modules/.test(file) &&
+          !/\.vue\.js/.test(file)
+        ),
         use: {
           loader: 'babel-loader'
         }
