@@ -1,12 +1,12 @@
 import Vapor
 
 public func routes(_ router: Router) throws {
-    
-    router.get() { req -> EventLoopFuture<View> in
+
+    router.get { req -> EventLoopFuture<View> in
         return try generateVueRoot(for: req)
     }
-    
-    router.get("playground/version") { req in
+
+    router.get("playground/version") { _ in
         return MicroPlayground.swiftVersionNumber
     }
 
@@ -15,5 +15,5 @@ public func routes(_ router: Router) throws {
     router.get(PathComponent.catchall) { req in
         return try generateVueRoot(for: req)
     }
-    
+
 }
