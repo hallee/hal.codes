@@ -290,7 +290,7 @@ export default {
     line-height: 1.4em;
     padding: 1em;
     height: auto;
-    -webkit-user-select: none;
+    user-select: none;
     pointer-events: none;
     ::-webkit-scrollbar-corner, ::-webkit-scrollbar { background-color: rgba(0,0,0,0); }
 
@@ -299,7 +299,7 @@ export default {
     }
 
     .CodeMirror-code {
-      -webkit-user-select: text;
+      user-select: text;
       pointer-events: auto;
       ::selection {
         background-color: rgba(200, 220, 240, 0.2);
@@ -308,7 +308,7 @@ export default {
 
     .CodeMirror-linenumber {
       pointer-events: none;
-      -webkit-user-select: none;
+      user-select: none;
     }
   }
   .CodeMirror-scroll {

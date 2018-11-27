@@ -81,7 +81,7 @@ section.projects {
     img {
       transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
       pointer-events: none;
-      -webkit-user-select: none;
+      user-select: none;
     }
 
     @media screen and (max-width: $break-small) {

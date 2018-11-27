@@ -32,15 +32,15 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
+              config: {
+                ctx: {
+                  'postcss-preset-env': { stage: 0 }
+                }
+              },
               ident: 'postcss',
               plugins: (loader) => [
                 require('postcss-preset-env')()
-              ],
-              config: {
-                ctx: {
-                  'postcss-preset-env': {}
-                }
-              }
+              ]
             }
           },
           { 
