@@ -1,4 +1,4 @@
-const version = "1.1";
+const version = "1.2";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
@@ -19,8 +19,8 @@ self.addEventListener('install', e => {
         `/scripts/3.bundle.js`,
         `/scripts/4.bundle.js`,
         `/scripts/5.bundle.js`,
-        `https://fonts.gstatic.com/s/ibmplexsans/v2/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2`,
-        `https://fonts.gstatic.com/s/ibmplexsans/v2/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2`,
+        `/fonts/ibmplexsans-regular.woff2`,
+        `/fonts/ibmplexsans-italic.woff2`,
         `/fonts/basiersquare-bold-webfont.woff2`,
         `/fonts/iosevka-brew-regular.woff2`,
         `/images/fail.svg`,
