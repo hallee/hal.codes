@@ -56,6 +56,15 @@
         }
       },
       {
+        "package": "MicroPlaygroundProvider",
+        "repositoryURL": "https://github.com/hallee/micro-playground-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "9f3609ef6dfceb1afa5dffcd1201100f9f953fff",
+          "version": "0.0.1"
+        }
+      },
+      {
         "package": "Multipart",
         "repositoryURL": "https://github.com/vapor/multipart.git",
         "state": {

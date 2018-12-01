@@ -1,6 +1,7 @@
 import Vapor
 import Leaf
 import SimpleFileLogger
+import MicroPlaygroundProvider
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
@@ -25,7 +26,12 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(router, as: Router.self)
 
     /// Register websocket server
-    try services.register(PlaygroundProvider())
+    MicroPlayground.moduleName = "hal.codes"
+    let microPlaygroundProvider = MicroPlaygroundProvider()
+    let logoColorProvider = LogoColorProvider()
+    microPlaygroundProvider.delegate = logoColorProvider
+    try services.register(logoColorProvider)
+    try services.register(microPlaygroundProvider)
 
     /// Register middleware
     var middlewares = MiddlewareConfig()

@@ -1,4 +1,5 @@
 import Vapor
+import MicroPlaygroundProvider
 
 public func routes(_ router: Router) throws {
 
