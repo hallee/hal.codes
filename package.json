@@ -34,11 +34,6 @@
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8"
   },
-  "browserslist": [
-    ">0.2%",
-    "safari >= 5",
-    "ios >= 6"
-  ],
   "eslintConfig": {
     "extends": [
       "eslint:recommended",
