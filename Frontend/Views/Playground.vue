@@ -54,7 +54,7 @@
           >
         </button>
       </div>
-      <codemirror v-model="code" />
+      <CodeMirrorSwift v-model="code" />
       <div class="console">
         <p><pre>{{ playgroundOutput }}</pre></p>
       </div>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { codemirror } from 'vue2-codemirror-lite-swift'
+import CodeMirrorSwift from 'vue2-codemirror-lite-swift'
 
 const codeString = `enum LogoColor {
     case red, orange, yellow, green, blue, indigo, violet
@@ -84,7 +84,7 @@ var socket
 
 export default {
   components: {
-    codemirror
+    CodeMirrorSwift
   },
   data () {
     return {

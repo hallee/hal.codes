@@ -1,8 +1,12 @@
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
+const mode = process.env.NODE_ENV !== 'development' ? 'production' : 'development'
+
 module.exports = {
+  mode: mode,
   entry: ['./Frontend/Sass/normalize.scss', './Frontend/index.js'],
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
@@ -37,10 +41,13 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          productionMode: mode === 'production'
+        }
       },
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         exclude: file => (
           /node_modules/.test(file) &&
           !/\.vue\.js/.test(file)
@@ -53,7 +60,10 @@ module.exports = {
         test: /\.md$/,
         use: [
           {
-            loader: 'vue-loader'
+            loader: 'vue-loader',          
+            options: {
+              productionMode: mode === 'production'
+            }
           },
           {
             loader: 'vue-markdown-loader/lib/markdown-compiler',
@@ -66,7 +76,20 @@ module.exports = {
     ]
   },
   optimization: {
-    minimize: true
+    minimizer: [new TerserPlugin({
+      parallel: true,
+      terserOptions: {
+        compress: {
+          booleans: true,
+          if_return: true,
+          sequences: true,
+          unused: true,
+          conditionals: true,
+          dead_code: true,
+          evaluate: true
+        },
+      }
+    })]
   },
   plugins: [
     new VueLoaderPlugin(),
