@@ -29,7 +29,7 @@ class LogoColorProvider: Provider, MicroPlaygroundDelegate {
         \(code)
         ======================
         """)
-        
+
         runLogoColorAttempt(playground, code: code)
     }
 
@@ -50,6 +50,5 @@ class LogoColorProvider: Provider, MicroPlaygroundDelegate {
         }
         return nil
     }
-
 
 }
