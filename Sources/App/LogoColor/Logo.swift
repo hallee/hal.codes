@@ -80,4 +80,9 @@ class Logo {
         }
     }
 
+    func veryBadExample() {
+        let BAD_VAR = 5;
+        // TODO: I left a todo here
+    }
+
 }
