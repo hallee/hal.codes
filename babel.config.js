@@ -7,8 +7,7 @@ module.exports = {
 				'>0.2%',
 				'safari >= 5',
 				'ios >= 6'
-			],
-			debug: true
+			]
 		}
 	]],
 	plugins: ['@babel/plugin-syntax-dynamic-import']

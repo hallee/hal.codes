@@ -2,8 +2,15 @@ const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const SitemapPlugin = require('sitemap-webpack-plugin').default
 
 const mode = process.env.NODE_ENV !== 'development' ? 'production' : 'development'
+
+const paths = [
+  '/',
+  '/fore',
+  '/objects'
+]
 
 module.exports = {
   mode: mode,
@@ -95,6 +102,11 @@ module.exports = {
     new VueLoaderPlugin(),
     new CompressionPlugin({
       algorithm: 'gzip'
+    }),
+    new SitemapPlugin('https://hal.codes', paths, {
+      fileName: '../sitemap.xml',
+      lastMod: true,
+      changeFreq: 'monthly'
     })
   ]
 }
