@@ -1,9 +1,9 @@
 <template>
-  <section class="main">
+  <main>
     <Intro />
     <Projects />
     <Footer />
-  </section>
+  </main>
 </template>
 
 <script>
@@ -118,7 +118,7 @@ button {
   outline: none;
 }
 
-section.main {
+main {
   padding: 3em 3em 1em 3em;
   margin: 0 auto;
   max-width: 1400px;

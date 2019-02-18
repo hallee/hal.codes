@@ -1,4 +1,4 @@
-const version = "1.2.1";
+const version = "1.2.2";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
@@ -19,7 +19,6 @@ self.addEventListener('install', e => {
         `/scripts/3.bundle.js`,
         `/scripts/4.bundle.js`,
         `/scripts/5.bundle.js`,
-        `/scripts/6.bundle.js`,
         `/fonts/ibmplexsans-regular.woff2`,
         `/fonts/ibmplexsans-italic.woff2`,
         `/fonts/basiersquare-bold-webfont.woff2`,
