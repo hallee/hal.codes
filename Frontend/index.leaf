@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>hal.codes</title>
+        <title>Hal Lee</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta content="Hal Lee is a software developer" property="og:title">
-        <meta content="Hal Lee is an iOS developer based in Brooklyn, currently at Quartz." name="description">
+        <meta content="Hal Lee" property="og:title">
+        <meta content="Hal Lee is a software developer based in Brooklyn, working mostly on iOS apps." name="description">
         <meta name="theme-color" content="\##(logoColor)">
         <link rel="canonical" href="https://hal.codes">
         <link rel="stylesheet" href="/styles/style.css">
