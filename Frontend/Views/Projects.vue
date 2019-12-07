@@ -40,7 +40,6 @@
 $break-small: 900px;
 
 section.projects {
-  margin-top: 2em;
   width: 100%;
 
   @include mobile {
@@ -55,14 +54,6 @@ section.projects {
     @media screen and (max-width: $break-small) {
       margin-right: -1em;
     } 
-  }
-
-  h2 {
-    margin-top: -2em;
-
-    @include tablet {
-      display: none;
-    }
   }
   
   a {
