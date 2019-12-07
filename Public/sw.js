@@ -1,4 +1,4 @@
-const version = "1.4.2";
+const version = "2.0";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
@@ -39,6 +39,18 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if(cacheName.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
 });
 
 self.addEventListener('fetch', event => {
