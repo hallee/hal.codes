@@ -8,8 +8,8 @@
           ontouchstart
         >
           <img
-            src="/images/forePhone.png"
-            alt="Fore - A smart portrait editing app"
+            src="/images/relaunchPhone.png"
+            alt="Quartz app relaunch"
             srcset="/images/relaunchPhone.png 1x, /images/relaunchPhone@2x.png 2x"
           >
         </router-link>

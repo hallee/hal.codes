@@ -1,11 +1,10 @@
-const version = "1.2.2";
+const version = "1.4.2";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
-        `/`,
         `/styles/style.css`,
         `/styles/0.style.css`,
         `/styles/1.style.css`,
@@ -13,12 +12,12 @@ self.addEventListener('install', e => {
         `/styles/3.style.css`,
         `/styles/4.style.css`,
         `/scripts/bundle.js`,
-        `/scripts/0.bundle.js`,
         `/scripts/1.bundle.js`,
         `/scripts/2.bundle.js`,
         `/scripts/3.bundle.js`,
         `/scripts/4.bundle.js`,
         `/scripts/5.bundle.js`,
+        `/scripts/6.bundle.js`,
         `/fonts/ibmplexsans-regular.woff2`,
         `/fonts/ibmplexsans-italic.woff2`,
         `/fonts/basiersquare-bold-webfont.woff2`,
@@ -30,6 +29,8 @@ self.addEventListener('install', e => {
         `/images/forePhone.png`, `/images/forePhone@2x.png`,
         `/images/objectsPhone.png`, `/images/objectsPhone@2x.png`,
         `/images/objectsPhoneStraight.jpg`, `/images/objectsPhoneStraight@2x.jpg`,
+        `/images/relaunchPhone.png`, `/images/relaunchPhone@2x.png`,
+        `/images/relaunchPhoneStraight.jpg`, `/images/relaunchPhoneStraight@2x.jpg`,
       ])
       .then(() => self.skipWaiting());
     })

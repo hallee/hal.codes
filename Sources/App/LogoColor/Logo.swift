@@ -5,13 +5,14 @@
 //  Created by Hal Lee on 7/28/18.
 //
 
+import Foundation
 import Vapor
 
 enum LogoColor: String, Codable {
     case red, orange, yellow, green, blue, indigo, violet
 }
 
-class Logo {
+class Logo: NSObject {
 
     static let shared = Logo()
 
