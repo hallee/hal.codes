@@ -3,14 +3,14 @@
     <section class="projects">
       <section>
         <router-link 
-          to="/fore" 
-          class="fore"
+          to="/quartz-relaunch" 
+          class="quartz-relaunch"
           ontouchstart
         >
           <img
             src="/images/forePhone.png"
             alt="Fore - A smart portrait editing app"
-            srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x"
+            srcset="/images/relaunchPhone.png 1x, /images/relaunchPhone@2x.png 2x"
           >
         </router-link>
         <router-link 
@@ -22,6 +22,19 @@
             src="/images/objectsPhone.png"
             alt="Quartz Objects"
             srcset="/images/objectsPhone.png 1x, /images/objectsPhone@2x.png 2x"
+          >
+        </router-link>
+      </section>
+      <section>
+        <router-link 
+          to="/fore" 
+          class="fore"
+          ontouchstart
+        >
+          <img
+            src="/images/forePhone.png"
+            alt="Fore - A smart portrait editing app"
+            srcset="/images/forePhone.png 1x, /images/forePhone@2x.png 2x"
           >
         </router-link>
       </section>
@@ -66,6 +79,7 @@ section.projects {
     overflow: hidden;
     height: 680px;
     min-width: 200px;
+    max-width: 80%;
 
     img {
       transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
@@ -77,6 +91,7 @@ section.projects {
     @media screen and (max-width: $break-small) {
       margin-right: 1em;
       flex: 1 0 240px !important;
+      max-width: none;
     }
 
     @include desktop {
@@ -132,6 +147,23 @@ section.projects {
 
     img {
       margin-top: -60px;
+      margin-left: 40px;
+    }
+  }
+  .quartz-relaunch {
+    display: block;
+    background: #D0D8DD;
+    flex: 1.6 0 280px;
+
+    img {
+      margin-top: -60px;
+      margin-left: 100px;
+      @include mobile {
+        margin-left: 60px;
+      }
+      @media screen and (max-width: $break-small) {
+        margin-left: 16px;
+      }
     }
   }
 }
