@@ -87,6 +87,7 @@ $post-width: 640px;
     width: 526px;
     height: 998px;
     position: relative;
+    margin-top: 2.4em;
 
     @include tablet {
       width: 400px;
@@ -135,6 +136,7 @@ $post-width: 640px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
+    margin-top: 2.4em;
 
     @include mobile {
       margin-top: 1em;

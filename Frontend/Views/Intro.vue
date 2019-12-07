@@ -1,7 +1,8 @@
-<template>   
+<template>
+  <div>
+  <Logo :logo-color="logoColor" />
   <section class="intro">
     <div>
-      <Logo :logo-color="logoColor" />
       <article>
         <p>👋 I’m Hal, a sofware engineer living in Brooklyn and building apps for iOS.</p>
         <p>Currently I work at <a href="https://qz.com" title="Quartz">Quartz</a>, where I lead development of our recently launched, all-new, <a href="https://qz.com/1724663/putting-members-at-the-heart-of-quartz/" title="Relaunch of Quartz">member-focused news app</a>. <br>Previously I worked on Quartz’s <a href="https://qz.com/613700/its-here-quartzs-first-news-app-for-iphone/" title="Quartz's first news app">conversational news app</a>.</p>
@@ -10,6 +11,7 @@
     </div>
     <Playground @logo-color="setLogoColor = $event" />
   </section>
+  </div>
 </template>
 
 <script>
