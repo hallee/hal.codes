@@ -1,10 +1,11 @@
-const version = "3.0.1";
+const version = "3.0.2";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
+        `/`,
         `/styles/style.css`,
         `/styles/0.style.css`,
         `/styles/1.style.css`,
