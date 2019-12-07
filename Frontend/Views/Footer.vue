@@ -2,9 +2,9 @@
   <section class="footer">
     <ul>
       <li><span class="emoji">👋</span></li>
+      <li><a href="https://blog.hal.codes">Blog</a></li>
       <li><a href="https://github.com/hallee">Github</a></li>
       <li><a href="https://twitter.com/hal_lee">Twitter</a></li>
-      <li><a href="https://www.instagram.com/hal_lee/">Instagram</a></li>
     </ul>
     <span class="colophon"><i>Built on <a href="https://vapor.codes">Vapor</a> and <a href="https://vuejs.org">Vue.js</a>. Check out this site’s <a href="https://github.com/hallee/hal.codes">source code</a>.</i></span>
   </section>

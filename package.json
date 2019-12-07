@@ -50,5 +50,8 @@
     "rules": {
       "vue/script-indent": "error"
     }
+  },
+  "dependencies": {
+    "vue-tweet-embed": "^2.4.0"
   }
 }
