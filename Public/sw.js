@@ -1,8 +1,8 @@
-const version = "2.0";
+const version = "3.0.0";
 const cacheName = `hal-codes-${version}`;
 
-self.addEventListener('install', e => {
-  e.waitUntil(
+self.addEventListener('install', event => {
+  event.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
         `/styles/style.css`,
@@ -42,6 +42,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('activate', event => {
+  // delete all outdated caches
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
@@ -54,39 +55,22 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // service workers are broken on ranged headers (mp4 video for example)
-  // https://samdutton.github.io/samples/service-worker/prefetch-video/
-  const range = event.request.headers.get('range');
-  if (range) {
-    const pos = Number(/^bytes=(\d+)-$/g.exec(range)[1]);
-    event.respondWith(
-        fetch(event.request)
-          .then(response => {
-            if (response) {
-              response.clone().arrayBuffer().then(ab => {
-                return new Response(
-                ab.slice(pos),
-                {
-                  status: 206,
-                  statusText: 'Partial Content',
-                  headers: [
-                    ['Content-Range', 'bytes ' + pos + '-' +
-                      (ab.byteLength - 1) + '/' + ab.byteLength]]
-                });
-              });
-            }
-            return response;
-          }).catch(function() { })
-        )
-  } else {
-    event.respondWith(
-      caches.open(cacheName)
-        .then(cache => cache.match(event.request, {ignoreSearch: true}))
-        .then(response => {
-        return fetch(event.request).catch(function() {
-          return response;
-        });
-      })
-    );
-  }
+  if (event.request.method != 'GET') return;
+  if (event.request.headers.get('range')) return;
+
+  event.respondWith(async function() {
+    // Try to get the response from a cache.
+    const cache = await caches.open(cacheName);
+    const cachedResponse = await cache.match(event.request);
+
+    if (cachedResponse) {
+      // If we found a match in the cache, return it, but also
+      // update the entry in the cache in the background.
+      event.waitUntil(cache.add(event.request));
+      return cachedResponse;
+    }
+
+    // If we didn't find a match in the cache, use the network.
+    return fetch(event.request);
+  }());
 });
