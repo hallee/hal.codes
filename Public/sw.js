@@ -1,4 +1,4 @@
-const version = "3.0.0";
+const version = "3.0.1";
 const cacheName = `hal-codes-${version}`;
 
 self.addEventListener('install', event => {
@@ -58,19 +58,13 @@ self.addEventListener('fetch', event => {
   if (event.request.method != 'GET') return;
   if (event.request.headers.get('range')) return;
 
-  event.respondWith(async function() {
-    // Try to get the response from a cache.
-    const cache = await caches.open(cacheName);
-    const cachedResponse = await cache.match(event.request);
-
-    if (cachedResponse) {
-      // If we found a match in the cache, return it, but also
-      // update the entry in the cache in the background.
-      event.waitUntil(cache.add(event.request));
-      return cachedResponse;
-    }
-
-    // If we didn't find a match in the cache, use the network.
-    return fetch(event.request);
-  }());
+  event.respondWith(
+    caches.open(cacheName)
+      .then(cache => cache.match(event.request))
+      .then(response => {
+        return fetch(event.request).catch(function() {
+          return response;
+        });
+      })
+  );
 });
