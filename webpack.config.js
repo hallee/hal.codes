@@ -3,6 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const SitemapPlugin = require('sitemap-webpack-plugin').default
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const mode = process.env.NODE_ENV !== 'development' ? 'production' : 'development'
 
@@ -18,7 +19,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'Public/scripts/'),
     publicPath: '/scripts/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    chunkFilename: '[contenthash].chunk.js'
   },
   resolve: {
     alias: {
@@ -107,6 +109,19 @@ module.exports = {
       fileName: '../sitemap.xml',
       lastMod: true,
       changeFreq: 'monthly'
+    }),
+    new WorkboxPlugin.GenerateSW({
+      exclude: [/\.(?:png|jpg|jpeg|svg|woff2)$/],
+      runtimeCaching: [{
+        urlPattern: /\.(?:png|jpg|jpeg|svg|woff2)$/,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'images',
+          expiration: {
+            maxEntries: 20,
+          },
+        },
+      }],
     })
   ]
 }
