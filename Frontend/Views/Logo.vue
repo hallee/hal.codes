@@ -17,7 +17,7 @@
     </router-link>
     <ul>
       <li><a href="https://blog.hal.codes">Blog</a></li>
-      <li><a href="https://github.com/hallee">Github</a></li>
+      <li><a href="https://github.com/hallee">GitHub</a></li>
     </ul>
   </div>
 </template>
