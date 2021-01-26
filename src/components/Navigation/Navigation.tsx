@@ -81,9 +81,7 @@ export default function Navigation() {
 				{
 					pages?.map(page => {
 						if (
-							page.path !== '/' &&
-							page.path.split('/').filter(Boolean).length < 2 &&
-							!page.context?.frontmatter?.excludedFromNav &&
+							!!page.context?.frontmatter?.navItem &&
 							page.context?.frontmatter?.title
 						) {
 							return <li key={page.path}>

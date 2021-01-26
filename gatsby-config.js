@@ -17,6 +17,8 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-image',
     'gatsby-plugin-typegen',
+    'gatsby-remark-embedder',
+    'gatsby-plugin-twitter',
     'gatsby-plugin-catch-links',
     {
       resolve: 'gatsby-plugin-page-creator',
@@ -35,6 +37,7 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve('./src/components/Layout.tsx'),
         },
+        gatsbyRemarkPlugins: ['gatsby-remark-embedder'],
       },
     },
     {

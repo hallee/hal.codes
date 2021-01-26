@@ -11,7 +11,7 @@ export default function usePages() {
 							frontmatter {
 								title
 								description
-								excludedFromNav
+								navItem
 							}
 						}
 					}

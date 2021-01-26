@@ -41,9 +41,8 @@ const Container = styled.div`
 		line-height: 1;
 	}
 	h1 {
-		font-size: 3em;
+		font-size: 2em;
 		margin-top: 0;
-		text-align: center;
 	}
 	p, li {
 		line-height: 1.4;
