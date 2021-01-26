@@ -49,7 +49,7 @@ const Container = styled.div`
 	a {
 		color: ${theme.accentLight};
 		text-decoration: none;
-		transition: all 150ms ease-out;
+		transition: color 150ms ease-out, opacity 150ms ease-out, background 150ms ease-out;
 	}
 	a:hover {
 		color: ${theme.accent};

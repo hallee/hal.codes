@@ -17,11 +17,19 @@ export const theme = {
 	largeBreakpoint: '820px',
 }
 
+export const darkTheme = {
+	...theme,
+	background: '#000000'
+}
+
 export const barStyle = css`
 	display: grid;
 	grid-template-columns: auto 1fr;
 	padding: 0.5em 0;
 	margin: 0 auto;
+	a, a:visited {
+		color: ${theme.contentColorSecondary};
+	}
 `
 
 export const fullWidth = css`
