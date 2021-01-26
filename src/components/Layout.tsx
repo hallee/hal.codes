@@ -4,12 +4,11 @@ import Navigation from './Navigation/Navigation'
 import Footer from './Navigation/Footer'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
+import { Reset } from 'styled-reset'
 import { fullWidth, theme } from './Styles'
 
 const GlobalStyle = createGlobalStyle`
 	body {
-		margin: 0;
-		padding: 0;
 		background-color: ${theme.background};
 	}
 `
@@ -62,6 +61,7 @@ export default function Layout(props: { children: JSX.Element; pageContext }) {
 	const { title, description } = props.pageContext?.frontmatter ?? {}
 	return (
 		<MDXProvider components={shortcodes}>
+			<Reset />
 			<GlobalStyle />
 			<Container>
 				<SEO title={title} description={description} />
