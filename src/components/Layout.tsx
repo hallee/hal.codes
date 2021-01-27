@@ -5,21 +5,22 @@ import Footer from './Navigation/Footer'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Reset } from 'styled-reset'
-import { fullWidth, theme } from './Styles'
+import { constants, fullWidth, lightTheme } from './Styles'
 
 const GlobalStyle = createGlobalStyle`
+	${lightTheme}
 	body {
-		background-color: ${theme.background};
+		background-color: var(--backgroundColor);
+		color: var(--contentColor);
+		font-family: ${constants.fontStack};
+		font-size: 20px;
 	}
 `
 const Container = styled.div`
-	color: ${theme.contentColor};
-	font-family: ${theme.fontStack};
-	font-size: 20px;
-	@media only screen and (max-width: 600px) {
+	@media only screen and (max-width: ${constants.mobile}) {
 		font-size: 16px;
 	}
-	max-width: ${theme.containerWidth};
+	max-width: ${constants.containerWidth};
 	margin: 0 auto;
 	padding: 0 1em;
 	main {
@@ -28,13 +29,20 @@ const Container = styled.div`
 		p, ul, ol {
 			margin: 1em 0 0;
 		}
+		a {
+			color: var(--accentColor);
+			opacity: 0.66;
+		}
+		a:hover {
+			opacity: 1;
+		}
 	}
 	.gatsby-resp-image-wrapper {
 		${fullWidth}
 	}
 	h1, h2, h3, h4, h5, h6 {
-		font-family: ${theme.headingFontStack};
-		color: ${theme.headingColor};
+		font-family: ${constants.headingFontStack};
+		color: var(--headingColor);
 		font-weight: 800;
 		margin: 1em 0 0;
 		line-height: 1;
@@ -47,12 +55,9 @@ const Container = styled.div`
 		line-height: 1.4;
 	}
 	a {
-		color: ${theme.accentLight};
+
 		text-decoration: none;
 		transition: color 150ms ease-out, opacity 150ms ease-out, background 150ms ease-out;
-	}
-	a:hover {
-		color: ${theme.accent};
 	}
 `
 

@@ -1,14 +1,37 @@
 import React from 'react'
 import usePages from '../Hooks/usePages'
 import { Link } from 'gatsby'
-import { barStyle, theme } from '../Styles'
+import { barStyle, constants } from '../Styles'
 import styled from 'styled-components'
 import Logo from './Logo'
 
 const Nav = styled.nav`
 	${barStyle}
-	border-bottom: ${theme.border};
+	border-bottom: ${constants.border};
 	margin-bottom: 4em;
+	ul {
+		display: grid;
+		font-size: 0.8em;
+		font-weight: 600;
+		grid-auto-flow: column;
+		grid-gap: 1em;
+		justify-items: end;
+		align-items: center;
+		margin-left: auto;
+		margin-right: -0.75em;
+	}
+	li {
+		[aria-current] {
+			color: var(--accentColor);
+		}
+		a, a:visited {
+			border-radius: 0.5em;
+			padding: 0.5em 0.75em;
+		}
+		a:hover, a:active, [aria-current] {
+			background-color: var(--linkBackgroundColor);
+		}
+	}
 `
 
 export default function Navigation() {
