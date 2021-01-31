@@ -1,6 +1,7 @@
 ---
 title: "Quartz Relaunch"
 date: 2019-12-01
+featuredImage: "relaunchPhone"
 ---
 
 # Quartz Relaunch

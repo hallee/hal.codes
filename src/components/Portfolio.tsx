@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import useImage from './Hooks/useImage'
 import usePages from './Hooks/usePages'
+import Img from 'gatsby-image'
 import { Link } from 'gatsby'
 import { constants, fullWidth } from './Styles'
 
@@ -37,7 +39,10 @@ export default function Portfolio() {
 				pages?.map(page => (
 					<li key={page.path}>
 						<Link to={page.path}>
-							{page.context?.frontmatter?.title}
+							<Img
+								fluid={useImage(page.context?.frontmatter?.featuredImage)?.fluid}
+								alt={page.context?.frontmatter?.title}
+							/>
 						</Link>
 					</li>
 				))

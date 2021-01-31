@@ -1,6 +1,7 @@
 ---
 title: "Quartz Objects"
 date: 2018-01-01
+featuredImage: "objectsPhone"
 ---
 
 # Quartz Objects
