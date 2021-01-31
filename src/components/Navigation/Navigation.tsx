@@ -8,7 +8,6 @@ import Logo from './Logo'
 const Nav = styled.nav`
 	${barStyle}
 	border-bottom: ${constants.border};
-	margin-bottom: 1em;
 	ul {
 		display: grid;
 		font-size: 0.8em;

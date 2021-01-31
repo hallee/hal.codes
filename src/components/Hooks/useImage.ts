@@ -20,6 +20,5 @@ export default function useImage(name?: string) {
 			}
 		`
 	)
-	console.log(name)
 	return allImageSharp.nodes.filter(image => image.original?.src?.includes(name))[0]
 }

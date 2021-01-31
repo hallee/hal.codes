@@ -50,7 +50,7 @@ const Container = styled.div`
 	}
 	h1 {
 		font-size: 2em;
-		margin-top: 0;
+		margin-top: 1rem;
 	}
 	p, li {
 		line-height: 1.4;
