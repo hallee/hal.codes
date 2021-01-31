@@ -7,6 +7,9 @@ const StyledFooter = styled.footer`
 	${barStyle}
 	border-top: ${constants.border};
 	margin-top: 4em;
+	ul {
+		font-size: 0.8em;
+	}
 `
 
 export default function Footer() {

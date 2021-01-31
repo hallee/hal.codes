@@ -10,6 +10,7 @@ export default function usePages() {
 						context {
 							frontmatter {
 								title
+								date
 								description
 								navItem
 							}

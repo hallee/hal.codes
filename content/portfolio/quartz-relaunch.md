@@ -1,5 +1,6 @@
 ---
 title: "Quartz Relaunch"
+date: 2019-12-01
 ---
 
 # Quartz Relaunch

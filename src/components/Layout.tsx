@@ -2,6 +2,7 @@ import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Navigation from './Navigation/Navigation'
 import Footer from './Navigation/Footer'
+import Portfolio from './Portfolio'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Reset } from 'styled-reset'
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 const Container = styled.div`
-	@media only screen and (max-width: ${constants.mobile}) {
+	@media (max-width: ${constants.mobile}) {
 		font-size: 16px;
 	}
 	max-width: ${constants.containerWidth};
@@ -62,7 +63,7 @@ const Container = styled.div`
 `
 
 export default function Layout(props: { children: JSX.Element; pageContext }) {
-	const shortcodes = { } // components available in MDX
+	const shortcodes = { Portfolio } // components available in MDX
 	const { title, description } = props.pageContext?.frontmatter ?? {}
 	return (
 		<MDXProvider components={shortcodes}>
