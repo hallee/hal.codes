@@ -26,6 +26,6 @@ export default function usePastelColor(seed?: string) {
 		// generate hash from 0—1 from input string
 		return (acc + ((i + 1) * (char.codePointAt(0) ?? 0) / (1 << 7))) % 1
 	}, 0) : Math.random())
-	const [ r, g, b ] = hslToRGB(hue, 0.6, 0.8)
+	const [ r, g, b ] = hslToRGB(hue, 0.5, 0.8)
 	return `rgb(${r}, ${g}, ${b}, 0.5)`
 }
