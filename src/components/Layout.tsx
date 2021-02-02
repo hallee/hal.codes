@@ -32,10 +32,9 @@ const Container = styled.div`
 		}
 		a {
 			color: var(--accentColor);
-			opacity: 0.66;
 		}
 		a:hover {
-			opacity: 1;
+			opacity: 0.66;
 		}
 	}
 	.gatsby-resp-image-wrapper {

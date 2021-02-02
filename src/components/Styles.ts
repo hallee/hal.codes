@@ -2,16 +2,18 @@ import { css } from 'styled-components'
 
 export const lightTheme = css`
 :root {
+	--accentBlue: #356dff;
 	--accentColor: #ff003e;
 	--backgroundColor: #f4f4f4;
 	--borderColor: #e0e0e0;
 	--contentColor: #4f4f4f;
-	--contentColorSecondary: #828282;
+	--contentColorSecondary: #666666;
 	--headingColor: #2d2d2d;
 	--linkBackgroundColor: #e8e8e8;
 }
 @supports (color: color(display-p3 1 1 1)) {
 	:root {
+		--accentBlue: color(display-p3 0.2078 0.4275 1);
 		--accentColor: color(display-p3 1 0 0.2431);
 	}
 }
