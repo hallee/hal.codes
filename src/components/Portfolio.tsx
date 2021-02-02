@@ -75,6 +75,13 @@ const Article = styled.article`
 	}
 `
 
+const Project = styled.li`
+	background-color: var(--project-background-color);
+	@supports (color: color(display-p3 1 1 1)) {
+		background-color: var(--project-background-color-p3);
+	}
+`
+
 export default function Portfolio(props: { children?: JSX.Element }) {
 	const pages = usePages()
 		.filter(page => page.path.includes('portfolio/'))
@@ -93,11 +100,16 @@ export default function Portfolio(props: { children?: JSX.Element }) {
 					}
 					const color = usePastelColor(page.context?.frontmatter?.title)
 					return (
-						<li key={page.path} style={ { backgroundColor: color } }>
+						<Project
+						key={page.path}
+						style={{
+							'--project-background-color': color.sRGB,
+							'--project-background-color-p3': color.p3,
+						}}>
 							<Link to={page.path}>
 								<Img fluid={image} alt={page.context?.frontmatter?.title} />
 							</Link>
-						</li>
+						</Project>
 					)
 				})
 			}</ul>

@@ -27,5 +27,8 @@ export default function usePastelColor(seed?: string) {
 		return (acc + ((i + 1) * (char.codePointAt(0) ?? 0) / (1 << 7))) % 1
 	}, 0) : Math.random())
 	const [ r, g, b ] = hslToRGB(hue, 0.5, 0.8)
-	return `rgb(${r}, ${g}, ${b}, 0.5)`
+	return {
+		sRGB: `rgb(${r}, ${g}, ${b}, 0.5)`,
+		p3: `color(display-p3 ${r/255} ${g/255} ${b/255} / 0.5)`,
+	}
 }
