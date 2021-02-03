@@ -16,9 +16,7 @@ export default function Post(props: { pageContext }) {
 					/*date={ node.meta.published }*/
 					image={ node.featuredImage }
 				/>
-				<section>
-					<PostBody node={ node } />
-				</section>
+				<PostBody node={ node } />
 				{/* <ReadNext next={next} /> */}
 			</Fragment>
 		</Layout>

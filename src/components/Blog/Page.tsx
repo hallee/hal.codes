@@ -1,9 +1,49 @@
 import React, { Fragment } from 'react'
+import { Link } from 'gatsby'
+import styled from 'styled-components'
 import Layout from '../Layout'
-import PostList from './PostList'
-import Pagination from './Pagination'
+import PostBody from './PostBody'
 
-export default function IndexTemplate(props: { pageContext }) {
+const Section = styled.section`
+	padding: 1em;
+	margin: 12em auto 4em auto;
+	display: flex;
+	justify-content: space-between;
+`
+
+function Pagination(props: {
+	prevPagePath: string;
+	nextPagePath: string;
+	hasPrevPage: boolean;
+	hasNextPage: boolean;
+}) {
+	return (
+		<Section>
+			<div>
+				{ props.hasPrevPage && (
+					<Link
+						rel="prev"
+						to={ props.prevPagePath }
+					>
+						Newer
+					</Link>
+				)}
+			</div>
+			<div>
+				{ props.hasNextPage && (
+					<Link
+						rel="next"
+						to={ props.nextPagePath }
+					>
+						Older
+					</Link>
+				)}
+			</div>
+		</Section>
+	)
+}
+
+export default function BlogPage(props: { pageContext }) {
 	const {
 		data,
 		prevPagePath,
@@ -17,7 +57,16 @@ export default function IndexTemplate(props: { pageContext }) {
 	return (
 		<Layout pageContext={props.pageContext}>
 			<Fragment>
-				<PostList nodes={ nodes } />
+				{ nodes && (
+					nodes.map(node => (
+						<PostBody
+							node={ node }
+							titleLink={ node.slug }
+							key={ node.slug }
+							preview
+						/>
+					))
+				)}
 				<Pagination
 					prevPagePath={ prevPagePath }
 					nextPagePath={ nextPagePath }

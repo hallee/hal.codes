@@ -6,14 +6,15 @@ import Portfolio from './Portfolio'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Reset } from 'styled-reset'
-import { constants, fullWidth, lightTheme } from './Styles'
+import { constants, fonts, fullWidth, lightTheme } from './Styles'
 
 const GlobalStyle = createGlobalStyle`
 	${lightTheme}
+	${fonts}
 	body {
 		background-color: var(--backgroundColor);
 		color: var(--contentColor);
-		font-family: ${constants.fontStack};
+		font-family: ${'"PlexSans", ' + constants.fontStack};
 		font-size: 20px;
 	}
 `
@@ -25,8 +26,6 @@ const Container = styled.div`
 	margin: 0 auto;
 	padding: 0 1em;
 	main {
-		display: grid;
-		align-items: center;
 		p, ul, ol {
 			margin: 1em 0 0;
 		}
