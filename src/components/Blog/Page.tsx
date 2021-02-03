@@ -3,12 +3,20 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import Layout from '../Layout'
 import PostBody from './PostBody'
+import { popAnimation } from '../Styles'
 
 const Section = styled.section`
-	padding: 1em;
-	margin: 12em auto 4em auto;
+	margin: 8em auto 2em;
 	display: flex;
 	justify-content: space-between;
+	a {
+		font-size: 0.8em;
+		display: inline-block;
+		background: var(--accentColorFaint);
+		border-radius: 0.5em;
+		padding: 1em 1.8em;
+		${popAnimation}
+	}
 `
 
 function Pagination(props: {
@@ -20,16 +28,6 @@ function Pagination(props: {
 	return (
 		<Section>
 			<div>
-				{ props.hasPrevPage && (
-					<Link
-						rel="prev"
-						to={ props.prevPagePath }
-					>
-						Newer
-					</Link>
-				)}
-			</div>
-			<div>
 				{ props.hasNextPage && (
 					<Link
 						rel="next"
@@ -39,6 +37,16 @@ function Pagination(props: {
 					</Link>
 				)}
 			</div>
+			<div>
+			{ props.hasPrevPage && (
+				<Link
+					rel="prev"
+					to={ props.prevPagePath }
+				>
+					Newer
+				</Link>
+			)}
+		</div>
 		</Section>
 	)
 }

@@ -3,17 +3,26 @@ import { Link } from 'gatsby'
 import Fragment from 'react-dom-fragment'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
-import { constants, fullWidth } from '../Styles'
+import { constants, fullWidth, popAnimation } from '../Styles'
 import './code.css'
 
 const Article = styled.article`
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	justify-content: center;
-	overflow-x: visible;
 	max-width: ${constants.containerWidth};
 	width: 100%;
+	margin-bottom: 8em;
+	span.kicker {
+		display: block;
+		color: var(--accentColor);
+		margin: 1em 0 0.5em;
+	}
+	span.post-date {
+		display: block;
+		opacity: 0.5;
+		margin: 0.5em 0 2em;
+	}
+	h2.title {
+		margin: 0;
+	}
 	code {
 		background: #ddd;
 		border-radius: 0.4em;
@@ -47,12 +56,29 @@ const Article = styled.article`
 	& > img, & > p > img, pre {
 		${fullWidth}
 	}
+	a.continue {
+		display: block;
+		font-size: 0.8em;
+		margin: 1em 0;
+		color: var(--accentColor);
+		-webkit-tap-highlight-color: transparent;
+		span {
+			display: inline-block;
+			background: var(--accentColorFaint);
+			border-radius: 0.5em;
+			padding: 1em 1.8em;
+			${popAnimation}
+		}
+		&:hover {
+			opacity: 0.7;
+		}
+	}
 `
 
 export default function PostBody(props: { node; titleLink?; preview? }) {
 	const { node, titleLink = null, preview = false } = props
-	const title = titleLink ? <Link to={ `${titleLink}` }>{ node.title }</Link> : node.title
-	const continueReading = preview ? <Link className="continue" to={ `${node.slug}` }><span>Continue reading →</span></Link> : null
+	const title = titleLink ? <Link to={ `/blog/${titleLink}` }>{ node.title }</Link> : node.title
+	const continueReading = preview ? <Link className="continue" to={ `/blog/${node.slug}` }><span>Continue reading →</span></Link> : null
 
 	const published = new Date(node.meta.published)
 	const dateString = published.toLocaleString('en-us', { month: 'long', day: 'numeric', year: 'numeric' })

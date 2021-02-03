@@ -45,12 +45,26 @@ const Container = styled.div`
 		font-weight: 800;
 		margin: 1em 0 0;
 		line-height: 1;
+		a {
+			color: var(--headingColor);
+			&:hover {
+				text-decoration: underline;
+				opacity: 1;
+			}
+		}
 	}
-	h1 {
+	h1, h2 {
 		font-size: 2em;
 		margin-top: 1rem;
 	}
+	h3 {
+		font-size: 1.5em;
+	}
+	h4 {
+		font-size: 1.3em;
+	}
 	p, li {
+		font-size: 1em;
 		line-height: 1.4;
 	}
 	a {

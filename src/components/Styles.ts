@@ -2,8 +2,8 @@ import { css } from 'styled-components'
 
 export const lightTheme = css`
 :root {
-	--accentBlue: #356dff;
 	--accentColor: #ff003e;
+	--accentColorFaint: #ff003e07;
 	--backgroundColor: #f4f4f4;
 	--borderColor: #e0e0e0;
 	--contentColor: #2f2f2f;
@@ -13,8 +13,8 @@ export const lightTheme = css`
 }
 @supports (color: color(display-p3 1 1 1)) {
 	:root {
-		--accentBlue: color(display-p3 0.2078 0.4275 1);
 		--accentColor: color(display-p3 1 0 0.2431);
+		--accentColorFaint: color(display-p3 1 0 0.2431 / 0.07);
 	}
 }
 `
@@ -68,6 +68,17 @@ export const constants = {
 	largeBreakpoint: '820px',
 }
 
+export const popAnimation = css`
+transition: color 0.2s cubic-bezier(0.1, 0.5, 0.8, 1.1),
+	background-color 0.2s cubic-bezier(0.1, 0.5, 0.8, 1.1),
+	transform 0.3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
+&:hover {
+	transform: scale(1.03);
+}
+&:active {
+	transform: scale(1);
+}
+`
 export const barStyle = css`
 	display: grid;
 	grid-template-columns: auto 1fr;

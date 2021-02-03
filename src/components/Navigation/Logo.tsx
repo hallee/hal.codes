@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../images/logo.png'
 import styled from 'styled-components'
-import { constants } from '../Styles'
+import { constants, popAnimation } from '../Styles'
 
 const Span = styled.span`
 img {
@@ -10,6 +10,7 @@ img {
 	@media only screen and (max-width: ${constants.mobile}) {
 		width: 110px;
 	}
+	${popAnimation}
 }
 `
 
