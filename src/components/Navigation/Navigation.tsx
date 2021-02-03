@@ -43,6 +43,7 @@ export default function Navigation() {
 				</Link>
 			</span>
 			<ul>
+				<li><Link to='/blog'>Blog</Link></li>
 				{
 					pages?.map(page => {
 						if (

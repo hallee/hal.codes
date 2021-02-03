@@ -1,28 +1,24 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import Layout from '../Layout'
 import PostList from './PostList'
 import Pagination from './Pagination'
 
-const IndexTemplate = ({ pageContext }) => {
+export default function IndexTemplate(props: { pageContext }) {
 	const {
 		data,
-		currentPage,
 		prevPagePath,
 		nextPagePath,
 		hasPrevPage,
 		hasNextPage,
-	} = pageContext
+	} = props.pageContext
 
-	const nodes = data.blog.blogPosts ? data.blog.blogPosts.nodes : null
-	// const pageTitle = currentPage > 0 ? `Posts - Page ${currentPage} - ${siteTitle}` : siteTitle;
+	const nodes = data.blog?.blogPosts?.nodes
 
 	return (
-		<Layout pageContext={pageContext}>
+		<Layout pageContext={props.pageContext}>
 			<Fragment>
 				<PostList nodes={ nodes } />
 				<Pagination
-					currentPage={ currentPage }
 					prevPagePath={ prevPagePath }
 					nextPagePath={ nextPagePath }
 					hasPrevPage={ hasPrevPage }
@@ -32,9 +28,3 @@ const IndexTemplate = ({ pageContext }) => {
 		</Layout>
 	)
 }
-
-IndexTemplate.propTypes = {
-	pageContext: PropTypes.shape(PropTypes.object).isRequired,
-}
-
-export default IndexTemplate

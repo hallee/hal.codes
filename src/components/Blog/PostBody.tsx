@@ -1,14 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Fragment from 'react-dom-fragment'
 import parse from 'html-react-parser'
 {/* import './PostBody.scss'; */}
 import './code.css'
 
-const PostBody = ({ node, titleLink, preview }) => {
-	const title = titleLink ? <Link to={ `/${titleLink}` }>{ node.title }</Link> : node.title
-	const continueReading = preview ? <Link className="continue" to={ `/${node.slug}` }><span>Continue reading →</span></Link> : null
+export default function PostBody(props: { node; titleLink; preview }) {
+	const { node, titleLink = null, preview = false } = props
+	const title = titleLink ? <Link to={ `${titleLink}` }>{ node.title }</Link> : node.title
+	const continueReading = preview ? <Link className="continue" to={ `/blog/${node.slug}` }><span>Continue reading →</span></Link> : null
 
 	const published = new Date(node.meta.published)
 	const dateString = published.toLocaleString('en-us', { month: 'long', day: 'numeric', year: 'numeric' })
@@ -29,17 +29,3 @@ const PostBody = ({ node, titleLink, preview }) => {
 		</article>
 	)
 }
-
-PostBody.defaultProps = {
-	titleLink: null,
-	preview: false,
-}
-
-PostBody.propTypes = {
-	node: PropTypes.shape(PropTypes.object.isRequred).isRequired,
-	titleLink: PropTypes.string,
-	preview: PropTypes.bool,
-}
-
-
-export default PostBody
