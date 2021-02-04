@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import Layout from '../Layout'
 import PostBody from './PostBody'
-import { popAnimation } from '../Styles'
+import { constants, popAnimation } from '../Styles'
 
 const Section = styled.section`
 	margin: 8em auto 2em;
@@ -13,7 +13,7 @@ const Section = styled.section`
 		font-size: 0.8em;
 		display: inline-block;
 		background: var(--accentColorFaint);
-		border-radius: 0.5em;
+		border-radius: ${constants.borderRadius};
 		padding: 1em 1.8em;
 		${popAnimation}
 	}

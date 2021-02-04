@@ -28,7 +28,7 @@ export default function SEO(
 	const seo = {
 		title: props.title ?? defaultTitle,
 		description: props.description || defaultDescription,
-		image: `${siteUrl}${props.image || socialImage}`,
+		image: props.image ? props.image : `${siteUrl}${socialImage}`,
 		url: `${siteUrl}${pathname}`,
 	}
 

@@ -15,17 +15,17 @@ const Article = styled.article`
 		color: var(--accentColor);
 		margin: 1em 0 0.5em;
 	}
-	span.post-date {
+	time {
 		display: block;
 		opacity: 0.5;
-		margin: 0.5em 0 2em;
+		margin: 0.5em 0 0;
 	}
 	h2.title {
 		margin: 0;
 	}
 	code {
 		background: #ddd;
-		border-radius: 0.4em;
+		border-radius: ${constants.borderRadius};
 		font-family: ${constants.monoFontStack};
 		font-size: 0.9em;
 		padding: 0 0.4rem;
@@ -40,14 +40,14 @@ const Article = styled.article`
 			display: none;
 		}
 		code {
-			min-width: calc(${constants.containerWidth} - 2em);
+			min-width: calc(${constants.containerWidth} - 3em);
 			background: #2a2734;
 			color: #f1ebff;
 			padding: 1.2em 1.5em;
 			overflow: scroll;
 			word-wrap: normal;
 			@media (max-width: ${constants.containerWidth}) {
-				min-width: auto;
+				min-width: 0;
 				width: 100%;
 				border-radius: 0;
 			}
@@ -59,13 +59,13 @@ const Article = styled.article`
 	a.continue {
 		display: block;
 		font-size: 0.8em;
-		margin: 1em 0;
+		margin: 2em 0 0;
 		color: var(--accentColor);
 		-webkit-tap-highlight-color: transparent;
 		span {
 			display: inline-block;
 			background: var(--accentColorFaint);
-			border-radius: 0.5em;
+			border-radius: ${constants.borderRadius};
 			padding: 1em 1.8em;
 			${popAnimation}
 		}
@@ -89,7 +89,7 @@ export default function PostBody(props: { node; titleLink?; preview? }) {
 			<h2 className="title">
 				{ title }
 			</h2>
-			<span className="post-date">{ dateString }</span>
+			<time>{ dateString }</time>
 			{ !preview ? (
 				<Fragment>{ parse(node.body.html) }</Fragment>
 			) : (

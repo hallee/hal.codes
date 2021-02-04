@@ -25,7 +25,7 @@ const Nav = styled.nav`
 			color: var(--accentColor);
 		}
 		a, a:visited {
-			border-radius: 0.5em;
+			border-radius: ${constants.borderRadius};
 			padding: 0.5em 0.75em;
 		}
 		a:hover, a:active, [aria-current] {

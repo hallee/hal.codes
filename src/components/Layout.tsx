@@ -26,7 +26,7 @@ const Container = styled.div`
 	margin: 0 auto;
 	padding: 0 1em;
 	main {
-		p, ul, ol {
+		p {
 			margin: 1em 0 0;
 		}
 		a {

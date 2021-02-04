@@ -5,13 +5,15 @@ import usePages from './Hooks/usePages'
 import usePastelColor from './Hooks/usePastelColor'
 import Img from 'gatsby-image'
 import { Link } from 'gatsby'
-import { constants, fullWidth } from './Styles'
+import { constants, fullWidth, popAnimation } from './Styles'
 
 
 const Article = styled.article`
-	margin-top: 1em;
-	.intro p {
-		margin: 0 0 1em 0;
+	@supports not (color: color(display-p3 1 1 1)) {
+		margin-top: 1em;
+		.intro p {
+			margin: 0 0 1em 0;
+		}
 	}
 	ul {
 		column-count: 2;
@@ -24,9 +26,8 @@ const Article = styled.article`
 		li:not(.intro) {
 			margin-top: 1em;
 			position: relative;
-			border-radius: 0.5em;
+			border-radius: ${constants.borderRadius};
 			vertical-align: top;
-			overflow: visible !important;
 			& > a {
 				display: inline-block;
 				position: absolute;
@@ -37,8 +38,9 @@ const Article = styled.article`
 				overflow: hidden;
 				opacity: 1;
 				z-index: 100;
-				transition: transform .3s cubic-bezier(0.175, 0.9, 0.32, 1.3) !important;
+				${popAnimation}
 				&:hover {
+					transform: none;
 					z-index: 1000;
 					@media (min-width: ${constants.mobile}) {
 						@-moz-document url-prefix() {
@@ -48,15 +50,10 @@ const Article = styled.article`
 						transform: scale(1.01);
 					}
 				}
-				&:active {
-					transform: none;
-				}
 				div, picture, img {
 					overflow: visible !important;
 					pointer-events: none;
 					user-select: none;
-					-webkit-backface-visibility: hidden;
-					backface-visibility: hidden;
 					transform: translate3d(0, 0, 0);
 				}
 				img {
