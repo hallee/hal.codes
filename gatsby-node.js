@@ -4,7 +4,7 @@ const path = require('path')
 exports.createPages = async({ graphql, actions }) => {
 	const { createPage } = actions
 
-	const perPage = 2
+	const perPage = 5
 
 	const pages = await graphql(`
 		{

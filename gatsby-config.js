@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const url = require('url');
+
 module.exports = {
 	siteMetadata: {
 		siteName: 'hal.codes',
@@ -8,6 +11,13 @@ module.exports = {
 		twitterUsername: '@hal_lee',
 	},
 	plugins: [
+		{
+			resolve: 'gatsby-plugin-fathom',
+			options: {
+				trackingUrl: 'stats.hal.codes',
+				siteId: 'TKENP',
+			},
+		},
 		{
 			resolve: 'gatsby-source-graphql',
 			options: {
@@ -24,7 +34,6 @@ module.exports = {
 		},
 		'gatsby-transformer-sharp',
 		'gatsby-image',
-		'gatsby-plugin-typegen',
 		'gatsby-remark-embedder',
 		'gatsby-plugin-twitter',
 		'gatsby-plugin-catch-links',
@@ -59,6 +68,48 @@ module.exports = {
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				path: './src/images',
+			},
+		},
+		{
+			resolve: 'gatsby-plugin-feed',
+			options: {
+				feeds: [
+					{
+						serialize: ({ query: { site, blog } }) => (
+							blog.blogPosts.nodes.map(node => (
+								Object.assign({}, node.title, {
+									title: node.title,
+									date: node.meta.published,
+									url: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
+									guid: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
+									custom_elements: [{ 'content:encoded': node.body.html }],
+								})
+							))
+						),
+						query: `
+							{
+								blog {
+									blogPosts(per: 20) {
+										nodes {
+											title
+											kicker
+											body {
+												html
+											}
+											slug
+											meta {
+												published
+											}
+										}
+									}
+								}
+							}
+						`,
+						output: '/blog/index.xml',
+						title: 'Hal Lee',
+						match: '^/blog',
+					},
+				],
 			},
 		},
 	],
