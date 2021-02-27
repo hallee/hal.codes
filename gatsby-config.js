@@ -37,6 +37,7 @@ module.exports = {
 		'gatsby-remark-embedder',
 		'gatsby-plugin-twitter',
 		'gatsby-plugin-catch-links',
+		'gatsby-plugin-offline',
 		{
 			resolve: 'gatsby-plugin-page-creator',
 			options: {
@@ -82,7 +83,7 @@ module.exports = {
 									date: node.meta.published,
 									url: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
 									guid: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
-									custom_elements: [{ 'content:encoded': node.body.html }],
+									customElements: [{ 'content:encoded': node.body.html }],
 								})
 							))
 						),
