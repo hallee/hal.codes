@@ -4,7 +4,7 @@ import Fragment from 'react-dom-fragment'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
 import { constants, fullWidth, popAnimation } from '../Styles'
-import './code.css'
+import { CodeStyle } from './Code'
 
 const Article = styled.article`
 	max-width: ${constants.containerWidth};
@@ -85,6 +85,7 @@ export default function PostBody(props: { node; titleLink?; preview? }) {
 
 	return (
 		<Article>
+			<CodeStyle />
 			<span className="kicker">{ node.kicker }</span>
 			<h2 className="title">
 				{ title }

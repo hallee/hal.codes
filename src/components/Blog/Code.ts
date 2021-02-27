@@ -7,6 +7,9 @@ Prism template for Base2Tone by Bram de Haan (https://github.com/atelierbram/Bas
 Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
 */
 
+import { createGlobalStyle } from 'styled-components'
+
+export const CodeStyle = createGlobalStyle`
 code[class*="language-"],
 pre[class*="language-"] {
 	font-family: 'Iosevka', Monaco, monospace;
@@ -175,3 +178,4 @@ pre > code.highlight {
 	background: #e0914233;
 	background: linear-gradient(to right, #e0914233 70%, #e0914200);
 }
+`
