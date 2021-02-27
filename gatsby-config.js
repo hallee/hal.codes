@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const url = require('url');
+const url = require('url')
 
 module.exports = {
 	siteMetadata: {

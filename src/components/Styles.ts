@@ -20,39 +20,6 @@ export const lightTheme = css`
 	}
 `
 
-export const fonts = css`
-@font-face {
-	font-family: 'Iosevka';
-	font-weight: 400;
-	src: url('/fonts/iosevka-ss09-regular.woff2') format('woff2'),
-			 url('/fonts/iosevka-ss09-regular.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'BasierSquare';
-	font-weight: 700;
-	font-style: normal;
-	src: url('/fonts/basiersquare-bold-webfont.eot');
-	src: url('/fonts/basiersquare-bold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('/fonts/basiersquare-bold-webfont.woff2') format('woff2'),
-			 url('/fonts/basiersquare-bold-webfont.woff') format('woff'),
-			 url('/fonts/basiersquare-bold-webfont.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'PlexSans';
-	font-style: italic;
-	font-weight: 400;
-	src: url('/fonts/ibmplexsans-italic.woff2') format('woff2'),
-			 url('/fonts/ibmplexsans-italic.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'PlexSans';
-	font-style: normal;
-	font-weight: 400;
-	src: url('/fonts/ibmplexsans-regular.woff2') format('woff2'),
-			 url('/fonts/ibmplexsans-regular.ttf') format('truetype');
-}
-`
-
 export const constants = {
 	border: '1px solid var(--borderColor)',
 	borderRadius: '0.5rem',

@@ -1,10 +1,10 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import Fragment from 'react-dom-fragment'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
 import { constants, fullWidth, popAnimation } from '../Styles'
-import { CodeStyle } from './Code'
 
 const Article = styled.article`
 	max-width: ${constants.containerWidth};
@@ -85,7 +85,9 @@ export default function PostBody(props: { node; titleLink?; preview? }) {
 
 	return (
 		<Article>
-			<CodeStyle />
+			<Helmet>
+				<link rel="stylesheet" type="text/css" href="/code.css" />
+			</Helmet>
 			<span className="kicker">{ node.kicker }</span>
 			<h2 className="title">
 				{ title }
