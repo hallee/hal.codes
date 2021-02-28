@@ -1,5 +1,4 @@
 import React from 'react'
-import usePages from '../Hooks/usePages'
 import { Link } from 'gatsby'
 import { barStyle, constants } from '../Styles'
 import styled from 'styled-components'
@@ -35,7 +34,6 @@ const Nav = styled.nav`
 `
 
 export default function Navigation() {
-	const pages = usePages()
 	return (
 		<Nav>
 			<span>
@@ -45,21 +43,6 @@ export default function Navigation() {
 			</span>
 			<ul>
 				<li><Link to='/blog'>Blog</Link></li>
-				{
-					pages?.map(page => {
-						if (
-							!!page.context?.frontmatter?.navItem &&
-							page.context?.frontmatter?.title
-						) {
-							return <li key={page.path}>
-								<Link to={page.path}>
-									{page.context.frontmatter.title}
-								</Link>
-							</li>
-						}
-						return null
-					})
-				}
 			</ul>
 		</Nav>
 	)

@@ -13,7 +13,6 @@ export default function usePages() {
 								date
 								description
 								featuredImage
-								navItem
 							}
 						}
 					}
