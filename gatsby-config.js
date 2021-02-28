@@ -37,7 +37,6 @@ module.exports = {
 		'gatsby-remark-embedder',
 		'gatsby-plugin-twitter',
 		'gatsby-plugin-catch-links',
-		'gatsby-plugin-offline',
 		{
 			resolve: 'gatsby-plugin-page-creator',
 			options: {
