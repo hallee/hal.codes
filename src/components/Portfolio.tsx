@@ -89,7 +89,7 @@ export default function Portfolio(props: { children?: JSX.Element }) {
 
 	return (
 		<Article>
-			<ul>{props.children && (<li className='intro'><div>{props.children}</div></li>)}{
+			<ul>{props.children && (<li className="intro"><div>{props.children}</div></li>)}{
 				pages?.map(page => {
 					const image = useImage(page.context?.frontmatter?.featuredImage)?.fluid
 					if (!image) {
