@@ -29,7 +29,7 @@ const Article = styled.article`
 		font-family: ${constants.monoFontStack};
 		font-size: 0.9em;
 		padding: 0 0.4rem;
-		margin: 0 -0.2rem;
+		margin: 0;
 	}
 	pre {
 		display: flex;
