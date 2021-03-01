@@ -1,15 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
 const url = require('url')
 
+const siteMetadata = {
+	siteName: 'hal.codes',
+	title: 'Hal Lee, software developer in NYC',
+	description: 'Hal is a software engineer and iOS app developer based in Brooklyn.',
+	siteUrl: 'https://hal.codes',
+	githubUsername: 'hallee',
+	twitterUsername: '@hal_lee',
+}
+
 module.exports = {
-	siteMetadata: {
-		siteName: 'hal.codes',
-		title: 'Hal Lee, software developer in NYC',
-		description: 'Hal is a software engineer and iOS app developer based in Brooklyn.',
-		siteUrl: 'https://hal.codes',
-		githubUsername: 'hallee',
-		twitterUsername: '@hal_lee',
-	},
+	siteMetadata,
 	plugins: [
 		{
 			resolve: 'gatsby-plugin-fathom',
@@ -43,7 +45,6 @@ module.exports = {
 				path: './content',
 			},
 		},
-		'gatsby-plugin-remove-trailing-slashes',
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-sitemap',
 		'gatsby-plugin-styled-components',
@@ -80,9 +81,9 @@ module.exports = {
 								Object.assign({}, node.title, {
 									title: node.title,
 									date: node.meta.published,
-									url: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
-									guid: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, node.slug),
-									customElements: [{ 'content:encoded': node.body.html }],
+									url: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, `${node.slug}/`),
+									guid: url.resolve(`${site.siteMetadata.siteUrl}/blog/`, `${node.slug}/`),
+									custom_elements: [{ 'content:encoded': node.body.html }],
 								})
 							))
 						),
@@ -107,7 +108,10 @@ module.exports = {
 						`,
 						output: '/blog/index.xml',
 						title: 'Hal Lee',
-						match: '^/blog',
+						match: '^/blog/',
+						guid: `${siteMetadata.siteUrl}/blog/index.xml`,
+						site_url: `${siteMetadata.siteUrl}/blog/`,
+						feed_url: `${siteMetadata.siteUrl}/blog/index.xml`,
 					},
 				],
 			},

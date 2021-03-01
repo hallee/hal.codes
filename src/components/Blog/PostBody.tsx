@@ -77,8 +77,8 @@ const Article = styled.article`
 
 export default function PostBody(props: { node; titleLink?; preview? }) {
 	const { node, titleLink = null, preview = false } = props
-	const title = titleLink ? <Link to={ `/blog/${titleLink}` }>{ node.title }</Link> : node.title
-	const continueReading = preview ? <Link className="continue" to={ `/blog/${node.slug}` }><span>Continue reading →</span></Link> : null
+	const title = titleLink ? <Link to={ `/blog/${titleLink}/` }>{ node.title }</Link> : node.title
+	const continueReading = preview ? <Link className="continue" to={ `/blog/${node.slug}/` }><span>Continue reading →</span></Link> : null
 
 	const published = new Date(node.meta.published)
 	const dateString = published.toLocaleString('en-us', { month: 'long', day: 'numeric', year: 'numeric' })

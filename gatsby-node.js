@@ -47,14 +47,14 @@ exports.createPages = async({ graphql, actions }) => {
 			}
 		`)
 		createPage({
-			path: i === 1 ? '/blog' : `/blog/page/${i}`,
+			path: i === 1 ? '/blog/' : `/blog/page/${i}/`,
 			component: path.resolve('./src/components/Blog/Page.tsx'),
 			context: {
 				data: pageQuery.data,
 				currentPage: i,
 				perPage: size,
-				prevPagePath: i <= 2 ? '/blog' : `/blog/page/${i - 1}`,
-				nextPagePath: `/blog/page/${i + 1}`,
+				prevPagePath: i <= 2 ? '/blog/' : `/blog/page/${i - 1}/`,
+				nextPagePath: `/blog/page/${i + 1}/`,
 				hasPrevPage: i !== 1,
 				hasNextPage: i < total,
 			},
@@ -63,7 +63,7 @@ exports.createPages = async({ graphql, actions }) => {
 		nodes.forEach((node, i) => {
 			const next = nodes[i + 1] ? nodes[i + 1] : nodes[0]
 			createPage({
-				path: `/blog/${node.slug}`,
+				path: `/blog/${node.slug}/`,
 				component: path.resolve('./src/components/Blog/Post.tsx'),
 				context: {
 					node,

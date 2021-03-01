@@ -42,7 +42,7 @@ export default function Navigation() {
 				</Link>
 			</span>
 			<ul>
-				<li><Link to="/blog">Blog</Link></li>
+				<li><Link to="/blog/">Blog</Link></li>
 			</ul>
 		</Nav>
 	)
