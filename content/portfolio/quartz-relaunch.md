@@ -4,7 +4,7 @@ date: 2019-12-01
 featuredImage: "relaunchPhone"
 ---
 
-<LegacyPhone image="relaunchPhoneFull">
+<MobileFeature legacyPhoneImage="relaunchPhoneFull">
 
 # Quartz Relaunch
 
@@ -14,4 +14,4 @@ I led the development of a ground-up rewrite of the [Quartz iOS app](https://app
 
 https://twitter.com/hal_lee/status/1182297489950543873
 
-</LegacyPhone>
+</MobileFeature>

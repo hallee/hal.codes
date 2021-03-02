@@ -8,6 +8,9 @@ const Article = styled.article`
 	display: grid;
 	aside {
 		max-width: 630px;
+		&.legacy {
+			margin-top: max(-4%, -2vw);
+		}
 	}
 	section {
 		iframe {
@@ -28,15 +31,26 @@ const Article = styled.article`
 	}
 `
 
-export default function LegacyPhone(props: { children?: JSX.Element; image: string }) {
-	const image = useImage(props.image)?.fluid
-	if (!image) {
+export default function MobileFeature(
+	props: {
+		children?: JSX.Element;
+		legacyPhoneImage?: string;
+		screenshot?: string;
+	}
+) {
+	if (props.legacyPhoneImage) {
+		const legacyImage = useImage(props.legacyPhoneImage)?.fluid
+		if (!legacyImage) {
+			return null
+		}
+		return (
+			<Article>
+				<section>{props.children}</section>
+				<aside className={'legacy'}><Img fluid={legacyImage} alt="" /></aside>
+			</Article>
+		)
+	} else {
+		// TODO: screenshot, built-in device frame & shadow
 		return null
 	}
-	return (
-		<Article>
-			<section>{props.children}</section>
-			<aside><Img fluid={image} alt="" /></aside>
-		</Article>
-	)
 }

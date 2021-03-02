@@ -4,7 +4,7 @@ date: 2018-01-01
 featuredImage: "objectsPhone"
 ---
 
-<LegacyPhone image="objectsPhoneFull">
+<MobileFeature legacyPhoneImage="objectsPhoneFull">
 
 # Quartz Objects
 
@@ -16,4 +16,4 @@ Ultimately we launched an AR journalism series called [The 2050 Project](https:/
 
 https://twitter.com/qz/status/1100464750041944064
 
-</LegacyPhone>
+</MobileFeature>
