@@ -4,6 +4,8 @@ date: 2018-01-01
 featuredImage: "objectsPhone"
 ---
 
+<LegacyPhone image="objectsPhoneFull">
+
 # Quartz Objects
 
 Objects was a project to bring augmented reality to news stories in the Quartz app.
@@ -13,3 +15,5 @@ The Quartz app was already a bit of a playground for experimentation — with a 
 Ultimately we launched an AR journalism series called [The 2050 Project](https://qz.com/se/the-2050-project/) that used the Quartz app to showcase innovative buildings from cities around the globe.
 
 https://twitter.com/qz/status/1100464750041944064
+
+</LegacyPhone>

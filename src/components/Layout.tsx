@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { MDXProvider } from '@mdx-js/react'
 import Navigation from './Navigation/Navigation'
 import Footer from './Navigation/Footer'
+import LegacyPhone from './LegacyPhone'
 import Portfolio from './Portfolio'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -75,7 +76,7 @@ const Container = styled.div`
 `
 
 export default function Layout(props: { children: JSX.Element; pageContext }) {
-	const shortcodes = { Portfolio } // components available in MDX
+	const shortcodes = { LegacyPhone, Portfolio } // components available in MDX
 	const { title, description } = props.pageContext?.frontmatter ?? {}
 	return (
 		<MDXProvider components={shortcodes}>

@@ -9,10 +9,8 @@ export default function useImage(name?: string) {
 			query AllImages {
 				allImageSharp {
 					nodes {
-						original {
-							src
-						}
 						fluid {
+							originalName
 							...GatsbyImageSharpFluid_withWebp_noBase64
 						}
 					}
@@ -20,5 +18,7 @@ export default function useImage(name?: string) {
 			}
 		`
 	)
-	return allImageSharp.nodes.filter(image => image.original?.src?.includes(name))[0]
+	return allImageSharp.nodes.filter(
+		image => image.fluid?.originalName?.split('.').slice(0, -1).join('.') === name
+	)[0]
 }
