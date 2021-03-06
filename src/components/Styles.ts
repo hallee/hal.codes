@@ -35,8 +35,8 @@ export const constants = {
 
 export const popAnimation = css`
 	transition: color 0.2s cubic-bezier(0.1, 0.5, 0.8, 1.1),
-		background-color 0.2s cubic-bezier(0.1, 0.5, 0.8, 1.1),
-		transform 0.3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
+	background-color 0.2s cubic-bezier(0.1, 0.5, 0.8, 1.1),
+	transform 0.3s cubic-bezier(0.175, 0.9, 0.32, 1.6);
 	&:hover {
 		transform: scale(1.03);
 	}

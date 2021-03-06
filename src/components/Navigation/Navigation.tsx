@@ -7,6 +7,9 @@ import Logo from './Logo'
 const Nav = styled.nav`
 	${barStyle}
 	border-bottom: ${constants.border};
+	@media (min-width: ${constants.mobile}) {
+		margin-bottom: 3em;
+	}
 	ul {
 		font-family: ${constants.fontStack};
 		display: grid;

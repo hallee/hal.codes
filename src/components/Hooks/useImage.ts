@@ -9,9 +9,9 @@ export default function useImage(name?: string) {
 			query AllImages {
 				allImageSharp {
 					nodes {
+						gatsbyImageData(placeholder: NONE)
 						fluid {
 							originalName
-							...GatsbyImageSharpFluid_withWebp_noBase64
 						}
 					}
 				}

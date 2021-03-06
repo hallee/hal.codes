@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
-import Fragment from 'react-dom-fragment'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
 import { constants, fullWidth, popAnimation } from '../Styles'
@@ -94,9 +93,9 @@ export default function PostBody(props: { node; titleLink?; preview? }) {
 			</h2>
 			<time>{ dateString }</time>
 			{ !preview ? (
-				<Fragment>{ parse(node.body.html) }</Fragment>
+				<>{ parse(node.body.html) }</>
 			) : (
-				<Fragment>{ parse(node.preview.html) }</Fragment>
+				<>{ parse(node.preview.html) }</>
 			)}
 			{ continueReading }
 		</Article>

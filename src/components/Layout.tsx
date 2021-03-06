@@ -8,7 +8,7 @@ import Portfolio from './Portfolio'
 import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Reset } from 'styled-reset'
-import { constants, fullWidth, lightTheme } from './Styles'
+import { constants, lightTheme } from './Styles'
 
 const GlobalStyle = createGlobalStyle`
 	${lightTheme}
@@ -36,9 +36,6 @@ const Container = styled.div`
 		a:hover {
 			opacity: 0.66;
 		}
-	}
-	.gatsby-resp-image-wrapper {
-		${fullWidth}
 	}
 	h1, h2, h3, h4, h5, h6 {
 		font-family: ${constants.headingFontStack};
@@ -69,9 +66,12 @@ const Container = styled.div`
 		line-height: 1.4;
 	}
 	a {
-
 		text-decoration: none;
 		transition: color 150ms ease-out, opacity 150ms ease-out, background 150ms ease-out;
+	}
+	blockquote {
+		padding-left: 1em;
+		border-left: 3px solid var(--accentColor);
 	}
 `
 

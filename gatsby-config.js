@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const url = require('url')
 
 const siteMetadata = {
@@ -28,16 +28,11 @@ module.exports = {
 				url: 'https://api.hal.codes/graphql',
 			}
 		},
-		{
-			resolve: 'gatsby-plugin-sharp',
-			options: {
-				stripMetadata: false
-			}
-		},
-		'gatsby-transformer-sharp',
-		'gatsby-image',
 		'gatsby-remark-embedder',
 		'gatsby-plugin-twitter',
+		'gatsby-plugin-sharp',
+		'gatsby-transformer-sharp',
+		'gatsby-plugin-image',
 		'gatsby-plugin-catch-links',
 		{
 			resolve: 'gatsby-plugin-page-creator',

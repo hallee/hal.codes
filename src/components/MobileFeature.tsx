@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useImage from './Hooks/useImage'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { constants, fullWidth } from './Styles'
 
 const Article = styled.article`
@@ -39,14 +39,14 @@ export default function MobileFeature(
 	}
 ) {
 	if (props.legacyPhoneImage) {
-		const legacyImage = useImage(props.legacyPhoneImage)?.fluid
+		const legacyImage = useImage(props.legacyPhoneImage)?.gatsbyImageData
 		if (!legacyImage) {
 			return null
 		}
 		return (
 			<Article>
 				<section>{props.children}</section>
-				<aside className={'legacy'}><Img fluid={legacyImage} alt="" /></aside>
+				<aside className={'legacy'}><GatsbyImage image={legacyImage} alt="" /></aside>
 			</Article>
 		)
 	} else {
