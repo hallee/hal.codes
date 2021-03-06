@@ -17,12 +17,11 @@ const Article = styled.article`
 	}
 	ul {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: masonry;
 		gap: 1em;
 		vertical-align: top;
-		@media (max-width: ${constants.mobile}) {
-			grid-template-columns: repeat(1, 1fr);
+		@media (min-width: ${constants.mobile}) {
+			grid-template-columns: repeat(2, 1fr);
 		}
 		@supports not (grid-template-rows: masonry) {
 			@media (min-width: ${constants.mobile}) {
@@ -31,11 +30,6 @@ const Article = styled.article`
 		}
 		${fullWidth};
 		padding: 1em;
-		li {
-			@media (max-width: ${constants.mobile}) {
-				grid-row-end: auto !important;
-			}
-		}
 		li:not(.intro) {
 			border-radius: ${constants.borderRadius};
 			& > a {

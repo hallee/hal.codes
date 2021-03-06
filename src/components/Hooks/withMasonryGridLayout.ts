@@ -5,6 +5,7 @@ function resizeGridItem(container: HTMLElement, item: HTMLElement){
 	const rowGap = parseInt(window.getComputedStyle(container).getPropertyValue('grid-row-gap'))
 	const contentHeight = item.children[0]?.getBoundingClientRect()?.height ?? 0
 	if (!contentHeight || !rowHeight || !rowGap) {
+		item.style.gridRowEnd = 'auto'
 		return
 	}
 	const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap))
