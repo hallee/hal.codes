@@ -1,0 +1,27 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react"
+  ],
+  "rules": {
+    "quotes": [1, "single"],
+    "jsx-quotes": 1,
+    "semi": [1, "never"],
+    "space-before-function-paren": [1, "never"],
+    "space-in-parens": [1, "never"],
+    "object-curly-spacing": [1, "always"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
