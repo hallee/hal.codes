@@ -102,12 +102,12 @@ module.exports = {
 								}
 							}
 						`,
-						output: '/blog/index.xml',
+						output: '/blog/rss.xml',
 						title: 'Hal Lee',
 						match: '^/blog/',
-						guid: `${siteMetadata.siteUrl}/blog/index.xml`,
+						guid: `${siteMetadata.siteUrl}/blog/rss.xml`,
 						site_url: `${siteMetadata.siteUrl}/blog/`,
-						feed_url: `${siteMetadata.siteUrl}/blog/index.xml`,
+						feed_url: `${siteMetadata.siteUrl}/blog/rss.xml`,
 					},
 				],
 			},
