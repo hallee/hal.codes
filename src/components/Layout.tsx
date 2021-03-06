@@ -82,6 +82,8 @@ export default function Layout(props: { children: JSX.Element; pageContext }) {
 		<MDXProvider components={shortcodes}>
 			<Helmet>
 				<link rel="stylesheet" type="text/css" href="/fonts/fonts.css" />
+				<script src="//stats.hal.codes/tracker.js" id="fathom-script" defer></script>
+				<script src="//hal.codes/scripts/fathom.js" async></script>
 			</Helmet>
 			<Reset />
 			<GlobalStyle />

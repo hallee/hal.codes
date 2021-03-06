@@ -13,7 +13,10 @@ function resizeGridItem(container: HTMLElement, item: HTMLElement){
 }
 
 function resizeAllGridItems(containerSelector: string, elementSelector: string) {
-	const container = document.querySelectorAll<HTMLElement>(containerSelector)[0]
+	const container = document.querySelector<HTMLElement>(containerSelector)
+	if (!container) {
+		return
+	}
 	const allItems = document.querySelectorAll<HTMLElement>(elementSelector)
 	for (const item of allItems) {
 		resizeGridItem(container, item)

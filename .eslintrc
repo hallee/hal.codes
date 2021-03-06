@@ -23,5 +23,6 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+  "ignorePatterns": ["fathom.js"]
 }

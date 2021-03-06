@@ -14,13 +14,6 @@ module.exports = {
 	siteMetadata,
 	plugins: [
 		{
-			resolve: 'gatsby-plugin-fathom',
-			options: {
-				trackingUrl: 'stats.hal.codes',
-				siteId: 'TKENP',
-			},
-		},
-		{
 			resolve: 'gatsby-source-graphql',
 			options: {
 				typeName: 'BlogPost',
