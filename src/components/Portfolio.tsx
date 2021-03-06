@@ -53,9 +53,11 @@ const Article = styled.article`
 				}
 				.gatsby-image-wrapper {
 					margin: -2em -4em -7em -1em;
+					z-index: 101;
 					@media (min-width: ${constants.mobile}) {
 						${popAnimation}
 						&:hover {
+							z-index: 1001;
 							transform: scale(1.01);
 						}
 					}

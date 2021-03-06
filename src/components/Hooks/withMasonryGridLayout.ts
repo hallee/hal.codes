@@ -26,7 +26,15 @@ export default function withMasonryGridLayout(containerSelector: string, element
 			resizeAllGridItems(containerSelector, elementSelector)
 		}
 		window.addEventListener('resize', resizeGrid)
+		for (const image of document.querySelectorAll('img')) {
+			image.addEventListener('load', resizeGrid)
+		}
 		resizeGrid()
-		return () => window.removeEventListener('resize', resizeGrid)
+		return () => {
+			window.removeEventListener('resize', resizeGrid)
+			for (const image of document.querySelectorAll('img')) {
+				image.removeEventListener('load', resizeGrid)
+			}
+		}
 	}, [containerSelector, elementSelector])
 }
