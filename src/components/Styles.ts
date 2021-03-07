@@ -47,6 +47,7 @@ export const popAnimation = css`
 export const barStyle = css`
 	display: grid;
 	grid-template-columns: auto 1fr;
+	justify-content: space-between;
 	padding: 1em 0;
 	margin: 0 auto;
 	a, a:visited {

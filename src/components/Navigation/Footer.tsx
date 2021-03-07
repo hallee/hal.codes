@@ -8,9 +8,13 @@ const StyledFooter = styled.footer`
 	margin-top: 5em;
 	ul {
 		font-size: 0.8em;
+		li:first-child {
+			margin-bottom: 0.5em;
+		}
 		a {
-			display: block;
-			padding: 0.3em 0 0.2em;
+			display: inline-block;
+			padding: 0.4em;
+			margin: 0 -0.4em;
 			&:hover {
 				text-decoration: underline;
 			}
