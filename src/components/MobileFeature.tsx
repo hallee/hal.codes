@@ -7,8 +7,11 @@ import { constants, fullWidth } from './Styles'
 const Article = styled.article`
 	display: grid;
 	aside {
-		max-width: 630px;
+		&.screenshot {
+
+		}
 		&.legacy {
+			max-width: 630px;
 			margin-top: max(-4%, -2vw);
 		}
 	}
@@ -38,7 +41,18 @@ export default function MobileFeature(
 		screenshot?: string;
 	}
 ) {
-	if (props.legacyPhoneImage) {
+	if (props.screenshot) {
+		const screenshot = useImage(props.screenshot)?.gatsbyImageData
+		if (!screenshot) {
+			return null
+		}
+		return (
+			<Article>
+				<section>{props.children}</section>
+				<aside className={'screenshot'}><GatsbyImage image={screenshot} alt="" /></aside>
+			</Article>
+		)
+	} else if (props.legacyPhoneImage) {
 		const legacyImage = useImage(props.legacyPhoneImage)?.gatsbyImageData
 		if (!legacyImage) {
 			return null
@@ -49,8 +63,6 @@ export default function MobileFeature(
 				<aside className={'legacy'}><GatsbyImage image={legacyImage} alt="" /></aside>
 			</Article>
 		)
-	} else {
-		// TODO: screenshot, built-in device frame & shadow
-		return null
 	}
+	return null
 }

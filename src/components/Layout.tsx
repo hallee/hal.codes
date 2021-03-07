@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { MDXProvider } from '@mdx-js/react'
 import Navigation from './Navigation/Navigation'
 import Footer from './Navigation/Footer'
@@ -9,8 +8,10 @@ import SEO from './SEO'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Reset } from 'styled-reset'
 import { constants, lightTheme } from './Styles'
+import * as fontFaces from './Fonts/fonts.css'
 
 const GlobalStyle = createGlobalStyle`
+	${fontFaces}
 	${lightTheme}
 	body {
 		background-color: var(--backgroundColor);
@@ -80,11 +81,6 @@ export default function Layout(props: { children: JSX.Element; pageContext }) {
 	const { title, description } = props.pageContext?.frontmatter ?? {}
 	return (
 		<MDXProvider components={shortcodes}>
-			<Helmet>
-				<link rel="stylesheet" type="text/css" href="/fonts/fonts.css" />
-				<script src="//stats.hal.codes/tracker.js" id="fathom-script" defer></script>
-				<script src="//hal.codes/scripts/fathom.js" async></script>
-			</Helmet>
 			<Reset />
 			<GlobalStyle />
 			<Container>

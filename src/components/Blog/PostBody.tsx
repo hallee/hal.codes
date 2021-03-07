@@ -1,11 +1,12 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import parse from 'html-react-parser'
 import styled from 'styled-components'
 import { constants, fullWidth, popAnimation } from '../Styles'
+import * as code from './code.css'
 
 const Article = styled.article`
+	${code}
 	max-width: ${constants.containerWidth};
 	width: 100%;
 	margin-bottom: 8em;
@@ -84,9 +85,6 @@ export default function PostBody(props: { node; titleLink?; preview? }) {
 
 	return (
 		<Article>
-			<Helmet>
-				<link rel="stylesheet" type="text/css" href="/code.css" />
-			</Helmet>
 			<span className="kicker">{ node.kicker }</span>
 			<h2 className="title">
 				{ title }
