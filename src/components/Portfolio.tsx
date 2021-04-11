@@ -32,27 +32,27 @@ const Article = styled.article`
 		padding: 1em;
 		li:not(.intro) {
 			border-radius: ${constants.borderRadius};
+			background-color: var(--project-background-color);
+			@supports (color: color(display-p3 1 1 1)) {
+				background-color: var(--project-background-color-p3);
+			}
+			overflow: hidden;
+			&:hover {
+				z-index: 1000;
+				@media (min-width: ${constants.mobile}) {
+					overflow: visible;
+				}
+			}
 			& > a {
 				display: block;
 				border-radius: ${constants.borderRadius};
-				background-color: var(--project-background-color);
-				@supports (color: color(display-p3 1 1 1)) {
-					background-color: var(--project-background-color-p3);
-				}
-				overflow: hidden;
 				opacity: 1;
 				z-index: 100;
 				@media (max-width: ${constants.mobile}) {
 					max-height: 90vw;
 				}
-				&:hover {
-					z-index: 1000;
-					@media (min-width: ${constants.mobile}) {
-						overflow: visible;
-					}
-				}
 				.gatsby-image-wrapper {
-					margin: -2em -4em -7em -1em;
+					margin: -2em -4em -9em -1em;
 					z-index: 101;
 					@media (min-width: ${constants.mobile}) {
 						${popAnimation}

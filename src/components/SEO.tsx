@@ -2,7 +2,6 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import useSiteMetadata from './Hooks/useSiteMetadata'
-import favicon from '../images/favicon.png'
 import socialImage from '../images/social.jpg'
 
 export default function SEO(
@@ -36,7 +35,7 @@ export default function SEO(
 		<Helmet title={seo.title} titleTemplate={titleTemplate} htmlAttributes={{ 'lang': 'en' }}>
 			<meta name="description" content={seo.description} />
 			<meta name="image" content={seo.image} />
-			<link rel="icon" type="image/png" href={favicon} />
+			<link rel="icon" type="image/png" href="/favicon.png" />
 			{seo.url && <meta property="og:url" content={seo.url} />}
 			{seo.url && <link rel="canonical" href={seo.url} />}
 			{props.article && <meta property="og:type" content="article" />}

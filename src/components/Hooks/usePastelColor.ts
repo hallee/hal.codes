@@ -22,7 +22,7 @@ function hslToRGB(h: number, s: number, l: number) {
 
 /** Generates a random pastel color in the form of a Display P3 compatible CSS color string */
 export default function usePastelColor(seed?: string) {
-	const hue = (seed ? Array.from(seed).reduce((acc, char, i) => {
+	const hue = (seed ? Array.from(seed).reverse().reduce((acc, char, i) => {
 		// generate hash from 0—1 from input string
 		return (acc + ((i + 1) * (char.codePointAt(0) ?? 0) / (1 << 7))) % 1
 	}, 0) : Math.random())
