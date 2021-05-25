@@ -64,17 +64,23 @@ const Article = styled.article`
 					}
 				}
 				& > div.screenshot {
-					margin: -4em -4em -6em 1em;
-					max-height: min(70vw, 700px);
+					transform: scale3d(0.9,0.9,1);
+					@media (min-width: ${constants.mobile}) {
+						margin: -3em -4em 0 0;
+						max-height: min(70vw, 700px);
+					}
 					z-index: 101;
 					& > aside {
 						transform: rotate(15deg);
+						@media (max-width: ${constants.mobile}) {
+							transform: rotate(15deg) scale(0.95) translateX(-1em) translateY(-7em);
+						}
 					}
 					@media (min-width: ${constants.mobile}) {
 						${popAnimation}
 						&:hover {
 							z-index: 1001;
-							transform: scale(1.01);
+							transform: scale3d(0.92,0.92,1);
 						}
 					}
 				}
