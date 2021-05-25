@@ -4,6 +4,7 @@ import useImage from './Hooks/useImage'
 import usePages from './Hooks/usePages'
 import withMasonryGridLayout from './Hooks/withMasonryGridLayout'
 import usePastelColor from './Hooks/usePastelColor'
+import DeviceScreenshot from './DeviceScreenshot'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import { constants, fullWidth, popAnimation } from './Styles'
@@ -51,7 +52,7 @@ const Article = styled.article`
 				@media (max-width: ${constants.mobile}) {
 					max-height: 90vw;
 				}
-				.gatsby-image-wrapper {
+				& > .gatsby-image-wrapper {
 					margin: -2em -4em -9em -1em;
 					z-index: 101;
 					@media (min-width: ${constants.mobile}) {
@@ -59,6 +60,27 @@ const Article = styled.article`
 						&:hover {
 							z-index: 1001;
 							transform: scale(1.01);
+						}
+					}
+				}
+				& > div.screenshot {
+					transform: scale3d(0.9,0.9,1);
+					@media (min-width: ${constants.mobile}) {
+						margin: -3em -4em 0 0;
+						max-height: min(70vw, 700px);
+					}
+					z-index: 101;
+					& > aside {
+						transform: rotate(15deg);
+						@media (max-width: ${constants.mobile}) {
+							transform: rotate(15deg) scale(0.95) translateX(-1em) translateY(-7em);
+						}
+					}
+					@media (min-width: ${constants.mobile}) {
+						${popAnimation}
+						&:hover {
+							z-index: 1001;
+							transform: scale3d(0.92,0.92,1);
 						}
 					}
 				}
@@ -81,23 +103,43 @@ export default function Portfolio(props: { children?: JSX.Element }) {
 		<Article>
 			<ul className="grid">{props.children && (<li className="intro"><div>{props.children}</div></li>)}{
 				pages?.map(page => {
-					const image = useImage(page.context?.frontmatter?.featuredImage)?.gatsbyImageData
-					if (!image) {
-						return null
-					}
 					const color = usePastelColor(page.context?.frontmatter?.title)
-					return (
-						<li
-						key={page.path}
-						style={{
-							'--project-background-color': color.sRGB,
-							'--project-background-color-p3': color.p3,
-						}}>
-							<Link to={page.path}>
-								<GatsbyImage image={image} alt={page.context?.frontmatter?.title} />
-							</Link>
-						</li>
-					)
+					if (page.context?.frontmatter?.screenshot) {
+						return (
+							<li
+							key={page.path}
+							style={{
+								'--project-background-color': color.sRGB,
+								'--project-background-color-p3': color.p3,
+							}}>
+								<Link to={page.path}>
+									<div className="screenshot">
+										<DeviceScreenshot
+											screenshot={page.context.frontmatter.screenshot}
+											alt={page.context?.frontmatter?.title}
+										/>
+									</div>
+								</Link>
+							</li>
+						)
+					} else {
+						const image = useImage(page.context?.frontmatter?.featuredImage)?.gatsbyImageData
+						if (!image) {
+							return null
+						}
+						return (
+							<li
+							key={page.path}
+							style={{
+								'--project-background-color': color.sRGB,
+								'--project-background-color-p3': color.p3,
+							}}>
+								<Link to={page.path}>
+									<GatsbyImage image={image} alt={page.context?.frontmatter?.title} />
+								</Link>
+							</li>
+						)
+					}
 				})
 			}</ul>
 		</Article>
