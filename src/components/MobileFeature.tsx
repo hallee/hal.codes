@@ -1,31 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import DeviceScreenshot from './DeviceScreenshot'
 import useImage from './Hooks/useImage'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { constants, fullWidth } from './Styles'
 
 const Article = styled.article`
 	display: grid;
 	aside {
-		&.screenshot {
-			justify-self: center;
-			max-width: 550px;
-			display: grid;
-			.screen {
-				max-width: 71.2%;
-				margin: -17% 0 0 4.7%;
-				img {
-					object-fit: contain !important;
-				}
-			}
-			.screen, .frame {
-				grid-area: 1 / 1;
-			}
-			.frame {
-				pointer-events: none;
-				z-index: 10;
-			}
-		}
 		&.legacy {
 			max-width: 630px;
 			margin-top: max(-4%, -2vw);
@@ -60,17 +42,10 @@ export default function MobileFeature(
 	}
 ) {
 	if (props.screenshot) {
-		const screenshot = useImage(props.screenshot)?.gatsbyImageData
-		if (!screenshot) {
-			return null
-		}
 		return (
 			<Article>
 				<section>{props.children}</section>
-				<aside className={'screenshot'}>
-					<GatsbyImage image={screenshot} alt="" className="screen" />
-					<StaticImage src="../images/12-mini-frame.png" placeholder="none" alt="" className="frame" />
-				</aside>
+				<DeviceScreenshot screenshot={props.screenshot} />
 			</Article>
 		)
 	} else if (props.legacyPhoneImage) {
