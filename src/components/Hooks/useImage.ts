@@ -10,8 +10,10 @@ export default function useImage(name?: string) {
 				allImageSharp {
 					nodes {
 						gatsbyImageData(placeholder: NONE)
-						fluid {
-							originalName
+						parent {
+							... on File {
+								name
+							}
 						}
 					}
 				}
@@ -19,6 +21,6 @@ export default function useImage(name?: string) {
 		`
 	)
 	return allImageSharp.nodes.filter(
-		image => image.fluid?.originalName?.split('.').slice(0, -1).join('.') === name
+		image => image.parent.name === name
 	)[0]
 }
