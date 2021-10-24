@@ -23,9 +23,9 @@ module.exports = {
 		},
 		'gatsby-remark-embedder',
 		'gatsby-plugin-twitter',
+		'gatsby-plugin-image',
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
-		'gatsby-plugin-image',
 		'gatsby-plugin-catch-links',
 		{
 			resolve: 'gatsby-plugin-page-creator',
