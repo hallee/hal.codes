@@ -34,7 +34,7 @@ export default function Footer() {
 			</ul>
 			<ul className="contact">
 				<li>👋</li>
-				<li><a href="https://twitter.com/hal_lee">Twitter</a></li>
+				<li><a href="https://federated.hal.codes/@hal" rel="me">Mastodon</a></li>
 				<li><a href="https://github.com/hallee">GitHub</a></li>
 			</ul>
 		</StyledFooter>
